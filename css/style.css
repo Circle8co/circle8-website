@@ -105,7 +105,7 @@ section { padding: 5rem 0; }
   font-family: 'Cinzel', serif; font-size: 1.15rem; font-weight: 500;
   color: var(--terracotta); letter-spacing: 0.05em;
 }
-.nav-logo-mark { width: 34px; height: 34px; opacity: 0.85; }
+.nav-logo-mark { width: 52px; height: 52px; opacity: 0.85; }
 .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
 .nav-links a {
   font-family: 'Source Sans 3', sans-serif; font-size: 0.75rem;
