@@ -239,22 +239,28 @@ section { padding: 5rem 0; }
 /* ============================================
    ABOUT
    ============================================ */
-.about { background: var(--cream); padding: 6rem 0; }
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
-.about-image { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: top; display: block; }
-.about-quote-card {
-  background: var(--white); border-left: 3px solid var(--terracotta);
-  padding: 1.5rem 1.75rem; margin-top: 1.5rem;
-}
-.about-quote-card p {
-  font-family: 'Lora', serif; font-style: italic;
-  font-size: 0.95rem; line-height: 1.7; color: var(--text-dark);
-}
-.about-content { padding-top: 1rem; }
-.about-content .eyebrow { margin-bottom: 1.25rem; }
-.about-content h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); margin-bottom: 2rem; }
-.about-content p { font-size: 1rem; color: var(--text-mid); margin-bottom: 1.25rem; line-height: 1.8; }
+.about { background: var(--cream); padding: 5rem 0; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+.about-image { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center 20%; display: block; }
+.about-content { padding-top: 0; }
+.about-content .eyebrow { margin-bottom: 1rem; }
+.about-content h2 { font-size: clamp(1.2rem, 2.2vw, 1.7rem); margin-bottom: 1.5rem; }
+.about-content p { font-size: 0.85rem; color: var(--text-mid); margin-bottom: 0; line-height: 1.85; }
 .about-stats { display: flex; gap: 2.5rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+.about-linkedin {
+  display: inline-flex; align-items: center; margin-top: 2rem;
+  color: var(--text-light); transition: color 0.2s ease; text-decoration: none;
+}
+.about-linkedin:hover { color: var(--terracotta); }
+.about-linkedin svg { flex-shrink: 0; }
+.about-linkedin {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  margin-top: 1.5rem; text-decoration: none;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-light); transition: color 0.2s ease;
+}
+.about-linkedin:hover { color: var(--terracotta); }
+.about-linkedin svg { flex-shrink: 0; }
 .stat-number { font-family: 'Cinzel', serif; font-size: 1.6rem; color: var(--terracotta); display: block; margin-bottom: 0.25rem; }
 .stat-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-light); }
 

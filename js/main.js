@@ -36,11 +36,18 @@ const heroSection = document.querySelector('.hero');
 if (nav) {
   window.addEventListener('scroll', () => {
     const heroBottom = heroSection ? heroSection.offsetHeight : window.innerHeight;
-    const pastHero = window.scrollY > heroBottom - 120;
+
+    // Nav fades exactly when white about section reaches it
+    const pastHero = window.scrollY >= heroBottom - nav.offsetHeight;
     nav.classList.toggle('past-hero', pastHero);
+
+    // Logo lingers ~300px further, fading as you pass the profile photo
     if (heroBrand) {
-      heroBrand.style.opacity = pastHero ? '0' : '';
-      heroBrand.style.pointerEvents = pastHero ? 'none' : '';
+      const logoFadeStart = heroBottom;
+      const logoFadeEnd = heroBottom + 150;
+      const logoProgress = Math.min(1, Math.max(0, (window.scrollY - logoFadeStart) / (logoFadeEnd - logoFadeStart)));
+      heroBrand.style.opacity = String(1 - logoProgress);
+      heroBrand.style.pointerEvents = logoProgress >= 1 ? 'none' : '';
     }
   }, { passive: true });
 }
