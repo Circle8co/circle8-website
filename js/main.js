@@ -2,11 +2,46 @@
 // CIRCLE8 — MAIN JS
 // ============================================
 
+// Hero stagger animation
+const heroAnimEls = [
+  document.querySelector('.hero-eyebrow'),
+  document.querySelector('.hero h1'),
+  document.querySelector('.hero-ctas'),
+  document.querySelector('.hero-founder')
+].filter(Boolean);
+heroAnimEls.forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(22px)';
+  el.style.transition = 'opacity 0.75s ease, transform 0.75s ease';
+});
+heroAnimEls.forEach((el, i) => {
+  setTimeout(() => {
+    el.style.opacity = '1';
+    el.style.transform = 'translateY(0)';
+  }, 200 + i * 180);
+});
+
+// Hero parallax
+const heroBg = document.querySelector('.hero-bg');
+if (heroBg) {
+  window.addEventListener('scroll', () => {
+    heroBg.style.transform = `translateY(${window.scrollY * 0.35}px)`;
+  }, { passive: true });
+}
+
 // Navigation scroll behaviour
 const nav = document.querySelector('.nav');
+const heroBrand = document.querySelector('.hero-brand');
+const heroSection = document.querySelector('.hero');
 if (nav) {
   window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 20);
+    const heroBottom = heroSection ? heroSection.offsetHeight : window.innerHeight;
+    const pastHero = window.scrollY > heroBottom - 120;
+    nav.classList.toggle('past-hero', pastHero);
+    if (heroBrand) {
+      heroBrand.style.opacity = pastHero ? '0' : '';
+      heroBrand.style.pointerEvents = pastHero ? 'none' : '';
+    }
   }, { passive: true });
 }
 
