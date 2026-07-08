@@ -363,7 +363,7 @@ section { padding: 5rem 0; }
 /* Brand Transition */
 .brand-transition { background: #dddcc8; padding: 5rem 0 6rem; overflow: hidden; }
 .brand-transition-inner { display: flex; justify-content: flex-end; align-items: center; will-change: transform; }
-.brand-mark-window { width: clamp(500px, 65vw, 950px); aspect-ratio: 466/530; flex-shrink: 0; margin-right: -10vw; background-image: url('../images/hero%20page%201.png'); background-size: cover; background-position: center; }
+.brand-transition-mark { width: clamp(600px, 78vw, 1100px); height: auto; opacity: 0.14; filter: sepia(1) saturate(0.8) hue-rotate(-10deg); display: block; margin-right: -12vw; transform: scaleX(-1); }
 
 .gds-teaser { background: #dddcc8; padding: 0; }
 .gds-sticky { position: sticky; top: 0; z-index: 5; background: #dddcc8; padding: 6rem 0 3rem; }
