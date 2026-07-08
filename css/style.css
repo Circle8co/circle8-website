@@ -10,7 +10,7 @@
   --terracotta-dark: #7a4a3a;
   --cream: #f5f5f3;
   --cream-dark: #f0ece5;
-  --near-black: #080808;
+  --near-black: #e8d8ce;
   --dark: #242424;
   --gold: #917e4a;
   --gold-light: #b8a060;
@@ -159,8 +159,8 @@ section { padding: 5rem 0; }
   text-transform: uppercase; text-decoration: none;
   padding: 0.9rem 1.8rem; cursor: pointer; transition: all 0.25s ease; border: none;
 }
-.btn-primary { background: var(--terracotta); color: var(--white); }
-.btn-primary:hover { background: var(--terracotta-light); }
+.btn-primary { background: #d4bfb2; color: var(--text-dark); }
+.btn-primary:hover { background: #c4aba0; }
 .btn-ghost { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.55); }
 .btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: var(--white); }
 .btn-ghost-dark { background: transparent; color: var(--text-dark); border: 1px solid rgba(42,33,24,0.4); }
@@ -207,6 +207,14 @@ section { padding: 5rem 0; }
   display: flex; flex-direction: column; align-items: flex-start;
 }
 .hero-brand-mark { width: 240px; height: 240px; object-fit: contain; opacity: 0.95; }
+.strategic-eyebrow {
+  color: transparent;
+}
+.strategic-eyebrow .letter {
+  display: inline-block;
+  color: transparent;
+  transition: color 0.08s ease;
+}
 .hero-brand-text {
   font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 500;
   color: rgba(255,255,255,0.92); letter-spacing: 0.08em; padding-left: 4px;
@@ -270,19 +278,21 @@ section { padding: 5rem 0; }
 /* ============================================
    STRATEGIC COLLABORATION
    ============================================ */
-.strategic { background: var(--near-black); padding: 6rem 0; }
-.strategic .eyebrow { color: var(--terracotta); margin-bottom: 1rem; }
-.strategic h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: var(--white); margin-bottom: 1rem; }
-.strategic-intro { font-size: 1rem; color: rgba(255,255,255,0.6); max-width: 600px; margin-bottom: 3.5rem; line-height: 1.8; }
+.strategic { background: var(--cream); padding: 8rem 0 0; }
+.strategic-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 6rem; margin-left: 150px; }
+.strategic-eyebrow { margin-left: -160px; }
+.strategic-header h2 { grid-column: 1; font-size: clamp(2.2rem, 5vw, 4rem); color: var(--text-dark); line-height: 1.05; letter-spacing: 0.01em; }
+.strategic-intro { grid-column: 2; font-size: 0.85rem; color: var(--text-mid); line-height: 1.9; align-self: end; padding-bottom: 0.25rem; }
 
-.strategic-differentiators { display: grid; grid-template-columns: repeat(2,1fr); gap: 0; margin-bottom: 4rem; border: 1px solid var(--border-dark); }
-.differentiator { padding: 2.5rem; border-right: 1px solid var(--border-dark); border-bottom: 1px solid var(--border-dark); }
-.differentiator:nth-child(2n) { border-right: none; }
-.differentiator:nth-child(3), .differentiator:nth-child(4) { border-bottom: none; }
-.differentiator h3 { font-family: 'Cinzel', serif; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em; color: var(--terracotta); margin-bottom: 0.75rem; }
-.differentiator p { font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.7; }
+.strategic-differentiators { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; border-top: 1px solid var(--border); margin-left: 150px; }
+.differentiator { padding: 2.75rem 2rem 3rem 0; border-right: 1px solid var(--border); }
+.differentiator:last-child { border-right: none; padding-right: 0; }
+.diff-number { display: block; font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--terracotta); margin-bottom: 1.5rem; }
+.differentiator h3 { font-family: 'Cinzel', serif; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.05em; color: var(--text-dark); margin-bottom: 1rem; line-height: 1.5; }
+.differentiator p { font-size: 0.82rem; color: var(--text-mid); line-height: 1.85; }
 
-.ecosystem-title { font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; text-align: center; }
+.ecosystem-section { background: var(--near-black); margin-top: 6rem; padding: 5rem 0; }
+.ecosystem-title { font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 2.5rem; text-align: center; }
 .ecosystem-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; }
 .ecosystem-item { padding: 1.75rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border-dark); }
 .ecosystem-number { font-family: 'Cinzel', serif; font-size: 0.68rem; color: var(--terracotta); margin-bottom: 0.75rem; display: block; letter-spacing: 0.1em; }
@@ -342,7 +352,7 @@ section { padding: 5rem 0; }
 /* ============================================
    GLOBAL DESIGN SERIES TEASER
    ============================================ */
-.gds-teaser { background: var(--terracotta); padding: 6rem 0; }
+.gds-teaser { background: var(--near-black); padding: 6rem 0; }
 .gds-teaser .eyebrow { color: rgba(255,255,255,0.6); margin-bottom: 1rem; }
 .gds-teaser h2 { font-size: clamp(2rem, 4vw, 3.2rem); color: var(--white); margin-bottom: 1rem; }
 .gds-tagline { font-family: 'Lora', serif; font-style: italic; font-size: 1.05rem; color: rgba(255,255,255,0.72); margin-bottom: 3rem; }
@@ -377,12 +387,12 @@ section { padding: 5rem 0; }
 .subscribe-form input::placeholder { color: rgba(255,255,255,0.35); }
 .subscribe-form input:focus { border-color: var(--terracotta); }
 .subscribe-form button {
-  background: var(--terracotta); color: white; border: none; padding: 0.9rem 1.5rem;
+  background: #d4bfb2; color: var(--text-dark); border: none; padding: 0.9rem 1.5rem;
   font-family: 'Source Sans 3', sans-serif; font-size: 0.72rem; font-weight: 600;
   letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; white-space: nowrap;
   transition: background 0.2s;
 }
-.subscribe-form button:hover { background: var(--terracotta-light); }
+.subscribe-form button:hover { background: #c4aba0; }
 .subscribe-disclaimer { font-size: 0.72rem; color: rgba(255,255,255,0.3); margin-top: 0.75rem; }
 
 /* ============================================
@@ -430,10 +440,10 @@ section { padding: 5rem 0; }
 .social-link {
   display: inline-flex; align-items: center; gap: 0.5rem;
   font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-  text-decoration: none; padding: 0.6rem 1.1rem; border: 1px solid var(--border);
-  color: var(--text-dark); transition: all 0.2s;
+  text-decoration: none; padding: 0.6rem 1.1rem; border: 1px solid #d4bfb2;
+  background: #d4bfb2; color: var(--text-dark); transition: all 0.2s;
 }
-.social-link:hover { background: var(--text-dark); color: white; border-color: var(--text-dark); }
+.social-link:hover { background: #c4aba0; border-color: #c4aba0; }
 .social-link svg { width: 14px; height: 14px; }
 
 /* ============================================
@@ -562,7 +572,7 @@ figcaption { font-size: 0.76rem; color: var(--text-light); margin-top: 0.6rem; l
 .gds-country-editions { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 0.5rem; display: block; }
 .gds-country-card h2 { font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; }
 .gds-country-card p { font-family: 'Lora', serif; font-style: italic; font-size: 0.85rem; color: rgba(255,255,255,0.62); }
-.view-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); opacity: 0; transition: opacity 0.3s ease; background: rgba(145,90,74,0.92); color: white; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.75rem 1.5rem; border: 1px solid rgba(255,255,255,0.3); white-space: nowrap; }
+.view-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); opacity: 0; transition: opacity 0.3s ease; background: #d4bfb2; color: var(--text-dark); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.75rem 1.5rem; border: 1px solid rgba(255,255,255,0.3); white-space: nowrap; }
 .gds-country-card:hover .view-btn { opacity: 1; }
 .gds-more-coming { text-align: center; padding: 2.5rem 0 1rem; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.28); }
 

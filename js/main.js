@@ -41,6 +41,21 @@ if (nav) {
     const pastHero = window.scrollY >= heroBottom - nav.offsetHeight;
     nav.classList.toggle('past-hero', pastHero);
 
+    // Reveal each letter only while it's inside the logo circle
+    if (window._eyebrowLetters && heroBrand) {
+      const logoRect = heroBrand.getBoundingClientRect();
+      const cx = logoRect.left + logoRect.width / 2;
+      const cy = logoRect.top + logoRect.height / 2;
+      const r = logoRect.width * 0.30;
+      window._eyebrowLetters.forEach(span => {
+        const lr = span.getBoundingClientRect();
+        const x = lr.left + lr.width / 2;
+        const y = lr.top + lr.height / 2;
+        const inside = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2) <= r;
+        span.style.color = inside ? 'var(--terracotta)' : 'transparent';
+      });
+    }
+
     // Logo lingers ~300px further, fading as you pass the profile photo
     if (heroBrand) {
       const gdsSection = document.querySelector('.gds-teaser') || document.querySelector('#global-design-series');
@@ -51,6 +66,18 @@ if (nav) {
       heroBrand.style.pointerEvents = logoProgress >= 1 ? 'none' : '';
     }
   }, { passive: true });
+}
+
+// Split strategic eyebrow into per-letter spans for logo reveal effect
+const strategicEyebrow = document.querySelector('.strategic-eyebrow');
+if (strategicEyebrow) {
+  strategicEyebrow.innerHTML = strategicEyebrow.textContent.split('').map(ch =>
+    ch === ' '
+      ? '<span class="letter" style="display:inline-block;min-width:0.3em;">&nbsp;</span>'
+      : `<span class="letter">${ch}</span>`
+  ).join('');
+  window._eyebrowLetters = Array.from(strategicEyebrow.querySelectorAll('.letter'));
+
 }
 
 // Mobile menu toggle
