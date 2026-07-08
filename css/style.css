@@ -361,12 +361,13 @@ section { padding: 5rem 0; }
    GLOBAL DESIGN SERIES TEASER
    ============================================ */
 /* Brand Transition */
-.brand-transition { background: #e4e9e1; padding: 4rem 0 5rem; overflow: hidden; }
+.brand-transition { background: #dddcc8; padding: 5rem 0 6rem; overflow: hidden; }
 .brand-transition-inner { display: flex; justify-content: flex-end; align-items: center; will-change: transform; }
-.brand-transition-mark { width: clamp(600px, 78vw, 1100px); height: auto; opacity: 0.14; filter: sepia(1) saturate(0.8) hue-rotate(-10deg); display: block; margin-right: -12vw; transform: scaleX(-1); }
+.brand-mark-window { width: clamp(500px, 65vw, 950px); aspect-ratio: 466/530; margin-right: -10vw; -webkit-mask-image: url('../images/circle8-logo.png'); mask-image: url('../images/circle8-logo.png'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; }
+.brand-window-image { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-.gds-teaser { background: #e4e9e1; padding: 0; }
-.gds-sticky { position: sticky; top: 0; z-index: 5; background: #e4e9e1; padding: 6rem 0 3rem; }
+.gds-teaser { background: #dddcc8; padding: 0; }
+.gds-sticky { position: sticky; top: 0; z-index: 5; background: #dddcc8; padding: 6rem 0 3rem; }
 .gds-sticky-content { margin-left: 150px; }
 .gds-eyebrow { color: transparent; margin-bottom: 0; line-height: 2; }
 .gds-eyebrow .letter { display: inline-block; color: transparent; transition: color 0.08s ease; }
