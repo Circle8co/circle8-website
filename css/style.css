@@ -294,7 +294,7 @@ section { padding: 5rem 0; }
 .differentiator h3 { font-family: 'Cinzel', serif; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.05em; color: #bbb3ad; margin-bottom: 1rem; line-height: 1.5; min-height: 2.4em; }
 .differentiator p { font-size: 0.82rem; color: #bbb3ad; line-height: 1.85; }
 
-.ecosystem-section { background: var(--near-black); padding: 6rem 0 7rem; }
+.ecosystem-section { background: var(--near-black); padding: 6rem 0 500px; }
 .ecosystem-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 2rem; padding-bottom: 1rem; }
 .ecosystem-header .eyebrow { color: var(--text-mid); }
 .ecosystem-header-intro { font-size: 0.85rem; color: var(--text-mid); line-height: 1.85; }
