@@ -363,7 +363,7 @@ section { padding: 5rem 0; }
 .gds-teaser { background: var(--near-black); padding: 0; }
 .gds-sticky { position: sticky; top: 0; z-index: 5; background: var(--near-black); padding: 6rem 0 3rem; }
 .gds-sticky-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-left: 150px; }
-.gds-eyebrow { color: transparent; margin-bottom: 0; line-height: 2; margin-left: -160px; }
+.gds-eyebrow { color: transparent; margin-bottom: 0; line-height: 2; }
 .gds-eyebrow .letter { display: inline-block; color: transparent; transition: color 0.08s ease; }
 .gds-teaser h2 { font-size: clamp(2rem, 4vw, 3.2rem); color: var(--white); margin-bottom: 1rem; }
 .gds-tagline { font-family: 'Lora', serif; font-style: italic; font-size: 0.95rem; color: rgba(255,255,255,0.62); line-height: 1.8; }
