@@ -41,6 +41,51 @@ if (nav) {
     const pastHero = window.scrollY >= heroBottom - nav.offsetHeight;
     nav.classList.toggle('past-hero', pastHero);
 
+    // Reveal GDS eyebrow letters only while inside the logo circle
+    if (window._gdsLetters && heroBrand) {
+      const logoRect = heroBrand.getBoundingClientRect();
+      const cx = logoRect.left + logoRect.width / 2;
+      const cy = logoRect.top + logoRect.height / 2;
+      const r = logoRect.width * 0.30;
+      window._gdsLetters.forEach(span => {
+        const lr = span.getBoundingClientRect();
+        const x = lr.left + lr.width / 2;
+        const y = lr.top + lr.height / 2;
+        const inside = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2) <= r;
+        span.style.color = inside ? 'var(--terracotta)' : 'transparent';
+      });
+    }
+
+    // Reveal About eyebrow letters only while inside the logo circle
+    if (window._aboutLetters && heroBrand) {
+      const logoRect = heroBrand.getBoundingClientRect();
+      const cx = logoRect.left + logoRect.width / 2;
+      const cy = logoRect.top + logoRect.height / 2;
+      const r = logoRect.width * 0.30;
+      window._aboutLetters.forEach(span => {
+        const lr = span.getBoundingClientRect();
+        const x = lr.left + lr.width / 2;
+        const y = lr.top + lr.height / 2;
+        const inside = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2) <= r;
+        span.style.color = inside ? 'var(--terracotta)' : 'transparent';
+      });
+    }
+
+    // Reveal RT eyebrow letters only while inside the logo circle
+    if (window._rtLetters && heroBrand) {
+      const logoRect = heroBrand.getBoundingClientRect();
+      const cx = logoRect.left + logoRect.width / 2;
+      const cy = logoRect.top + logoRect.height / 2;
+      const r = logoRect.width * 0.30;
+      window._rtLetters.forEach(span => {
+        const lr = span.getBoundingClientRect();
+        const x = lr.left + lr.width / 2;
+        const y = lr.top + lr.height / 2;
+        const inside = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2) <= r;
+        span.style.color = inside ? 'var(--terracotta)' : 'transparent';
+      });
+    }
+
     // Reveal each letter only while it's inside the logo circle
     if (window._eyebrowLetters && heroBrand) {
       const logoRect = heroBrand.getBoundingClientRect();
@@ -56,16 +101,47 @@ if (nav) {
       });
     }
 
-    // Logo lingers ~300px further, fading as you pass the profile photo
+    // Logo remains visible throughout the page
     if (heroBrand) {
-      const gdsSection = document.querySelector('.gds-teaser') || document.querySelector('#global-design-series');
-      const logoFadeStart = gdsSection ? gdsSection.offsetTop - 100 : heroBottom + 2000;
-      const logoFadeEnd = gdsSection ? gdsSection.offsetTop + 150 : heroBottom + 2200;
-      const logoProgress = Math.min(1, Math.max(0, (window.scrollY - logoFadeStart) / (logoFadeEnd - logoFadeStart)));
-      heroBrand.style.opacity = String(1 - logoProgress);
-      heroBrand.style.pointerEvents = logoProgress >= 1 ? 'none' : '';
+      heroBrand.style.opacity = '1';
+      heroBrand.style.pointerEvents = '';
     }
   }, { passive: true });
+}
+
+// Split GDS eyebrow into per-letter spans for logo reveal effect
+const gdsEyebrow = document.querySelector('.gds-eyebrow');
+if (gdsEyebrow) {
+  gdsEyebrow.innerHTML = gdsEyebrow.innerHTML.replace(/<br\s*\/?>/gi, '<br>').split('<br>').map(line =>
+    line.trim().split('').map(ch =>
+      ch === ' '
+        ? '<span class="letter" style="display:inline-block;min-width:0.3em;">&nbsp;</span>'
+        : `<span class="letter">${ch}</span>`
+    ).join('')
+  ).join('<br>');
+  window._gdsLetters = Array.from(gdsEyebrow.querySelectorAll('.letter'));
+}
+
+// Split about eyebrow into per-letter spans for logo reveal effect
+const aboutEyebrow = document.querySelector('.about-eyebrow');
+if (aboutEyebrow) {
+  aboutEyebrow.innerHTML = aboutEyebrow.textContent.split('').map(ch =>
+    ch === ' '
+      ? '<span class="letter" style="display:inline-block;min-width:0.3em;">&nbsp;</span>'
+      : `<span class="letter">${ch}</span>`
+  ).join('');
+  window._aboutLetters = Array.from(aboutEyebrow.querySelectorAll('.letter'));
+}
+
+// Split round table eyebrow into per-letter spans for logo reveal effect
+const rtEyebrow = document.querySelector('.rt-eyebrow');
+if (rtEyebrow) {
+  rtEyebrow.innerHTML = rtEyebrow.textContent.split('').map(ch =>
+    ch === ' '
+      ? '<span class="letter" style="display:inline-block;min-width:0.3em;">&nbsp;</span>'
+      : `<span class="letter">${ch}</span>`
+  ).join('');
+  window._rtLetters = Array.from(rtEyebrow.querySelectorAll('.letter'));
 }
 
 // Split strategic eyebrow into per-letter spans for logo reveal effect

@@ -253,6 +253,8 @@ section { padding: 5rem 0; }
 .about-content-text { grid-column: 2; grid-row: 1; }
 .about-content-meta { grid-column: 2; grid-row: 2; }
 .about-image { width: 100%; max-width: 180px; aspect-ratio: 3/4; object-fit: cover; object-position: center 15%; display: block; }
+.about-eyebrow { color: transparent; margin-bottom: 2rem; }
+.about-eyebrow .letter { display: inline-block; color: transparent; transition: color 0.08s ease; }
 .about-content-text .eyebrow { margin-bottom: 1rem; }
 .about-content-text h2 { font-size: clamp(1.2rem, 2.2vw, 1.7rem); margin-bottom: 1.5rem; }
 .about-content-text p { font-size: 0.85rem; color: var(--text-mid); margin-bottom: 0; line-height: 1.85; }
@@ -306,6 +308,9 @@ section { padding: 5rem 0; }
    ROUND TABLE
    ============================================ */
 .round-table-section { background: var(--cream-dark); padding: 6rem 0; }
+.rt-inner { margin-left: 150px; }
+.rt-eyebrow { color: transparent; margin-left: -160px; margin-bottom: 1rem; }
+.rt-eyebrow .letter { display: inline-block; color: transparent; transition: color 0.08s ease; }
 .round-table-section .eyebrow { margin-bottom: 1rem; }
 .round-table-section h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 1rem; }
 .round-table-intro { font-size: 1rem; color: var(--text-mid); max-width: 640px; margin-bottom: 3.5rem; line-height: 1.8; }
@@ -355,23 +360,25 @@ section { padding: 5rem 0; }
 /* ============================================
    GLOBAL DESIGN SERIES TEASER
    ============================================ */
-.gds-teaser { background: var(--near-black); padding: 6rem 0; }
-.gds-teaser .eyebrow { color: rgba(255,255,255,0.6); margin-bottom: 1rem; }
+.gds-teaser { background: var(--near-black); padding: 0; }
+.gds-sticky { position: sticky; top: 0; z-index: 5; background: var(--near-black); padding: 6rem 0 3rem; }
+.gds-sticky-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-left: 150px; }
+.gds-eyebrow { color: transparent; margin-bottom: 0; line-height: 2; margin-left: -160px; }
+.gds-eyebrow .letter { display: inline-block; color: transparent; transition: color 0.08s ease; }
 .gds-teaser h2 { font-size: clamp(2rem, 4vw, 3.2rem); color: var(--white); margin-bottom: 1rem; }
-.gds-tagline { font-family: 'Lora', serif; font-style: italic; font-size: 1.05rem; color: rgba(255,255,255,0.72); margin-bottom: 3rem; }
-
-.gds-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-bottom: 2.5rem; }
-.gds-card { position: relative; aspect-ratio: 3/4; overflow: hidden; text-decoration: none; display: block; }
-.gds-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-.gds-card:hover img { transform: scale(1.04); }
-.gds-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(27,20,16,0.88) 0%, rgba(27,20,16,0.1) 55%); }
-.gds-card-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.75rem; }
-.gds-card-status { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 0.4rem; display: block; }
-.gds-card h3 { font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 400; color: var(--white); margin-bottom: 0.4rem; }
-.gds-card p { font-family: 'Lora', serif; font-style: italic; font-size: 0.82rem; color: rgba(255,255,255,0.65); }
-.coming-soon-overlay { position: absolute; inset: 0; background: rgba(27,20,16,0.45); display: flex; align-items: center; justify-content: center; }
-.coming-soon-badge { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.25); padding: 0.5rem 1rem; }
-.gds-more { text-align: center; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 2.5rem; }
+.gds-tagline { font-family: 'Lora', serif; font-style: italic; font-size: 0.95rem; color: rgba(255,255,255,0.62); line-height: 1.8; }
+.gds-countries { padding: 4rem 0 7rem; }
+.gds-country { padding: 3rem 0; border-top: 1px solid rgba(255,255,255,0.08); }
+.gds-country--coming { padding: 2rem 0; }
+.gds-country-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2.5rem; }
+.gds-country-name { font-family: 'Cinzel', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 400; color: var(--white); letter-spacing: 0.05em; }
+.gds-coming-badge { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+.gds-editions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.gds-edition { text-decoration: none; display: block; }
+.gds-edition-thumb { aspect-ratio: 3/4; overflow: hidden; margin-bottom: 1rem; }
+.gds-edition-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; filter: brightness(0.85); }
+.gds-edition:hover .gds-edition-thumb img { transform: scale(1.04); filter: brightness(1); }
+.gds-edition-title { font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; color: rgba(255,255,255,0.75); }
 
 /* ============================================
    SUBSCRIBE STRIP
