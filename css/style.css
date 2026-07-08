@@ -181,7 +181,6 @@ section { padding: 5rem 0; }
   background-size: cover; background-position: center;
   background-color: #2a3530;
   will-change: transform;
-  filter: hue-rotate(20deg) saturate(0.8);
 }
 .hero-overlay {
   position: absolute; inset: 0;
