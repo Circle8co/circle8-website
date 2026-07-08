@@ -363,7 +363,7 @@ section { padding: 5rem 0; }
 /* Brand Transition */
 .brand-transition { background: #dddcc8; padding: 5rem 0 6rem; overflow: hidden; }
 .brand-transition-inner { display: flex; justify-content: flex-start; align-items: center; will-change: transform; }
-.brand-mark-window { width: clamp(700px, 88vw, 1300px); aspect-ratio: 466/530; flex-shrink: 0; margin-left: 5vw; transform: scaleX(-1); background-image: url('../images/global%20design%20series%20image.jpg'); background-size: cover; background-position: center; -webkit-mask-image: url('../images/circle8-logo.png'); mask-image: url('../images/circle8-logo.png'); -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-mode: alpha; mask-mode: alpha; }
+.brand-mark-window { width: clamp(700px, 88vw, 1300px); height: auto; flex-shrink: 0; margin-left: 5vw; transform: scaleX(-1); display: block; overflow: visible; }
 
 .gds-teaser { background: #dddcc8; padding: 0; }
 .gds-sticky { position: sticky; top: 0; z-index: 5; background: #dddcc8; padding: 6rem 0 3rem; }

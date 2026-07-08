@@ -184,7 +184,17 @@
 <!-- BRAND TRANSITION -->
 <div class="brand-transition">
   <div class="brand-transition-inner">
-    <div class="brand-mark-window" aria-hidden="true"></div>
+    <svg class="brand-mark-window" viewBox="0 0 466 530" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <filter id="mask-to-white">
+          <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1 0"/>
+        </filter>
+        <mask id="logo-mask">
+          <image href="images/circle8-logo.png" width="466" height="530" filter="url(#mask-to-white)"/>
+        </mask>
+      </defs>
+      <image href="images/global%20design%20series%20image.jpg" x="-80" y="0" width="626" height="530" preserveAspectRatio="xMidYMid slice" mask="url(#logo-mask)"/>
+    </svg>
   </div>
 </div>
 
