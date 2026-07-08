@@ -43,8 +43,9 @@ if (nav) {
 
     // Logo lingers ~300px further, fading as you pass the profile photo
     if (heroBrand) {
-      const logoFadeStart = heroBottom;
-      const logoFadeEnd = heroBottom + 150;
+      const gdsSection = document.querySelector('.gds-teaser') || document.querySelector('#global-design-series');
+      const logoFadeStart = gdsSection ? gdsSection.offsetTop - 100 : heroBottom + 2000;
+      const logoFadeEnd = gdsSection ? gdsSection.offsetTop + 150 : heroBottom + 2200;
       const logoProgress = Math.min(1, Math.max(0, (window.scrollY - logoFadeStart) / (logoFadeEnd - logoFadeStart)));
       heroBrand.style.opacity = String(1 - logoProgress);
       heroBrand.style.pointerEvents = logoProgress >= 1 ? 'none' : '';
