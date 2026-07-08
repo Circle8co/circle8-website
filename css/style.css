@@ -367,20 +367,20 @@ section { padding: 5rem 0; }
 .brand-transition-inner { display: flex; justify-content: flex-start; align-items: center; will-change: transform; }
 .brand-transition-mark { width: clamp(700px, 88vw, 1300px); height: auto; opacity: 0.14; filter: sepia(1) saturate(0.8) hue-rotate(-10deg); display: block; margin-left: 5vw; transform: scaleX(-1); }
 
-.gds-teaser { background: var(--near-black); padding: 0; }
-.gds-sticky { position: sticky; top: 0; z-index: 5; background: var(--near-black); padding: 6rem 0 3rem; }
+.gds-teaser { background: #dddcc8; padding: 0; }
+.gds-sticky { position: sticky; top: 0; z-index: 5; background: #dddcc8; padding: 6rem 0 3rem; }
 .gds-sticky-content { margin-left: 150px; }
 .gds-eyebrow { color: transparent; margin-bottom: 0; line-height: 2; }
 .gds-eyebrow .letter { display: inline-block; color: transparent; transition: color 0.08s ease; }
-.gds-teaser h2 { font-size: clamp(2rem, 4vw, 3.2rem); color: var(--white); margin-bottom: 1.25rem; }
-.gds-tagline { font-family: 'Lora', serif; font-style: italic; font-size: 0.95rem; color: rgba(255,255,255,0.78); line-height: 1.8; max-width: 480px; }
+.gds-teaser h2 { font-size: clamp(2rem, 4vw, 3.2rem); color: var(--text-dark); margin-bottom: 1.25rem; }
+.gds-tagline { font-family: 'Lora', serif; font-style: italic; font-size: 0.95rem; color: var(--text-mid); line-height: 1.8; max-width: 480px; }
 .gds-countries { padding: 4rem 0 7rem; }
-.gds-country { padding: 3rem 0; border-top: 1px solid rgba(255,255,255,0.08); }
+.gds-country { padding: 3rem 0; border-top: 1px solid var(--border); }
 .gds-country--coming { padding: 2rem 0; }
 .gds-country-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2.5rem; }
 .gds-country-label { display: flex; flex-direction: column; gap: 0.4rem; }
 .gds-country-eyebrow { font-family: 'Source Sans 3', sans-serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terracotta); }
-.gds-country-name { font-family: 'Cinzel', serif; font-size: clamp(1.4rem, 2.5vw, 2.2rem); font-weight: 400; color: var(--white); letter-spacing: 0.05em; }
+.gds-country-name { font-family: 'Cinzel', serif; font-size: clamp(1.4rem, 2.5vw, 2.2rem); font-weight: 400; color: var(--text-dark); letter-spacing: 0.05em; }
 .gds-view-link { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.12em; color: rgba(255,255,255,0.55); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 3px; transition: color 0.25s ease, border-color 0.25s ease; white-space: nowrap; margin-bottom: 0.4rem; }
 .gds-view-link:hover { color: var(--white); border-color: rgba(255,255,255,0.55); }
 .gds-coming-badge { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
@@ -389,7 +389,7 @@ section { padding: 5rem 0; }
 .gds-edition-thumb { aspect-ratio: 3/4; overflow: hidden; margin-bottom: 1rem; }
 .gds-edition-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; filter: brightness(0.85); }
 .gds-edition:hover .gds-edition-thumb img { transform: scale(1.04); filter: brightness(1); }
-.gds-edition-title { font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; color: rgba(255,255,255,0.75); }
+.gds-edition-title { font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; color: var(--text-mid); }
 
 /* ============================================
    SUBSCRIBE STRIP
