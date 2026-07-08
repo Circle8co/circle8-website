@@ -29,6 +29,19 @@ if (heroBg) {
   }, { passive: true });
 }
 
+// Brand transition mark parallax
+const brandMark = document.querySelector('.brand-transition-inner');
+if (brandMark) {
+  window.addEventListener('scroll', () => {
+    const rect = brandMark.closest('.brand-transition').getBoundingClientRect();
+    const inView = rect.top < window.innerHeight && rect.bottom > 0;
+    if (inView) {
+      const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+      brandMark.style.transform = `translateY(${(progress - 0.5) * -60}px)`;
+    }
+  }, { passive: true });
+}
+
 // Navigation scroll behaviour
 const nav = document.querySelector('.nav');
 const heroBrand = document.querySelector('.hero-brand');
