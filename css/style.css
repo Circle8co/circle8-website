@@ -361,7 +361,7 @@ section { padding: 5rem 0; }
    GLOBAL DESIGN SERIES TEASER
    ============================================ */
 /* Brand Transition */
-.brand-transition { background: #dddcc8; padding: 4rem 0 5rem; overflow: hidden; }
+.brand-transition { background: #dddcc8; padding: 0; overflow: hidden; }
 .brand-cinematic { width: 100%; overflow: hidden; }
 .brand-cinematic-img { width: 100%; height: auto; display: block; }
 .brand-transition-inner { display: flex; justify-content: flex-start; align-items: center; will-change: transform; }
@@ -381,9 +381,9 @@ section { padding: 5rem 0; }
 .gds-country-label { display: flex; flex-direction: column; gap: 0.4rem; }
 .gds-country-eyebrow { font-family: 'Source Sans 3', sans-serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terracotta); }
 .gds-country-name { font-family: 'Cinzel', serif; font-size: clamp(1.4rem, 2.5vw, 2.2rem); font-weight: 400; color: var(--text-dark); letter-spacing: 0.05em; }
-.gds-view-link { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.12em; color: rgba(255,255,255,0.55); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 3px; transition: color 0.25s ease, border-color 0.25s ease; white-space: nowrap; margin-bottom: 0.4rem; }
-.gds-view-link:hover { color: var(--white); border-color: rgba(255,255,255,0.55); }
-.gds-coming-badge { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+.gds-view-link { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.12em; color: var(--text-mid); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 3px; transition: color 0.25s ease, border-color 0.25s ease; white-space: nowrap; margin-bottom: 0.4rem; }
+.gds-view-link:hover { color: var(--text-dark); border-color: var(--text-mid); }
+.gds-coming-badge { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-mid); opacity: 0.5; }
 .gds-editions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
 .gds-edition { text-decoration: none; display: block; }
 .gds-edition-thumb { aspect-ratio: 3/4; overflow: hidden; margin-bottom: 1rem; }
@@ -583,7 +583,7 @@ figcaption { font-size: 0.76rem; color: var(--text-light); margin-top: 0.6rem; l
 .gds-index-hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--white); margin-bottom: 1.25rem; }
 .gds-index-hero p { font-family: 'Lora', serif; font-style: italic; font-size: 1.1rem; color: rgba(255,255,255,0.72); max-width: 560px; margin: 0 auto; line-height: 1.7; }
 
-.gds-countries { background: var(--near-black); padding: 4rem 0; }
+.page-gds-index .gds-countries { background: var(--near-black); padding: 4rem 0; }
 .gds-country-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
 .gds-country-card { position: relative; aspect-ratio: 3/4; overflow: hidden; text-decoration: none; display: block; }
 .gds-country-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; filter: brightness(0.75); }
