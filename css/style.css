@@ -361,12 +361,12 @@ section { padding: 5rem 0; }
    GLOBAL DESIGN SERIES TEASER
    ============================================ */
 /* Brand Transition */
-.brand-transition { background: var(--near-black); padding: 4rem 0 5rem; overflow: hidden; }
+.brand-transition { background: #e4e9e1; padding: 4rem 0 5rem; overflow: hidden; }
 .brand-transition-inner { display: flex; justify-content: flex-end; align-items: center; will-change: transform; }
 .brand-transition-mark { width: clamp(600px, 78vw, 1100px); height: auto; opacity: 0.14; filter: sepia(1) saturate(0.8) hue-rotate(-10deg); display: block; margin-right: -12vw; transform: scaleX(-1); }
 
-.gds-teaser { background: var(--near-black); padding: 0; }
-.gds-sticky { position: sticky; top: 0; z-index: 5; background: var(--near-black); padding: 6rem 0 3rem; }
+.gds-teaser { background: #e4e9e1; padding: 0; }
+.gds-sticky { position: sticky; top: 0; z-index: 5; background: #e4e9e1; padding: 6rem 0 3rem; }
 .gds-sticky-content { margin-left: 150px; }
 .gds-eyebrow { color: transparent; margin-bottom: 0; line-height: 2; }
 .gds-eyebrow .letter { display: inline-block; color: transparent; transition: color 0.08s ease; }
