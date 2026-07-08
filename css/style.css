@@ -363,7 +363,7 @@ section { padding: 5rem 0; }
 /* Brand Transition */
 .brand-transition { background: #dddcc8; padding: 5rem 0 6rem; overflow: hidden; }
 .brand-transition-inner { display: flex; justify-content: flex-start; align-items: center; will-change: transform; }
-.brand-transition-mark { width: clamp(700px, 88vw, 1300px); height: auto; opacity: 0.14; filter: sepia(1) saturate(0.8) hue-rotate(-10deg); display: block; margin-left: -3vw; }
+.brand-transition-mark { width: clamp(700px, 88vw, 1300px); height: auto; opacity: 0.14; filter: sepia(1) saturate(0.8) hue-rotate(-10deg); display: block; margin-left: -3vw; transform: scaleX(-1); }
 
 .gds-teaser { background: #dddcc8; padding: 0; }
 .gds-sticky { position: sticky; top: 0; z-index: 5; background: #dddcc8; padding: 6rem 0 3rem; }
