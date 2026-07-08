@@ -362,8 +362,8 @@ section { padding: 5rem 0; }
    ============================================ */
 /* Brand Transition */
 .brand-transition { background: #dddcc8; padding: 0; overflow: hidden; }
-.brand-cinematic { width: 100%; overflow: hidden; height: 350px; }
-.brand-cinematic-img { width: 100%; height: 100%; object-fit: cover; object-position: center 48%; display: block; }
+.brand-cinematic { width: 100%; overflow: hidden; height: 280px; }
+.brand-cinematic-img { width: 100%; height: 100%; object-fit: cover; object-position: center 52%; display: block; }
 .brand-transition-inner { display: flex; justify-content: flex-start; align-items: center; will-change: transform; }
 .brand-transition-mark { width: clamp(700px, 88vw, 1300px); height: auto; opacity: 0.14; filter: sepia(1) saturate(0.8) hue-rotate(-10deg); display: block; margin-left: 5vw; transform: scaleX(-1); }
 
