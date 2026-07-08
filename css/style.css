@@ -293,7 +293,7 @@ section { padding: 5rem 0; }
 .differentiator p { font-size: 0.82rem; color: #bbb3ad; line-height: 1.85; }
 
 .ecosystem-section { background: var(--near-black); padding: 6rem 0 7rem; }
-.ecosystem-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 5rem; padding-bottom: 3rem; }
+.ecosystem-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 2rem; padding-bottom: 1rem; }
 .ecosystem-header .eyebrow { color: var(--text-mid); }
 .ecosystem-header-intro { font-size: 0.85rem; color: var(--text-mid); line-height: 1.85; }
 .ecosystem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 6rem; }
