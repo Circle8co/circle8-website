@@ -137,14 +137,17 @@ if (nav) {
       });
     }
 
-    // Homepage: fade logo out once testimonials cards scroll into view
+    // Homepage: fade logo to watermark as testimonials cards scroll into view
     if (heroSection && heroBrand) {
       const grid = document.querySelector('.testimonials-grid');
       if (grid) {
         const gridTop = grid.getBoundingClientRect().top;
-        const hideLogo = gridTop < heroBrand.offsetHeight + 40;
-        heroBrand.style.opacity = hideLogo ? '0' : '1';
-        heroBrand.style.pointerEvents = hideLogo ? 'none' : '';
+        const fadeStart = heroBrand.offsetHeight + 200;
+        const fadeEnd = heroBrand.offsetHeight - 60;
+        const progress = Math.min(1, Math.max(0, (fadeStart - gridTop) / (fadeStart - fadeEnd)));
+        const opacity = 1 - progress * 0.88; // fades from 1 down to 0.12 (watermark)
+        heroBrand.style.opacity = opacity;
+        heroBrand.style.pointerEvents = progress > 0.5 ? 'none' : '';
       } else {
         heroBrand.style.opacity = '1';
         heroBrand.style.pointerEvents = '';
