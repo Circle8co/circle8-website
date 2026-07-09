@@ -484,9 +484,9 @@ section { padding: 5rem 0; }
 .footer { background: #4a2d25; padding: 3rem 0; }
 .footer-inner { display: flex; flex-direction: column; gap: 0.5rem; }
 .footer-logo { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--terracotta); text-decoration: none; display: block; }
-.footer-bottom-row { display: flex; align-items: center; gap: 1.5rem; flex-wrap: nowrap; }
+.footer-bottom-row { display: flex; align-items: center; gap: 2rem; flex-wrap: nowrap; }
 .footer-tagline { font-size: 0.72rem; color: rgba(255,255,255,0.3); white-space: nowrap; }
-.footer-links { display: flex; gap: 1.25rem; list-style: none; flex-wrap: nowrap; }
+.footer-links { display: flex; gap: 1.75rem; list-style: none; flex-wrap: nowrap; }
 .footer-links a { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.38); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: rgba(255,255,255,0.75); }
 .footer-copy { font-size: 0.72rem; color: rgba(255,255,255,0.22); white-space: nowrap; margin-left: auto; }
