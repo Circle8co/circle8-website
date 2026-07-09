@@ -123,11 +123,11 @@ section { padding: 5rem 0; }
 }
 .nav-links a:hover { color: var(--terracotta); }
 .nav-links .nav-highlight {
-  color: var(--terracotta);
-  border: 1px solid var(--terracotta);
+  color: var(--text-dark);
+  border: 1px solid #d4bfb2;
   padding: 0.4rem 0.85rem;
 }
-.nav-links .nav-highlight:hover { background: var(--terracotta); color: white; }
+.nav-links .nav-highlight:hover { background: #d4bfb2; color: var(--text-dark); }
 
 .hamburger {
   display: none; flex-direction: column; gap: 5px; cursor: pointer;
@@ -159,14 +159,14 @@ section { padding: 5rem 0; }
   text-transform: uppercase; text-decoration: none;
   padding: 0.9rem 1.8rem; cursor: pointer; transition: all 0.25s ease; border: none;
 }
-.btn-primary { background: var(--terracotta); color: var(--white); }
-.btn-primary:hover { background: var(--terracotta-dark); }
+.btn-primary { background: #d4bfb2; color: var(--text-dark); }
+.btn-primary:hover { background: #c4aba0; }
 .btn-ghost { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.55); }
 .btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: var(--white); }
-.btn-ghost-dark { background: transparent; color: var(--terracotta); border: 1px solid var(--terracotta); }
-.btn-ghost-dark:hover { background: var(--terracotta); color: var(--white); }
-.btn-gold { background: var(--terracotta); color: var(--white); }
-.btn-gold:hover { background: var(--terracotta-dark); }
+.btn-ghost-dark { background: transparent; color: var(--text-dark); border: 1px solid #d4bfb2; }
+.btn-ghost-dark:hover { background: #d4bfb2; color: var(--text-dark); }
+.btn-gold { background: #d4bfb2; color: var(--text-dark); }
+.btn-gold:hover { background: #c4aba0; }
 
 /* ============================================
    HERO
@@ -408,12 +408,12 @@ section { padding: 5rem 0; }
 .subscribe-form input::placeholder { color: rgba(255,255,255,0.35); }
 .subscribe-form input:focus { border-color: var(--terracotta); }
 .subscribe-form button {
-  background: var(--terracotta); color: var(--white); border: none; padding: 0.9rem 1.5rem;
+  background: #d4bfb2; color: var(--text-dark); border: none; padding: 0.9rem 1.5rem;
   font-family: 'Source Sans 3', sans-serif; font-size: 0.72rem; font-weight: 600;
   letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; white-space: nowrap;
   transition: background 0.2s;
 }
-.subscribe-form button:hover { background: var(--terracotta-dark); }
+.subscribe-form button:hover { background: #c4aba0; }
 .subscribe-disclaimer { font-size: 0.72rem; color: rgba(255,255,255,0.3); margin-top: 0.75rem; }
 
 /* ============================================
