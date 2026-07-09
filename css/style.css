@@ -536,9 +536,9 @@ figcaption { font-size: 0.76rem; color: var(--text-light); margin-top: 0.6rem; l
 .article-image-duo { display: grid; grid-template-columns: repeat(2,1fr); gap: 1rem; margin: 2.5rem 0; }
 .article-image-duo figure img { width: 100%; display: block; aspect-ratio: 3/4; object-fit: cover; }
 
-.article-pullquote-block { background: var(--near-black); padding: 5rem clamp(2rem, 8vw, 7rem); position: relative; }
+.article-pullquote-block { background: #dddcc8; padding: 5rem clamp(2rem, 8vw, 7rem); position: relative; }
 .article-pullquote-block::before { content: ''; position: absolute; left: clamp(2rem, 4vw, 4rem); top: 50%; transform: translateY(-50%); width: 3px; height: 55%; background: var(--terracotta); }
-.article-pullquote-block .pull-quote { color: var(--white); font-size: clamp(1.1rem, 2.2vw, 1.5rem); padding-left: 2rem; }
+.article-pullquote-block .pull-quote { color: var(--text-dark); font-size: clamp(1.1rem, 2.2vw, 1.5rem); padding-left: 2rem; }
 
 /* SOCIAL SHARE (in article) */
 .article-share { background: var(--cream-dark); padding: 2rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
@@ -620,6 +620,13 @@ figcaption { font-size: 0.76rem; color: var(--text-light); margin-top: 0.6rem; l
 .rt-page-hero .eyebrow { color: var(--gold); margin-bottom: 1rem; }
 .rt-page-hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--white); margin-bottom: 1.25rem; max-width: 680px; }
 .rt-page-hero p { font-family: 'Lora', serif; font-style: italic; font-size: 1.1rem; color: rgba(255,255,255,0.65); max-width: 540px; line-height: 1.7; margin-bottom: 2rem; }
+
+/* ============================================
+   EDITORIAL PAGE OVERRIDES
+   ============================================ */
+.page-editorial .nav { background: var(--cream); }
+.page-editorial .nav-logo-mark { width: 80px; }
+.page-editorial .page-hero { margin-top: 80px; }
 
 /* ============================================
    RESPONSIVE
