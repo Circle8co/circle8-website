@@ -48,11 +48,18 @@ const heroBrand = document.querySelector('.hero-brand');
 const heroSection = document.querySelector('.hero');
 if (nav) {
   window.addEventListener('scroll', () => {
-    // Only fade nav on homepage (has .hero section); on all other pages keep nav visible
+    // Homepage: fade nav out past hero
     if (heroSection) {
       const heroBottom = heroSection.offsetHeight;
       const pastHero = window.scrollY >= heroBottom - nav.offsetHeight;
       nav.classList.toggle('past-hero', pastHero);
+    }
+
+    // Editorial/inner pages: slide nav + logo up out of view when scrolled
+    if (!heroSection) {
+      const hidden = window.scrollY > 80;
+      nav.classList.toggle('nav-scrolled-away', hidden);
+      if (heroBrand) heroBrand.classList.toggle('nav-scrolled-away', hidden);
     }
 
     // Reveal GDS eyebrow letters only while inside the logo circle
