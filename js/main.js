@@ -137,10 +137,18 @@ if (nav) {
       });
     }
 
-    // Logo remains visible throughout the page
-    if (heroBrand) {
-      heroBrand.style.opacity = '1';
-      heroBrand.style.pointerEvents = '';
+    // Homepage: fade logo out once testimonials cards scroll into view
+    if (heroSection && heroBrand) {
+      const grid = document.querySelector('.testimonials-grid');
+      if (grid) {
+        const gridTop = grid.getBoundingClientRect().top;
+        const hideLogo = gridTop < heroBrand.offsetHeight + 40;
+        heroBrand.style.opacity = hideLogo ? '0' : '1';
+        heroBrand.style.pointerEvents = hideLogo ? 'none' : '';
+      } else {
+        heroBrand.style.opacity = '1';
+        heroBrand.style.pointerEvents = '';
+      }
     }
   }, { passive: true });
 }
