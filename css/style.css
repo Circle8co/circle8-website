@@ -470,7 +470,7 @@ section { padding: 5rem 0; }
 /* ============================================
    FOOTER
    ============================================ */
-.footer { background: #1e1a17; padding: 3rem 0; }
+.footer { background: #2a2118; padding: 3rem 0; }
 .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
 .footer-logo { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--terracotta); text-decoration: none; display: block; margin-bottom: 0.25rem; }
 .footer-tagline { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
@@ -625,7 +625,8 @@ figcaption { font-size: 0.76rem; color: var(--text-light); margin-top: 0.6rem; l
    EDITORIAL PAGE OVERRIDES
    ============================================ */
 .page-editorial .nav { background: var(--cream); }
-.page-editorial .nav-logo-mark { width: 80px; }
+.page-editorial .nav-logo-mark { width: 65px; }
+.page-editorial .nav-logo-text { display: none; }
 .page-editorial .page-hero { margin-top: 80px; }
 
 /* ============================================
