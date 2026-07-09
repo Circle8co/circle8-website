@@ -625,12 +625,16 @@ figcaption { font-size: 0.76rem; color: var(--text-light); margin-top: 0.6rem; l
    EDITORIAL PAGE OVERRIDES
    ============================================ */
 .page-editorial .nav,
-.page-gds-index .nav { background: var(--cream); }
+.page-gds-index .nav {
+  background: var(--cream);
+  height: 80px;
+}
 .page-editorial .nav-logo-mark,
-.page-gds-index .nav-logo-mark { width: 90px; }
+.page-gds-index .nav-logo-mark { width: 52px; }
 .page-editorial .nav-logo-text,
 .page-gds-index .nav-logo-text { display: none; }
-.page-editorial .page-hero { margin-top: 80px; }
+.page-editorial .page-hero,
+.page-gds-index .gds-index-hero { margin-top: 80px; }
 
 /* ============================================
    RESPONSIVE
