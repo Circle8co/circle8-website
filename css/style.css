@@ -451,7 +451,7 @@ section { padding: 5rem 0; }
 /* ============================================
    CONTACT
    ============================================ */
-.contact { background: #5c3530; padding: 6rem 0; text-align: center; }
+.contact { background: #6d4337; padding: 6rem 0; text-align: center; }
 .contact .eyebrow { color: var(--terracotta); margin-bottom: 1.25rem; }
 .contact h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: var(--white); margin-bottom: 1.5rem; }
 .contact > .container > p { font-size: 1rem; color: rgba(255,255,255,0.58); max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.8; }
