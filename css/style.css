@@ -482,13 +482,15 @@ section { padding: 5rem 0; }
    FOOTER
    ============================================ */
 .footer { background: #4a2d25; padding: 3rem 0; }
-.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
+.footer-left { display: flex; flex-direction: column; margin-left: -0.5rem; }
 .footer-logo { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--terracotta); text-decoration: none; display: block; margin-bottom: 0.25rem; }
 .footer-tagline { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
-.footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
+.footer-right { display: flex; align-items: center; gap: 2.5rem; }
+.footer-links { display: flex; gap: 2rem; list-style: none; }
 .footer-links a { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.38); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: rgba(255,255,255,0.75); }
-.footer-copy { font-size: 0.72rem; color: rgba(255,255,255,0.22); }
+.footer-copy { font-size: 0.72rem; color: rgba(255,255,255,0.22); white-space: nowrap; }
 
 /* ============================================
    PAGE HERO (inner pages)
