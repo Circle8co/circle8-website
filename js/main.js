@@ -48,11 +48,12 @@ const heroBrand = document.querySelector('.hero-brand');
 const heroSection = document.querySelector('.hero');
 if (nav) {
   window.addEventListener('scroll', () => {
-    const heroBottom = heroSection ? heroSection.offsetHeight : window.innerHeight;
-
-    // Nav fades exactly when white about section reaches it
-    const pastHero = window.scrollY >= heroBottom - nav.offsetHeight;
-    nav.classList.toggle('past-hero', pastHero);
+    // Only fade nav on homepage (has .hero section); on all other pages keep nav visible
+    if (heroSection) {
+      const heroBottom = heroSection.offsetHeight;
+      const pastHero = window.scrollY >= heroBottom - nav.offsetHeight;
+      nav.classList.toggle('past-hero', pastHero);
+    }
 
     // Reveal GDS eyebrow letters only while inside the logo circle
     if (window._gdsLetters && heroBrand) {
