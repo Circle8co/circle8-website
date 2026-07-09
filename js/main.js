@@ -122,6 +122,21 @@ if (nav) {
       });
     }
 
+    // Reveal Testimonials eyebrow letters only while inside the logo circle
+    if (window._testimonialsLetters && heroBrand) {
+      const logoRect = heroBrand.getBoundingClientRect();
+      const cx = logoRect.left + logoRect.width / 2;
+      const cy = logoRect.top + logoRect.height / 2;
+      const r = logoRect.width * 0.30;
+      window._testimonialsLetters.forEach(span => {
+        const lr = span.getBoundingClientRect();
+        const x = lr.left + lr.width / 2;
+        const y = lr.top + lr.height / 2;
+        const inside = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2) <= r;
+        span.style.color = inside ? 'var(--terracotta)' : 'transparent';
+      });
+    }
+
     // Logo remains visible throughout the page
     if (heroBrand) {
       heroBrand.style.opacity = '1';
@@ -175,6 +190,17 @@ if (strategicEyebrow) {
   ).join('');
   window._eyebrowLetters = Array.from(strategicEyebrow.querySelectorAll('.letter'));
 
+}
+
+// Split testimonials eyebrow into per-letter spans for logo reveal effect
+const testimonialsEyebrow = document.querySelector('.testimonials-eyebrow');
+if (testimonialsEyebrow) {
+  testimonialsEyebrow.innerHTML = testimonialsEyebrow.textContent.split('').map(ch =>
+    ch === ' '
+      ? '<span class="letter" style="display:inline-block;min-width:0.3em;">&nbsp;</span>'
+      : `<span class="letter">${ch}</span>`
+  ).join('');
+  window._testimonialsLetters = Array.from(testimonialsEyebrow.querySelectorAll('.letter'));
 }
 
 // Mobile menu toggle
