@@ -163,8 +163,8 @@ if (nav) {
         if (rtSection && rtSection.getBoundingClientRect().top <= 0) {
           window._logoLocked = true;
         }
-        // Unlock once testimonials grid top re-enters the viewport on scroll up
-        if (gridTop > 0) window._logoLocked = false;
+        // Unlock as soon as RT section scrolls back below the logo on scroll-up
+        if (rtSection && rtSection.getBoundingClientRect().top > logoH) window._logoLocked = false;
         if (window._logoLocked) opacity = 1;
 
         heroBrand.style.opacity = opacity;
