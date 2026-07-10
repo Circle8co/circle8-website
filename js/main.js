@@ -159,12 +159,18 @@ if (nav) {
           opacity = Math.max(opacity, restore);
         }
 
-        // Lock permanently once the RT section top reaches the viewport top
+        // Track scroll direction
+        const scrollingUp = window.scrollY < (window._lastScrollY || 0);
+        window._lastScrollY = window.scrollY;
+
+        // Lock when RT section reaches top of viewport
         if (rtSection && rtSection.getBoundingClientRect().top <= 0) {
           window._logoLocked = true;
         }
-        // Unlock as soon as RT section scrolls back below the logo on scroll-up
-        if (rtSection && rtSection.getBoundingClientRect().top > logoH) window._logoLocked = false;
+        // Unlock immediately when scrolling up past the RT section
+        if (window._logoLocked && scrollingUp && rtSection && rtSection.getBoundingClientRect().top > 0) {
+          window._logoLocked = false;
+        }
         if (window._logoLocked) opacity = 1;
 
         heroBrand.style.opacity = opacity;
