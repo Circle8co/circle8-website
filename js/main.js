@@ -64,6 +64,21 @@ if (nav) {
       if (heroBrand) heroBrand.classList.toggle('nav-scrolled-away', hidden);
     }
 
+    // Round-table page: fade logo out as the h1 heading reaches logo level
+    if (rtPageHero && heroBrand) {
+      const rtH1 = rtPageHero.querySelector('h1');
+      if (rtH1) {
+        const h1Top = rtH1.getBoundingClientRect().top;
+        const logoH = heroBrand.offsetHeight;
+        // Fade starts when h1 is at logo bottom, fully gone at logo center
+        const fadeStart = logoH;
+        const fadeEnd = logoH * 0.4;
+        const opacity = Math.min(1, Math.max(0, (h1Top - fadeEnd) / (fadeStart - fadeEnd)));
+        heroBrand.style.opacity = opacity;
+        heroBrand.style.pointerEvents = opacity < 0.2 ? 'none' : '';
+      }
+    }
+
     // Reveal GDS eyebrow letters only while inside the logo circle
     if (window._gdsLetters && heroBrand) {
       const logoRect = heroBrand.getBoundingClientRect();
