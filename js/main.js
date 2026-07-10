@@ -137,37 +137,34 @@ if (nav) {
       });
     }
 
-    // Homepage: logo fades to watermark over testimonials, locks full once RT eyebrow enters logo circle
+    // Homepage: logo fades to watermark over testimonials, restores then locks when RT heading is level with logo
     if (heroSection && heroBrand) {
       const grid = document.querySelector('.testimonials-grid');
+      const rtSection = document.querySelector('.round-table-section');
+      const rtHeading = document.querySelector('.round-table-section h2');
       if (grid) {
-        const logoRect = heroBrand.getBoundingClientRect();
-        const cx = logoRect.left + logoRect.width / 2;
-        const cy = logoRect.top + logoRect.height / 2;
-        const r = logoRect.width * 0.30;
         const gridTop = grid.getBoundingClientRect().top;
         const logoH = heroBrand.offsetHeight;
 
-        // Fade to watermark as testimonials grid scrolls up through logo
+        // Fade to watermark as testimonials grid scrolls past
         const fadeDownStart = logoH + 200;
         const fadeDownEnd = logoH - 60;
         const fadeDown = Math.min(1, Math.max(0, (fadeDownStart - gridTop) / (fadeDownStart - fadeDownEnd)));
         let opacity = 1 - fadeDown * 0.88;
 
-        // Check if any RT eyebrow letter is inside the logo circle — if so, lock to full
-        if (window._rtLetters && window._rtLetters.length) {
-          const anyInside = window._rtLetters.some(span => {
-            const lr = span.getBoundingClientRect();
-            const x = lr.left + lr.width / 2;
-            const y = lr.top + lr.height / 2;
-            return Math.sqrt((x - cx) ** 2 + (y - cy) ** 2) <= r;
-          });
-          if (anyInside) opacity = 1;
+        // Gradually restore as RT section scrolls up from viewport bottom toward logo
+        if (rtSection) {
+          const rtTop = rtSection.getBoundingClientRect().top;
+          const restore = Math.min(1, Math.max(0, (window.innerHeight - rtTop) / (window.innerHeight * 0.6)));
+          opacity = Math.max(opacity, restore);
         }
 
-        // Once past testimonials (RT section fully in view), always restore
-        const rtSection = document.querySelector('.round-table-section');
-        if (rtSection && rtSection.getBoundingClientRect().top <= 0) opacity = 1;
+        // Lock at full once the RT heading's vertical centre reaches the logo
+        if (rtHeading) {
+          const hRect = rtHeading.getBoundingClientRect();
+          const headingCY = hRect.top + hRect.height / 2;
+          if (headingCY <= logoH) opacity = 1;
+        }
 
         heroBrand.style.opacity = opacity;
         heroBrand.style.pointerEvents = opacity < 0.4 ? 'none' : '';
