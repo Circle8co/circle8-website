@@ -492,7 +492,7 @@ section { padding: 5rem 0; }
 /* ============================================
    FOOTER
    ============================================ */
-.footer { background: #4a2d25; padding: 3rem 0; }
+.footer { background: #321a12; padding: 3rem 0; }
 .footer-inner { display: flex; flex-direction: column; gap: 0.5rem; }
 .footer-logo { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--terracotta); text-decoration: none; display: block; }
 .footer-bottom-row { display: flex; align-items: center; gap: 2rem; flex-wrap: nowrap; }
