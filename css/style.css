@@ -696,6 +696,14 @@ figcaption { font-size: 0.76rem; color: var(--text-light); margin-top: 0.6rem; l
 
 /* GDS view button on country cards */
 .page-gds-index .view-btn { background: #8a9e85; }
+.page-gds-index .subscribe-strip { background: #8a9e85; }
+.page-gds-index .subscribe-strip h3,
+.page-gds-index .subscribe-strip p { color: var(--white); }
+.page-gds-index .subscribe-strip input { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.3); color: var(--white); }
+.page-gds-index .subscribe-strip input::placeholder { color: rgba(255,255,255,0.6); }
+.page-gds-index .subscribe-disclaimer { color: rgba(255,255,255,0.6); }
+.page-gds-index .subscribe-form button { background: #6b8266; color: var(--white); }
+.page-gds-index .subscribe-form button:hover { background: #5c7357; }
 
 /* ============================================
    RESPONSIVE
