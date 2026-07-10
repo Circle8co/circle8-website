@@ -56,7 +56,9 @@ if (nav) {
     }
 
     // Editorial/inner pages: slide nav + logo up out of view when scrolled
-    if (!heroSection) {
+    // Exception: round-table page keeps logo visible for the letter-reveal effect
+    const rtPageHero = document.querySelector('.rt-page-hero');
+    if (!heroSection && !rtPageHero) {
       const hidden = window.scrollY > 80;
       nav.classList.toggle('nav-scrolled-away', hidden);
       if (heroBrand) heroBrand.classList.toggle('nav-scrolled-away', hidden);
