@@ -642,8 +642,7 @@ figcaption { font-size: 0.76rem; color: var(--text-light); margin-top: 0.6rem; l
 .rt-page-hero { background: var(--surface-dark); margin-top: 170px; padding: 8rem 0 5rem; position: relative; overflow: hidden; }
 .rt-page-hero::before { content: '8'; position: absolute; right: -2rem; top: 50%; transform: translateY(-50%); font-family: 'Cinzel', serif; font-size: 30rem; color: rgba(122,63,48,0.06); line-height: 1; pointer-events: none; }
 .rt-page-hero { overflow: visible; }
-.rt-page-hero .eyebrow { position: absolute; top: -60px; left: clamp(2rem, 5vw, 5rem); color: transparent; margin-left: -175px; margin-bottom: 0; }
-.rt-page-hero .eyebrow .letter { display: inline-block; color: transparent; transition: color 0.08s ease; }
+.rt-page-hero .eyebrow { position: absolute; top: -55px; left: clamp(2rem, 5vw, 5rem); color: var(--terracotta); margin-bottom: 0; }
 .rt-page-hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--white); margin-bottom: 1.25rem; max-width: 680px; }
 .rt-page-hero p { font-family: 'Lora', serif; font-style: italic; font-size: 1.1rem; color: rgba(255,255,255,0.65); max-width: 540px; line-height: 1.7; margin-bottom: 2rem; }
 
