@@ -696,6 +696,21 @@ figcaption { font-size: 0.76rem; color: var(--text-light); margin-top: 0.6rem; l
 
 /* GDS view button on country cards */
 .page-gds-index .view-btn { background: #8a9e85; }
+.gds-brand-label {
+  position: absolute;
+  top: 46%; left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  line-height: 1.7;
+  pointer-events: none;
+  white-space: nowrap;
+}
 .page-gds-index .subscribe-strip { background: #8a9e85; }
 .page-gds-index .subscribe-strip h3,
 .page-gds-index .subscribe-strip p { color: var(--white); }
