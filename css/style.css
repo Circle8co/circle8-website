@@ -338,19 +338,19 @@ section { padding: 5rem 0; }
 
 .rt-formats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-bottom: 4rem; }
 .rt-format {
-  background: var(--white); padding: 2.5rem;
-  border-top: 3px solid var(--terracotta);
+  background: var(--white); padding: 2.5rem 2rem;
+  border-top: 1px solid var(--terracotta);
   position: relative;
 }
 .rt-format-number {
-  font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.2em;
-  text-transform: uppercase; color: var(--terracotta); display: block; margin-bottom: 1rem;
+  font-family: 'Source Sans 3', sans-serif; font-size: 0.62rem; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--text-light); display: block; margin-bottom: 1.25rem;
 }
-.rt-format h3 { font-size: 0.88rem; margin-bottom: 0.65rem; color: var(--text-dark); }
-.rt-format p { font-size: 0.8rem; color: var(--text-mid); line-height: 1.75; margin-bottom: 1rem; }
+.rt-format h3 { font-size: 0.82rem; font-family: 'Cinzel', serif; font-weight: 400; letter-spacing: 0.02em; margin-bottom: 1rem; color: var(--text-dark); }
+.rt-format p { font-size: 0.76rem; color: var(--text-mid); line-height: 1.9; margin-bottom: 0.85rem; }
 .rt-format-detail {
-  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--text-light); border-top: 1px solid var(--border); padding-top: 1rem; margin-top: auto;
+  font-size: 0.6rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--terracotta); border-top: 1px solid var(--border); padding-top: 1rem; margin-top: auto; line-height: 1.8;
 }
 
 .rt-rules { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; margin-bottom: 3.5rem; }
