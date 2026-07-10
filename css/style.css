@@ -320,7 +320,7 @@ section { padding: 5rem 0; }
 .round-table-section { background: var(--cream-dark); padding: 7rem 0 6rem; position: sticky; top: 0; z-index: 5; overflow: hidden; }
 .rt-watermark { position: absolute; right: 6%; top: 50%; transform: translateY(-50%); font-family: 'Cinzel', serif; font-size: clamp(16rem, 22vw, 26rem); color: var(--terracotta); opacity: 0.06; line-height: 1; pointer-events: none; user-select: none; }
 .rt-inner { margin-left: 150px; max-width: 640px; }
-.rt-eyebrow { color: transparent; margin-left: -160px; margin-bottom: 0.75rem; }
+.rt-eyebrow { color: transparent; margin-left: -210px; margin-bottom: 0.75rem; }
 .rt-eyebrow .letter { display: inline-block; color: transparent; transition: color 0.08s ease; }
 .round-table-section h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); margin-bottom: 1rem; color: var(--text-dark); }
 .rt-lead { font-size: 0.88rem; color: var(--text-mid); line-height: 1.85; margin-bottom: 2rem; max-width: 480px; }
@@ -464,7 +464,10 @@ section { padding: 5rem 0; }
 .contact h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: var(--white); margin-bottom: 1.5rem; }
 .contact > .container > p { font-size: 1rem; color: rgba(255,255,255,0.58); max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.8; }
 .contact-ctas { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
-.contact-details { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.08); }
+.contact-details { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.08); margin-bottom: 3rem; }
+.contact-social { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 2rem; }
+.contact-social .social-strip-text { color: rgba(255,255,255,0.5); }
+.contact-social .social-strip-text strong { color: rgba(255,255,255,0.75); }
 .contact-item-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--terracotta); display: block; margin-bottom: 0.4rem; }
 .contact-item a, .contact-item span { font-size: 0.95rem; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
 .contact-item a:hover { color: var(--white); }
