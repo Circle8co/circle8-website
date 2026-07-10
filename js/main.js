@@ -159,9 +159,11 @@ if (nav) {
           opacity = Math.max(opacity, restore);
         }
 
-        // Lock permanently once testimonials grid is fully off screen
-        if (gridBottom <= 0) window._logoLocked = true;
-        // Unlock when scrolled back above testimonials
+        // Lock permanently once the RT section top reaches the viewport top
+        if (rtSection && rtSection.getBoundingClientRect().top <= 0) {
+          window._logoLocked = true;
+        }
+        // Unlock only when scrolled all the way back above testimonials
         if (gridTop > logoH + 200) window._logoLocked = false;
         if (window._logoLocked) opacity = 1;
 
