@@ -159,14 +159,10 @@ if (nav) {
           opacity = Math.max(opacity, restore);
         }
 
-        // Lock permanently once RT heading top reaches the logo area
-        if (rtHeading && rtHeading.getBoundingClientRect().top <= logoH) {
-          window._logoLocked = true;
-        }
-        // Unlock only when scrolled back above testimonials
-        if (gridTop > logoH + 200) {
-          window._logoLocked = false;
-        }
+        // Lock permanently once testimonials grid is fully off screen
+        if (gridBottom <= 0) window._logoLocked = true;
+        // Unlock when scrolled back above testimonials
+        if (gridTop > logoH + 200) window._logoLocked = false;
         if (window._logoLocked) opacity = 1;
 
         heroBrand.style.opacity = opacity;
