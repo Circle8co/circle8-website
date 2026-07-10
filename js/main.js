@@ -334,6 +334,33 @@ if (subscribeForm) {
   });
 }
 
+// Floating nav button
+const floatBtn = document.getElementById('floatNavBtn');
+const floatOverlay = document.getElementById('floatNavOverlay');
+if (floatBtn && floatOverlay) {
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      floatBtn.classList.add('visible');
+    } else {
+      floatBtn.classList.remove('visible');
+      floatBtn.classList.remove('open');
+      floatOverlay.classList.remove('open');
+    }
+  }, { passive: true });
+
+  floatBtn.addEventListener('click', () => {
+    floatBtn.classList.toggle('open');
+    floatOverlay.classList.toggle('open');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!floatBtn.contains(e.target) && !floatOverlay.contains(e.target)) {
+      floatBtn.classList.remove('open');
+      floatOverlay.classList.remove('open');
+    }
+  });
+}
+
 // Round Table interest form
 const rtForm = document.querySelector('.rt-form');
 if (rtForm) {
