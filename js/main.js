@@ -137,17 +137,40 @@ if (nav) {
       });
     }
 
-    // Homepage: fade logo to watermark as testimonials cards scroll into view
+    // Homepage: logo fades to watermark over testimonials, locks full once RT eyebrow enters logo circle
     if (heroSection && heroBrand) {
       const grid = document.querySelector('.testimonials-grid');
       if (grid) {
+        const logoRect = heroBrand.getBoundingClientRect();
+        const cx = logoRect.left + logoRect.width / 2;
+        const cy = logoRect.top + logoRect.height / 2;
+        const r = logoRect.width * 0.30;
         const gridTop = grid.getBoundingClientRect().top;
-        const fadeStart = heroBrand.offsetHeight + 200;
-        const fadeEnd = heroBrand.offsetHeight - 60;
-        const progress = Math.min(1, Math.max(0, (fadeStart - gridTop) / (fadeStart - fadeEnd)));
-        const opacity = 1 - progress * 0.88; // fades from 1 down to 0.12 (watermark)
+        const logoH = heroBrand.offsetHeight;
+
+        // Fade to watermark as testimonials grid scrolls up through logo
+        const fadeDownStart = logoH + 200;
+        const fadeDownEnd = logoH - 60;
+        const fadeDown = Math.min(1, Math.max(0, (fadeDownStart - gridTop) / (fadeDownStart - fadeDownEnd)));
+        let opacity = 1 - fadeDown * 0.88;
+
+        // Check if any RT eyebrow letter is inside the logo circle — if so, lock to full
+        if (window._rtLetters && window._rtLetters.length) {
+          const anyInside = window._rtLetters.some(span => {
+            const lr = span.getBoundingClientRect();
+            const x = lr.left + lr.width / 2;
+            const y = lr.top + lr.height / 2;
+            return Math.sqrt((x - cx) ** 2 + (y - cy) ** 2) <= r;
+          });
+          if (anyInside) opacity = 1;
+        }
+
+        // Once past testimonials (RT section fully in view), always restore
+        const rtSection = document.querySelector('.round-table-section');
+        if (rtSection && rtSection.getBoundingClientRect().top <= 0) opacity = 1;
+
         heroBrand.style.opacity = opacity;
-        heroBrand.style.pointerEvents = progress > 0.5 ? 'none' : '';
+        heroBrand.style.pointerEvents = opacity < 0.4 ? 'none' : '';
       } else {
         heroBrand.style.opacity = '1';
         heroBrand.style.pointerEvents = '';
