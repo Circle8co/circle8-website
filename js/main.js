@@ -152,19 +152,22 @@ if (nav) {
         const fadeDown = Math.min(1, Math.max(0, (fadeDownStart - gridTop) / (fadeDownStart - fadeDownEnd)));
         let opacity = 1 - fadeDown * 0.88;
 
-        // Gradually restore as RT section scrolls up from viewport bottom toward logo
-        if (rtSection) {
-          const rtTop = rtSection.getBoundingClientRect().top;
-          const restore = Math.min(1, Math.max(0, (window.innerHeight - rtTop) / (window.innerHeight * 0.6)));
+        // Restore gradually once testimonials grid bottom clears the logo
+        const gridBottom = grid.getBoundingClientRect().bottom;
+        if (gridBottom < logoH) {
+          const restore = Math.min(1, Math.max(0, (logoH - gridBottom) / 180));
           opacity = Math.max(opacity, restore);
         }
 
-        // Lock at full once the RT heading's vertical centre reaches the logo
-        if (rtHeading) {
-          const hRect = rtHeading.getBoundingClientRect();
-          const headingCY = hRect.top + hRect.height / 2;
-          if (headingCY <= logoH) opacity = 1;
+        // Lock permanently once RT heading top reaches the logo area
+        if (rtHeading && rtHeading.getBoundingClientRect().top <= logoH) {
+          window._logoLocked = true;
         }
+        // Unlock only when scrolled back above testimonials
+        if (gridTop > logoH + 200) {
+          window._logoLocked = false;
+        }
+        if (window._logoLocked) opacity = 1;
 
         heroBrand.style.opacity = opacity;
         heroBrand.style.pointerEvents = opacity < 0.4 ? 'none' : '';
