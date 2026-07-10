@@ -639,10 +639,10 @@ figcaption { font-size: 0.76rem; color: var(--text-light); margin-top: 0.6rem; l
 /* ============================================
    ROUND TABLE PAGE
    ============================================ */
-.rt-page-hero { background: var(--cream-dark); margin-top: 220px; padding: 4rem 0 12rem; position: relative; overflow: visible; }
+.rt-page-hero { background: var(--cream-dark); margin-top: 220px; padding: 4rem 0 5rem; position: relative; overflow: visible; }
 .rt-page-hero::before { content: '8'; position: absolute; right: 6%; top: 50%; transform: translateY(-50%); font-family: 'Cinzel', serif; font-size: clamp(16rem, 22vw, 26rem); color: var(--terracotta); opacity: 0.06; line-height: 1; pointer-events: none; }
 .rt-page-inner { margin-left: 150px; max-width: 640px; }
-.rt-page-hero .eyebrow { position: fixed; top: 120px; left: calc(clamp(2rem, 5vw, 5rem) + 120px); transform: translate(-50%, -50%); color: var(--terracotta); margin-bottom: 0; font-size: 0.6rem; letter-spacing: 0.15em; white-space: nowrap; z-index: 1000; }
+.rt-page-eyebrow { position: fixed; top: 120px; left: calc(clamp(2rem, 5vw, 5rem) + 120px); transform: translate(-50%, -50%); color: var(--terracotta); font-size: 0.6rem; letter-spacing: 0.15em; white-space: nowrap; z-index: 1000; font-family: 'Source Sans 3', sans-serif; font-weight: 600; text-transform: uppercase; }
 .rt-page-hero h1 { font-size: clamp(1.4rem, 2.5vw, 2rem); color: var(--text-dark); margin-bottom: 1rem; }
 .rt-page-hero p { font-family: 'Lora', serif; font-style: italic; font-size: 0.92rem; color: var(--text-mid); max-width: 480px; line-height: 1.85; margin-bottom: 2rem; }
 
