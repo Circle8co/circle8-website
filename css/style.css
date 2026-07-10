@@ -317,10 +317,10 @@ section { padding: 5rem 0; }
 /* ============================================
    ROUND TABLE
    ============================================ */
-.round-table-section { background: var(--cream-dark); padding: 7rem 0 6rem; position: sticky; top: 0; z-index: 5; overflow: hidden; }
+.round-table-section { background: var(--cream-dark); padding: 7rem 0 6rem; position: relative; overflow: hidden; }
 .rt-watermark { position: absolute; right: 6%; top: 50%; transform: translateY(-50%); font-family: 'Cinzel', serif; font-size: clamp(16rem, 22vw, 26rem); color: var(--terracotta); opacity: 0.06; line-height: 1; pointer-events: none; user-select: none; }
 .rt-inner { margin-left: 150px; max-width: 640px; }
-.rt-eyebrow { color: transparent; margin-left: -210px; margin-bottom: 0.75rem; }
+.rt-eyebrow { color: transparent; margin-left: -175px; margin-bottom: 0.75rem; }
 .rt-eyebrow .letter { display: inline-block; color: transparent; transition: color 0.08s ease; }
 .round-table-section h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); margin-bottom: 1rem; color: var(--text-dark); }
 .rt-lead { font-size: 0.88rem; color: var(--text-mid); line-height: 1.85; margin-bottom: 2rem; max-width: 480px; }
