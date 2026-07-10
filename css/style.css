@@ -339,8 +339,9 @@ section { padding: 5rem 0; }
 .rt-formats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-bottom: 4rem; }
 .rt-format {
   background: var(--white); padding: 2.5rem 2rem;
-  border-top: 1px solid var(--terracotta);
+  border-top: 1px solid rgba(90,74,58,0.2);
   position: relative;
+  display: flex; flex-direction: column;
 }
 .rt-format-number {
   font-family: 'Source Sans 3', sans-serif; font-size: 0.62rem; letter-spacing: 0.25em;
