@@ -336,12 +336,12 @@ section { padding: 5rem 0; }
 .round-table-intro { font-size: 1rem; color: var(--text-mid); max-width: 640px; margin-bottom: 3.5rem; line-height: 1.8; }
 .rt-eight { display: inline-block; font-family: 'Cinzel', serif; font-size: 5rem; color: var(--terracotta); opacity: 0.12; line-height: 1; margin-bottom: -1rem; }
 
-.rt-formats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-bottom: 4rem; align-items: stretch; }
+.rt-formats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-bottom: 4rem; grid-auto-rows: 1fr; }
 .rt-format {
   background: var(--white); padding: 2.5rem 2rem;
   border-top: 1px solid rgba(90,74,58,0.2);
   position: relative;
-  display: flex; flex-direction: column; height: 100%;
+  display: flex; flex-direction: column;
 }
 .rt-format-number {
   font-family: 'Source Sans 3', sans-serif; font-size: 0.62rem; letter-spacing: 0.25em;
