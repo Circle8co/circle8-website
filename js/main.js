@@ -101,19 +101,44 @@ if (nav) {
       });
     }
 
-    // Reveal RT eyebrow letters only while inside the logo circle
+    // RT eyebrow: letter-reveal while scrolling, then pin at logo centre
     if (window._rtLetters && heroBrand) {
+      const rtEyebrowEl = document.querySelector('.rt-eyebrow');
       const logoRect = heroBrand.getBoundingClientRect();
       const cx = logoRect.left + logoRect.width / 2;
       const cy = logoRect.top + logoRect.height / 2;
       const r = logoRect.width * 0.30;
-      window._rtLetters.forEach(span => {
-        const lr = span.getBoundingClientRect();
-        const x = lr.left + lr.width / 2;
-        const y = lr.top + lr.height / 2;
-        const inside = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2) <= r;
-        span.style.color = inside ? 'var(--terracotta)' : 'transparent';
-      });
+
+      if (rtEyebrowEl) {
+        const rtSection = document.querySelector('.round-table-section');
+        const rtBottom = rtSection ? rtSection.getBoundingClientRect().bottom : 9999;
+        // Use natural position to decide pin vs reveal
+        const naturalRect = rtEyebrowEl.getBoundingClientRect();
+        const eyebrowMid = naturalRect.top + naturalRect.height / 2;
+        const isPinned = eyebrowMid <= cy && rtBottom > cy;
+
+        if (isPinned) {
+          // Pin the eyebrow at logo centre
+          rtEyebrowEl.style.position = 'fixed';
+          rtEyebrowEl.style.top = (cy - naturalRect.height / 2) + 'px';
+          rtEyebrowEl.style.left = naturalRect.left + 'px';
+          rtEyebrowEl.style.zIndex = '1002';
+          window._rtLetters.forEach(s => { s.style.color = 'var(--terracotta)'; });
+        } else {
+          // Letter-reveal mode — restore natural flow
+          rtEyebrowEl.style.position = '';
+          rtEyebrowEl.style.top = '';
+          rtEyebrowEl.style.left = '';
+          rtEyebrowEl.style.zIndex = '';
+          window._rtLetters.forEach(span => {
+            const lr = span.getBoundingClientRect();
+            const x = lr.left + lr.width / 2;
+            const y = lr.top + lr.height / 2;
+            const inside = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2) <= r;
+            span.style.color = inside ? 'var(--terracotta)' : 'transparent';
+          });
+        }
+      }
     }
 
     // Reveal each letter only while it's inside the logo circle
