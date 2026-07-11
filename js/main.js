@@ -64,22 +64,21 @@ if (nav) {
       if (heroBrand) heroBrand.classList.toggle('nav-scrolled-away', hidden);
     }
 
-    // Round-table page: fade logo until eyebrow is centred in it, then lock both visible
+    // RT page: logo fades in as you scroll; locks at full opacity when eyebrow centres in logo
     if (rtPageHero && heroBrand) {
       const rtH1 = rtPageHero.querySelector('h1');
       const rtEyebrow = document.querySelector('.rt-page-eyebrow');
       if (rtH1) {
         const h1Top = rtH1.getBoundingClientRect().top;
         const logoCenter = heroBrand.offsetHeight * 0.5;
-        // Lock once the h1 has risen to the eyebrow/logo centre
         if (h1Top <= logoCenter) {
           heroBrand.style.opacity = '1';
           heroBrand.style.pointerEvents = '';
           if (rtEyebrow) rtEyebrow.style.opacity = '1';
         } else {
-          const fadeStart = heroBrand.offsetHeight;
-          const fadeEnd = logoCenter;
-          const opacity = Math.min(1, Math.max(0, (h1Top - fadeEnd) / (fadeStart - fadeEnd)));
+          const fadeFrom = window.innerHeight;
+          const fadeTo = logoCenter;
+          const opacity = Math.min(1, Math.max(0, (fadeFrom - h1Top) / (fadeFrom - fadeTo)));
           heroBrand.style.opacity = opacity;
           heroBrand.style.pointerEvents = opacity < 0.2 ? 'none' : '';
           if (rtEyebrow) rtEyebrow.style.opacity = opacity;
