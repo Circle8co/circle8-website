@@ -121,6 +121,7 @@ if (nav) {
           rtEyebrowEl.style.position = '';
           rtEyebrowEl.style.top = '';
           rtEyebrowEl.style.left = '';
+          rtEyebrowEl.style.marginLeft = '';
           rtEyebrowEl.style.zIndex = '';
         }
 
@@ -132,6 +133,7 @@ if (nav) {
             rtEyebrowEl.style.position = 'fixed';
             rtEyebrowEl.style.top = (cy - rect.height / 2) + 'px';
             rtEyebrowEl.style.left = rect.left + 'px';
+            rtEyebrowEl.style.marginLeft = '0';
             rtEyebrowEl.style.zIndex = '1002';
             window._rtPinned = true;
           }
@@ -143,6 +145,7 @@ if (nav) {
           rtEyebrowEl.style.position = '';
           rtEyebrowEl.style.top = '';
           rtEyebrowEl.style.left = '';
+          rtEyebrowEl.style.marginLeft = '';
           rtEyebrowEl.style.zIndex = '';
         }
 
