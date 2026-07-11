@@ -414,7 +414,6 @@ section { padding: 5rem 0; }
   font-family: 'Caveat', cursive; font-size: clamp(0.62rem, 1.2vw, 0.75rem); line-height: 1.1;
   color: #3a2a1a; text-align: center; margin: 4px 0 0; white-space: nowrap;
 }
-.gds-hang-note span { font-size: 0.75em; opacity: 0.7; }
 .gds-hang--link:hover .gds-hang-card { transform: rotate(var(--tilt, 0deg)) scale(1.08); box-shadow: 0 8px 16px rgba(27,20,16,0.35); }
 .gds-hang--link:hover .gds-hang-note { color: var(--terracotta-dark); }
 
