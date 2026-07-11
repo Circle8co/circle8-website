@@ -10,6 +10,13 @@
   <meta property="og:image" content="https://www.circle8.co/images/og-roundtable.jpg">
   <meta property="og:url" content="https://www.circle8.co/what-is-the-round-table-talks.html">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .hero-brand, .rt-page-eyebrow {
+      opacity: 1 !important;
+      transform: none !important;
+      pointer-events: auto !important;
+    }
+  </style>
 </head>
 <body class="page-rt">
 
@@ -263,5 +270,24 @@
   </nav>
 </div>
 <script src="js/main.js"></script>
+<script>
+(function() {
+  var brand = document.querySelector('.hero-brand');
+  var eyebrow = document.querySelector('.rt-page-eyebrow');
+  function lockLogo() {
+    if (brand) {
+      brand.classList.remove('nav-scrolled-away');
+      brand.style.opacity = '1';
+      brand.style.transform = 'none';
+      brand.style.pointerEvents = 'auto';
+    }
+    if (eyebrow) {
+      eyebrow.style.opacity = '1';
+    }
+  }
+  lockLogo();
+  window.addEventListener('scroll', lockLogo, { passive: true });
+})();
+</script>
 </body>
 </html>
