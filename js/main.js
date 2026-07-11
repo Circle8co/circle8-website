@@ -64,15 +64,7 @@ if (nav) {
       if (heroBrand) heroBrand.classList.toggle('nav-scrolled-away', hidden);
     }
 
-    // RT page: logo fades in from 0 to 1 over first 180px of scroll, then locks
-    if (rtPageHero && heroBrand) {
-      const rtEyebrow = document.querySelector('.rt-page-eyebrow');
-      const lockAt = 180;
-      const opacity = Math.min(1, window.scrollY / lockAt);
-      heroBrand.style.opacity = opacity;
-      heroBrand.style.pointerEvents = opacity < 0.2 ? 'none' : '';
-      if (rtEyebrow) rtEyebrow.style.opacity = opacity;
-    }
+    // RT page: logo and eyebrow locked via CSS (.page-rt)
 
     // Reveal GDS eyebrow letters only while inside the logo circle
     if (window._gdsLetters && heroBrand) {
