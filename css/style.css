@@ -2,7 +2,7 @@
    CIRCLE8 — GLOBAL STYLES
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600&family=Caveat:wght@500;600&display=swap');
 
 :root {
   --terracotta: #915a4a;
@@ -398,7 +398,17 @@ section { padding: 5rem 0; }
 .gds-tagline { font-family: 'Lora', serif; font-style: italic; font-size: 0.95rem; color: var(--text-mid); line-height: 1.8; max-width: 480px; }
 .gds-map-wrap { padding: 3rem 0 6rem; }
 .gds-map-container { position: relative; width: 100%; margin: 0 auto; }
-.gds-world-map { width: 62%; height: auto; display: block; margin: 0 auto; opacity: 0.7; }
+.gds-map-inner { position: relative; width: 62%; margin: 0 auto; }
+.gds-world-map { width: 100%; height: auto; display: block; opacity: 0.7; }
+.gds-map-caption {
+  position: absolute; transform: rotate(var(--tilt, 0deg));
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; pointer-events: none; padding: 6%; box-sizing: border-box;
+}
+.gds-map-caption span {
+  font-family: 'Caveat', cursive; font-size: clamp(0.42rem, 0.7vw, 0.6rem); line-height: 1.05;
+  color: #3a2a1a; text-align: center;
+}
 
 /* ============================================
    SUBSCRIBE STRIP
