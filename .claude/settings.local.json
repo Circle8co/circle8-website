@@ -86,7 +86,19 @@
       "Bash(cp \"/Users/paulettemirzikinian/Desktop/circle8 6/index.html\" \"/Users/paulettemirzikinian/Desktop/circle8-site/circle8/index.html\")",
       "Bash(cp \"/Users/paulettemirzikinian/Desktop/circle8 6/css/style.css\" \"/Users/paulettemirzikinian/Desktop/circle8-site/circle8/css/style.css\")",
       "Bash(cp \"/Users/paulettemirzikinian/Desktop/circle8 6/js/main.js\" \"/Users/paulettemirzikinian/Desktop/circle8-site/circle8/js/main.js\")",
-      "Bash(cp \"/Users/paulettemirzikinian/Desktop/circle8 6/images/profile.jpeg\" \"/Users/paulettemirzikinian/Desktop/circle8-site/circle8/images/profile.jpeg\")"
+      "Bash(cp \"/Users/paulettemirzikinian/Desktop/circle8 6/images/profile.jpeg\" \"/Users/paulettemirzikinian/Desktop/circle8-site/circle8/images/profile.jpeg\")",
+      "Bash(sed -i '' 's|<div class=\"page-hero-overlay\" style=\"background:linear-gradient\\(to right, rgba\\(10,18,30,0.22\\) 0%, rgba\\(10,18,30,0.12\\) 55%, rgba\\(10,18,30,0\\) 100%\\);\"></div>|<div class=\"page-hero-overlay\"></div>|g' \"/Users/paulettemirzikinian/Desktop/circle8 6/design-series/turkey/galataport.html\")",
+      "Bash(sed -i '' 's|<div class=\"page-hero-overlay\" style=\"background:linear-gradient\\(to right, rgba\\(26,37,53,0.62\\) 0%, rgba\\(26,37,53,0.42\\) 50%, rgba\\(26,37,53,0.12\\) 100%\\);\"></div>|<div class=\"page-hero-overlay\"></div>|g' \"/Users/paulettemirzikinian/Desktop/circle8 6/design-series/turkey/hagia-sophia.html\")",
+      "Bash(sed -i '' 's|<div class=\"page-hero-overlay\" style=\"background:linear-gradient\\(to right, rgba\\(26,37,53,0.62\\) 0%, rgba\\(26,37,53,0.42\\) 50%, rgba\\(26,37,53,0.12\\) 100%\\);\"></div>|<div class=\"page-hero-overlay\"></div>|g' \"/Users/paulettemirzikinian/Desktop/circle8 6/design-series/turkey/blue-mosque.html\")",
+      "Bash(sed -i '' 's|<div class=\"page-hero-overlay\" style=\"background:linear-gradient\\(to right, rgba\\(26,37,53,0.46\\) 0%, rgba\\(26,37,53,0.3\\) 50%, rgba\\(26,37,53,0.05\\) 100%\\);\"></div>|<div class=\"page-hero-overlay\"></div>|g' \"/Users/paulettemirzikinian/Desktop/circle8 6/design-series/turkey/topkapi-palace.html\")",
+      "Bash(sed -i '' 's|<p class=\"page-hero-eyebrow\">Palace · Editorial · Istanbul</p>|<p class=\"page-hero-eyebrow\" style=\"color:#e8643a;\">Palace · Editorial · Istanbul</p>|g' \"/Users/paulettemirzikinian/Desktop/circle8 6/design-series/turkey/topkapi-palace.html\")",
+      "Bash(sips --help)",
+      "Bash(qlmanage -t -s 480 -o \"/tmp/\" \"/Users/paulettemirzikinian/Desktop/circle8 6/images/circle8_logo.svg\")",
+      "Bash(cp /tmp/circle8_logo.svg.png \"/Users/paulettemirzikinian/Desktop/circle8 6/images/circle8-logo.png\")",
+      "Bash(cp /tmp/circle8_logo.svg.png \"/Users/paulettemirzikinian/Desktop/circle8-site/circle8/images/circle8-logo.png\")",
+      "Bash(cp \"/Users/paulettemirzikinian/Desktop/circle8 6/round-table.html\" \"/Users/paulettemirzikinian/Desktop/circle8-site/circle8/round-table.html\")",
+      "Bash(cp \"/Users/paulettemirzikinian/Desktop/circle8 6/design-series/index.html\" \"/Users/paulettemirzikinian/Desktop/circle8-site/circle8/design-series/index.html\")",
+      "Bash(cp \"/Users/paulettemirzikinian/Desktop/circle8-site/circle8/design-series/index.html\" \"/Users/paulettemirzikinian/Desktop/circle8 6/design-series/index.html\" && cp \"/Users/paulettemirzikinian/Desktop/circle8-site/circle8/css/style.css\" \"/Users/paulettemirzikinian/Desktop/circle8 6/css/style.css\")"
     ]
   }
 }
