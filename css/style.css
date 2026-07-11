@@ -402,19 +402,19 @@ section { padding: 5rem 0; }
 
 /* Hanging photo cards */
 .gds-hang { position: absolute; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; z-index: 2; text-decoration: none; }
-.gds-hang-peg { width: 12px; height: 7px; background: var(--terracotta-dark); border-radius: 2px; box-shadow: 0 1px 2px rgba(27,20,16,0.35); }
-.gds-hang-string { width: 1px; height: clamp(28px, 4vw, 46px); background: rgba(74,45,37,0.4); }
+.gds-hang-peg { width: 10px; height: 6px; background: var(--terracotta-dark); border-radius: 2px; box-shadow: 0 1px 2px rgba(27,20,16,0.35); }
+.gds-hang-string { width: 1px; height: clamp(20px, 3vw, 32px); background: rgba(74,45,37,0.4); }
 .gds-hang-card {
-  width: clamp(78px, 9vw, 106px); background: var(--cream);
-  border: 1px solid rgba(74,45,37,0.25); box-shadow: 0 4px 10px rgba(27,20,16,0.3);
-  padding: 6px 6px 8px; box-sizing: border-box;
+  width: clamp(54px, 6vw, 74px); background: var(--cream);
+  border: 1px solid rgba(74,45,37,0.25); box-shadow: 0 3px 8px rgba(27,20,16,0.3);
+  padding: 4px 4px 6px; box-sizing: border-box;
   transform: rotate(var(--tilt, 0deg));
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .gds-hang-photo { width: 100%; aspect-ratio: 1 / 1; background: var(--cream-dark); border: 1px solid rgba(74,45,37,0.15); }
 .gds-hang-note {
-  font-family: 'Caveat', cursive; font-size: clamp(0.78rem, 1.6vw, 0.95rem); line-height: 1.15;
-  color: #3a2a1a; text-align: center; margin: 5px 0 0; white-space: nowrap;
+  font-family: 'Caveat', cursive; font-size: clamp(0.62rem, 1.2vw, 0.75rem); line-height: 1.1;
+  color: #3a2a1a; text-align: center; margin: 4px 0 0; white-space: nowrap;
 }
 .gds-hang-note span { font-size: 0.75em; opacity: 0.7; }
 .gds-hang--link:hover .gds-hang-card { transform: rotate(var(--tilt, 0deg)) scale(1.08); box-shadow: 0 8px 16px rgba(27,20,16,0.35); }
