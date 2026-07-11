@@ -398,7 +398,7 @@ section { padding: 5rem 0; }
 .gds-tagline { font-family: 'Lora', serif; font-style: italic; font-size: 0.95rem; color: var(--text-mid); line-height: 1.8; max-width: 480px; }
 .gds-map-wrap { padding: 3rem 0 6rem; }
 .gds-map-container { position: relative; width: 100%; margin: 0 auto; }
-.gds-world-map { width: 100%; height: auto; display: block; opacity: 0.3; }
+.gds-world-map { width: 100%; height: auto; display: block; opacity: 0.5; }
 
 /* Hanging photo cards */
 .gds-hang { position: absolute; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; z-index: 2; text-decoration: none; }
