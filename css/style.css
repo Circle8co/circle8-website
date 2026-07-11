@@ -398,70 +398,10 @@ section { padding: 5rem 0; }
 .gds-eyebrow .letter { display: inline-block; color: transparent; transition: color 0.08s ease; }
 .gds-teaser h2 { font-size: clamp(2rem, 4vw, 3.2rem); color: var(--text-dark); margin-bottom: 1.25rem; }
 .gds-tagline { font-family: 'Lora', serif; font-style: italic; font-size: 0.95rem; color: var(--text-mid); line-height: 1.8; max-width: 480px; }
-/* GDS World Map */
+/* GDS image */
 .gds-map-wrap { padding: 3rem 0 6rem; }
 .gds-map-container { position: relative; width: 100%; max-width: 1100px; margin: 0 auto; }
 .gds-world-map { width: 100%; height: auto; display: block; }
-.gds-land { fill: var(--border); stroke: var(--cream); stroke-width: 0.8; transition: fill 0.3s ease; }
-
-/* Pin base */
-.gds-pin { position: absolute; transform: translate(-50%, -50%); z-index: 2; }
-.gds-pin-dot {
-  width: 10px; height: 10px; border-radius: 50%;
-  background: var(--terracotta); border: 2px solid var(--cream);
-  cursor: pointer; transition: transform 0.2s ease;
-  box-shadow: 0 0 0 3px rgba(145,80,64,0.25);
-}
-.gds-pin--coming .gds-pin-dot { background: var(--text-light); box-shadow: 0 0 0 3px rgba(160,150,140,0.2); }
-.gds-pin-dot:hover { transform: scale(1.4); }
-
-/* Card that pops up on hover */
-.gds-pin-card {
-  position: absolute; bottom: calc(100% + 8px); left: 50%;
-  transform: translateX(-50%);
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.25s ease;
-  transform-origin: bottom center;
-  transform: translateX(-50%) scale(0.9);
-  display: flex; flex-direction: column; align-items: center;
-}
-.gds-pin:hover .gds-pin-card {
-  opacity: 1; pointer-events: auto;
-  transform: translateX(-50%) scale(1);
-}
-.gds-pin-arrow {
-  width: 1px; height: 40px;
-  background: var(--terracotta); margin-bottom: 0;
-  order: 2;
-}
-.gds-pin--coming .gds-pin-arrow { background: var(--text-light); }
-.gds-pin-bubble {
-  width: 100px; height: 100px; border-radius: 50%;
-  overflow: hidden; display: flex; align-items: center; justify-content: center;
-  flex-direction: column;
-  text-decoration: none;
-  border: 2px solid var(--terracotta);
-  background: var(--cream-dark);
-  order: 1; position: relative;
-  transition: transform 0.2s ease;
-}
-.gds-pin-bubble:hover { transform: scale(1.05); }
-.gds-pin-bubble img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
-.gds-pin-info {
-  position: absolute; inset: 0; display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  background: rgba(27,20,16,0.55); padding: 0.5rem;
-  text-align: center;
-}
-.gds-pin-bubble--coming { border-color: var(--text-light); }
-.gds-pin-bubble--coming .gds-pin-info { background: rgba(27,20,16,0.15); }
-.gds-pin-edition { font-family: 'Source Sans 3', sans-serif; font-size: 0.55rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--terracotta); display: block; margin-bottom: 0.15rem; }
-.gds-pin-name { font-family: 'Cinzel', serif; font-size: 0.65rem; color: var(--white); display: block; letter-spacing: 0.06em; }
-.gds-pin-soon { font-family: 'Source Sans 3', sans-serif; font-size: 0.5rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); display: block; margin-top: 0.2rem; }
-
-/* Highlight active country on map hover */
-.gds-pin--active:hover ~ .gds-world-map .gds-land,
-.gds-map-container:has(.gds-pin--active:hover) .gds-land { fill: var(--border); }
 
 /* ============================================
    SUBSCRIBE STRIP
