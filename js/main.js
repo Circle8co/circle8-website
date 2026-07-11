@@ -101,35 +101,44 @@ if (nav) {
       });
     }
 
-    // RT eyebrow: letter-reveal while scrolling, then pin at logo centre
+    // RT eyebrow: letter-reveal while scrolling, then latch-pin at logo centre
     if (window._rtLetters && heroBrand) {
       const rtEyebrowEl = document.querySelector('.rt-eyebrow');
+      const rtSection = document.querySelector('.round-table-section');
       const logoRect = heroBrand.getBoundingClientRect();
       const cx = logoRect.left + logoRect.width / 2;
       const cy = logoRect.top + logoRect.height / 2;
       const r = logoRect.width * 0.30;
 
-      if (rtEyebrowEl) {
-        const rtSection = document.querySelector('.round-table-section');
-        const rtBottom = rtSection ? rtSection.getBoundingClientRect().bottom : 9999;
-        // Use natural position to decide pin vs reveal
-        const naturalRect = rtEyebrowEl.getBoundingClientRect();
-        const eyebrowMid = naturalRect.top + naturalRect.height / 2;
-        const isPinned = eyebrowMid <= cy && rtBottom > cy;
+      if (rtEyebrowEl && rtSection) {
+        const rtBottom = rtSection.getBoundingClientRect().bottom;
 
-        if (isPinned) {
-          // Pin the eyebrow at logo centre
-          rtEyebrowEl.style.position = 'fixed';
-          rtEyebrowEl.style.top = (cy - naturalRect.height / 2) + 'px';
-          rtEyebrowEl.style.left = naturalRect.left + 'px';
-          rtEyebrowEl.style.zIndex = '1002';
-          window._rtLetters.forEach(s => { s.style.color = 'var(--terracotta)'; });
-        } else {
-          // Letter-reveal mode — restore natural flow
+        // Only sample eyebrow position when NOT already pinned (avoids fixed-position measurement loop)
+        if (!window._rtPinned) {
+          const rect = rtEyebrowEl.getBoundingClientRect();
+          const eyebrowMid = rect.top + rect.height / 2;
+          if (eyebrowMid <= cy && rtBottom > cy) {
+            // Capture position before switching to fixed
+            rtEyebrowEl.style.position = 'fixed';
+            rtEyebrowEl.style.top = (cy - rect.height / 2) + 'px';
+            rtEyebrowEl.style.left = rect.left + 'px';
+            rtEyebrowEl.style.zIndex = '1002';
+            window._rtPinned = true;
+          }
+        }
+
+        // Release latch when section scrolls past logo
+        if (rtBottom <= cy) {
+          window._rtPinned = false;
           rtEyebrowEl.style.position = '';
           rtEyebrowEl.style.top = '';
           rtEyebrowEl.style.left = '';
           rtEyebrowEl.style.zIndex = '';
+        }
+
+        if (window._rtPinned) {
+          window._rtLetters.forEach(s => { s.style.color = 'var(--terracotta)'; });
+        } else {
           window._rtLetters.forEach(span => {
             const lr = span.getBoundingClientRect();
             const x = lr.left + lr.width / 2;
@@ -178,8 +187,7 @@ if (nav) {
       if (grid) {
         const logoH = heroBrand.offsetHeight;
         const rtTop = rtSection ? rtSection.getBoundingClientRect().top : 9999;
-        const rtInView = rtTop <= 180; // logo goes solid as RT eyebrow approaches the logo from below
-
+        const rtInView = rtTop <= 180 || window._rtPinned; // logo goes solid as RT eyebrow approaches, stays solid while pinned
 
         if (rtInView) {
           heroBrand.style.opacity = '1';
