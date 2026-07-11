@@ -56,15 +56,20 @@ if (nav) {
     }
 
     // Editorial/inner pages: slide nav + logo up out of view when scrolled
-    // Exception: round-table page keeps logo visible for the letter-reveal effect
     const rtPageHero = document.querySelector('.rt-page-hero');
-    if (!heroSection && !rtPageHero) {
+    const isRtPage = document.body.classList.contains('page-rt');
+    if (!heroSection && !rtPageHero && !isRtPage) {
       const hidden = window.scrollY > 80;
       nav.classList.toggle('nav-scrolled-away', hidden);
       if (heroBrand) heroBrand.classList.toggle('nav-scrolled-away', hidden);
     }
 
-    // RT page: logo and eyebrow locked via CSS (.page-rt)
+    // RT page: lock logo and eyebrow in place
+    if (isRtPage && heroBrand) {
+      heroBrand.classList.remove('nav-scrolled-away');
+      heroBrand.style.removeProperty('opacity');
+      heroBrand.style.removeProperty('transform');
+    }
 
     // Reveal GDS eyebrow letters only while inside the logo circle
     if (window._gdsLetters && heroBrand) {
