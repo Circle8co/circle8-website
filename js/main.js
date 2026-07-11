@@ -64,26 +64,14 @@ if (nav) {
       if (heroBrand) heroBrand.classList.toggle('nav-scrolled-away', hidden);
     }
 
-    // RT page: logo fades in as you scroll; locks at full opacity when eyebrow centres in logo
+    // RT page: logo fades in from 0 to 1 over first 180px of scroll, then locks
     if (rtPageHero && heroBrand) {
-      const rtH1 = rtPageHero.querySelector('h1');
       const rtEyebrow = document.querySelector('.rt-page-eyebrow');
-      if (rtH1) {
-        const h1Top = rtH1.getBoundingClientRect().top;
-        const logoCenter = heroBrand.offsetHeight * 0.5;
-        if (h1Top <= logoCenter) {
-          heroBrand.style.opacity = '1';
-          heroBrand.style.pointerEvents = '';
-          if (rtEyebrow) rtEyebrow.style.opacity = '1';
-        } else {
-          const fadeFrom = window.innerHeight;
-          const fadeTo = logoCenter;
-          const opacity = Math.min(1, Math.max(0, (fadeFrom - h1Top) / (fadeFrom - fadeTo)));
-          heroBrand.style.opacity = opacity;
-          heroBrand.style.pointerEvents = opacity < 0.2 ? 'none' : '';
-          if (rtEyebrow) rtEyebrow.style.opacity = opacity;
-        }
-      }
+      const lockAt = 180;
+      const opacity = Math.min(1, window.scrollY / lockAt);
+      heroBrand.style.opacity = opacity;
+      heroBrand.style.pointerEvents = opacity < 0.2 ? 'none' : '';
+      if (rtEyebrow) rtEyebrow.style.opacity = opacity;
     }
 
     // Reveal GDS eyebrow letters only while inside the logo circle
