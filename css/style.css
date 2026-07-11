@@ -2,7 +2,7 @@
    CIRCLE8 — GLOBAL STYLES
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600&family=Caveat:wght@500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600&display=swap');
 
 :root {
   --terracotta: #915a4a;
@@ -399,23 +399,6 @@ section { padding: 5rem 0; }
 .gds-map-wrap { padding: 3rem 0 6rem; }
 .gds-map-container { position: relative; width: 100%; margin: 0 auto; }
 .gds-world-map { width: 100%; height: auto; display: block; opacity: 0.7; }
-
-/* Hanging photo cards */
-.gds-hang { position: absolute; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; z-index: 2; text-decoration: none; }
-.gds-hang-card {
-  width: clamp(54px, 6vw, 74px); background: var(--cream);
-  border: 1px solid rgba(74,45,37,0.25); box-shadow: 0 3px 8px rgba(27,20,16,0.3);
-  padding: 4px 4px 6px; box-sizing: border-box;
-  transform: rotate(var(--tilt, 0deg));
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.gds-hang-photo { width: 100%; aspect-ratio: 1 / 1; background: var(--cream-dark); border: 1px solid rgba(74,45,37,0.15); }
-.gds-hang-note {
-  font-family: 'Caveat', cursive; font-size: clamp(0.62rem, 1.2vw, 0.75rem); line-height: 1.1;
-  color: #3a2a1a; text-align: center; margin: 4px 0 0; white-space: nowrap;
-}
-.gds-hang--link:hover .gds-hang-card { transform: rotate(var(--tilt, 0deg)) scale(1.08); box-shadow: 0 8px 16px rgba(27,20,16,0.35); }
-.gds-hang--link:hover .gds-hang-note { color: var(--terracotta-dark); }
 
 /* ============================================
    SUBSCRIBE STRIP
