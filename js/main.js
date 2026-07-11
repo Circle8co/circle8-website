@@ -113,12 +113,22 @@ if (nav) {
       if (rtEyebrowEl && rtSection) {
         const rtBottom = rtSection.getBoundingClientRect().bottom;
 
+        const rtTop = rtSection.getBoundingClientRect().top;
+
+        // Reset latch if user scrolls back above the section
+        if (rtTop > cy && window._rtPinned) {
+          window._rtPinned = false;
+          rtEyebrowEl.style.position = '';
+          rtEyebrowEl.style.top = '';
+          rtEyebrowEl.style.left = '';
+          rtEyebrowEl.style.zIndex = '';
+        }
+
         // Only sample eyebrow position when NOT already pinned (avoids fixed-position measurement loop)
         if (!window._rtPinned) {
           const rect = rtEyebrowEl.getBoundingClientRect();
           const eyebrowMid = rect.top + rect.height / 2;
           if (eyebrowMid <= cy && rtBottom > cy) {
-            // Capture position before switching to fixed
             rtEyebrowEl.style.position = 'fixed';
             rtEyebrowEl.style.top = (cy - rect.height / 2) + 'px';
             rtEyebrowEl.style.left = rect.left + 'px';
@@ -137,6 +147,7 @@ if (nav) {
         }
 
         if (window._rtPinned) {
+          heroBrand.style.opacity = '1';
           window._rtLetters.forEach(s => { s.style.color = 'var(--terracotta)'; });
         } else {
           window._rtLetters.forEach(span => {
@@ -187,7 +198,7 @@ if (nav) {
       if (grid) {
         const logoH = heroBrand.offsetHeight;
         const rtTop = rtSection ? rtSection.getBoundingClientRect().top : 9999;
-        const rtInView = rtTop <= 180 || window._rtPinned; // logo goes solid as RT eyebrow approaches, stays solid while pinned
+        const rtInView = rtTop <= 180; // logo goes solid as RT eyebrow approaches the logo from below
 
         if (rtInView) {
           heroBrand.style.opacity = '1';
