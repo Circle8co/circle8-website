@@ -270,8 +270,9 @@ section { padding: 5rem 0; }
 .about-content-text p { font-size: 0.85rem; color: var(--text-mid); margin-bottom: 0; line-height: 1.85; }
 .about-content-text p strong { white-space: nowrap; }
 .about-stats { display: flex; gap: 2.5rem; margin-top: 0; padding-top: 2rem; border-top: 1px solid var(--border); }
+.about-social-row { display: flex; align-items: center; gap: 1rem; margin-top: 1.5rem; }
 .about-linkedin {
-  display: inline-flex; align-items: center; margin-top: 2rem;
+  display: inline-flex; align-items: center; margin-top: 0;
   color: var(--text-light); transition: color 0.2s ease; text-decoration: none;
 }
 .about-linkedin:hover { color: var(--terracotta); }
