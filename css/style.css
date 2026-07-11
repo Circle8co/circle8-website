@@ -640,7 +640,7 @@ figcaption { font-size: 0.76rem; color: var(--text-light); margin-top: 0.6rem; l
 /* ============================================
    ROUND TABLE PAGE
    ============================================ */
-.page-rt .hero-brand, .page-rt .rt-page-eyebrow { opacity: 1 !important; pointer-events: auto !important; }
+.page-rt .hero-brand, .page-rt .rt-page-eyebrow { opacity: 1 !important; transform: none !important; pointer-events: auto !important; }
 .rt-page-hero { background: var(--cream-dark); margin-top: 220px; padding: 4rem 0 5rem; position: relative; overflow: visible; }
 .rt-page-hero::before { display: none; }
 .rt-page-inner { margin-left: 150px; max-width: 640px; }
