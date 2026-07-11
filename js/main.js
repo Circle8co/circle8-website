@@ -101,7 +101,7 @@ if (nav) {
       });
     }
 
-    // RT eyebrow: letter-reveal while scrolling, then latch-pin at logo centre
+    // RT eyebrow: letter-reveal while scrolling, then latch-pin via fixed body clone
     if (window._rtLetters && heroBrand) {
       const rtEyebrowEl = document.querySelector('.rt-eyebrow');
       const rtSection = document.querySelector('.round-table-section');
@@ -110,49 +110,47 @@ if (nav) {
       const cy = logoRect.top + logoRect.height / 2;
       const r = logoRect.width * 0.30;
 
+      // Create fixed body clone once (avoids position:fixed-inside-transform bug)
+      if (!window._rtClone) {
+        const clone = document.createElement('p');
+        clone.style.cssText = 'position:fixed;opacity:0;pointer-events:none;margin:0;color:var(--terracotta);font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;font-family:"Source Sans 3",sans-serif;font-weight:600;white-space:nowrap;z-index:1002;';
+        clone.textContent = 'Circle8 Talks';
+        document.body.appendChild(clone);
+        window._rtClone = clone;
+      }
+
       if (rtEyebrowEl && rtSection) {
         const rtBottom = rtSection.getBoundingClientRect().bottom;
-
         const rtTop = rtSection.getBoundingClientRect().top;
 
-        // Reset latch if user scrolls back above the section
+        // Reset latch when scrolling back above section
         if (rtTop > cy && window._rtPinned) {
           window._rtPinned = false;
-          rtEyebrowEl.style.position = '';
-          rtEyebrowEl.style.top = '';
-          rtEyebrowEl.style.left = '';
-          rtEyebrowEl.style.marginLeft = '';
-          rtEyebrowEl.style.zIndex = '';
+        }
+        // Release latch when section exits logo
+        if (rtBottom <= cy) {
+          window._rtPinned = false;
         }
 
-        // Only sample eyebrow position when NOT already pinned (avoids fixed-position measurement loop)
+        // Trigger latch: sample eyebrow only when not yet pinned
         if (!window._rtPinned) {
           const rect = rtEyebrowEl.getBoundingClientRect();
           const eyebrowMid = rect.top + rect.height / 2;
           if (eyebrowMid <= cy && rtBottom > cy) {
-            rtEyebrowEl.style.position = 'fixed';
-            rtEyebrowEl.style.top = (cy - rect.height / 2) + 'px';
-            rtEyebrowEl.style.left = rect.left + 'px';
-            rtEyebrowEl.style.marginLeft = '0';
-            rtEyebrowEl.style.zIndex = '1002';
+            // Position clone at same x as eyebrow, centred on logo y
+            const cloneH = window._rtClone.offsetHeight || 14;
+            window._rtClone.style.top = (cy - cloneH / 2) + 'px';
+            window._rtClone.style.left = rect.left + 'px';
             window._rtPinned = true;
           }
         }
 
-        // Release latch when section scrolls past logo
-        if (rtBottom <= cy) {
-          window._rtPinned = false;
-          rtEyebrowEl.style.position = '';
-          rtEyebrowEl.style.top = '';
-          rtEyebrowEl.style.left = '';
-          rtEyebrowEl.style.marginLeft = '';
-          rtEyebrowEl.style.zIndex = '';
-        }
-
         if (window._rtPinned) {
           heroBrand.style.opacity = '1';
-          window._rtLetters.forEach(s => { s.style.color = 'var(--terracotta)'; });
+          window._rtClone.style.opacity = '1';
+          window._rtLetters.forEach(s => { s.style.color = 'transparent'; });
         } else {
+          window._rtClone.style.opacity = '0';
           window._rtLetters.forEach(span => {
             const lr = span.getBoundingClientRect();
             const x = lr.left + lr.width / 2;
