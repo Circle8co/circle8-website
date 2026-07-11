@@ -152,7 +152,8 @@ if (nav) {
       const rtSection = document.querySelector('.round-table-section');
       if (grid) {
         const logoH = heroBrand.offsetHeight;
-        const rtInView = rtSection && rtSection.getBoundingClientRect().top <= logoH;
+        const rtTop = rtSection ? rtSection.getBoundingClientRect().top : 9999;
+        const rtInView = rtTop <= logoH;
 
         if (rtInView) {
           heroBrand.style.opacity = '1';
