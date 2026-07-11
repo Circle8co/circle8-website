@@ -64,19 +64,26 @@ if (nav) {
       if (heroBrand) heroBrand.classList.toggle('nav-scrolled-away', hidden);
     }
 
-    // Round-table page: fade logo and eyebrow out as the h1 heading reaches logo level
+    // Round-table page: fade logo until eyebrow is centred in it, then lock both visible
     if (rtPageHero && heroBrand) {
       const rtH1 = rtPageHero.querySelector('h1');
       const rtEyebrow = document.querySelector('.rt-page-eyebrow');
       if (rtH1) {
         const h1Top = rtH1.getBoundingClientRect().top;
-        const logoH = heroBrand.offsetHeight;
-        const fadeStart = logoH;
-        const fadeEnd = logoH * 0.4;
-        const opacity = Math.min(1, Math.max(0, (h1Top - fadeEnd) / (fadeStart - fadeEnd)));
-        heroBrand.style.opacity = opacity;
-        heroBrand.style.pointerEvents = opacity < 0.2 ? 'none' : '';
-        if (rtEyebrow) rtEyebrow.style.opacity = opacity;
+        const logoCenter = heroBrand.offsetHeight * 0.5;
+        // Lock once the h1 has risen to the eyebrow/logo centre
+        if (h1Top <= logoCenter) {
+          heroBrand.style.opacity = '1';
+          heroBrand.style.pointerEvents = '';
+          if (rtEyebrow) rtEyebrow.style.opacity = '1';
+        } else {
+          const fadeStart = heroBrand.offsetHeight;
+          const fadeEnd = logoCenter;
+          const opacity = Math.min(1, Math.max(0, (h1Top - fadeEnd) / (fadeStart - fadeEnd)));
+          heroBrand.style.opacity = opacity;
+          heroBrand.style.pointerEvents = opacity < 0.2 ? 'none' : '';
+          if (rtEyebrow) rtEyebrow.style.opacity = opacity;
+        }
       }
     }
 
