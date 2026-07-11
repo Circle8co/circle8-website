@@ -153,27 +153,8 @@ if (nav) {
       if (grid) {
         const logoH = heroBrand.offsetHeight;
         const rtTop = rtSection ? rtSection.getBoundingClientRect().top : 9999;
-        const rtInView = rtTop <= logoH;
+        const rtInView = rtTop <= 180; // logo goes solid as RT eyebrow approaches the logo from below
 
-        // Pin the RT eyebrow inside the logo when it reaches logo centre
-        const rtEyebrowEl = document.querySelector('.rt-eyebrow');
-        if (rtEyebrowEl) {
-          const eyebrowTop = rtEyebrowEl.getBoundingClientRect().top;
-          const lockY = logoH * 0.5;
-          if (eyebrowTop <= lockY && rtInView) {
-            rtEyebrowEl.style.position = 'fixed';
-            rtEyebrowEl.style.top = lockY + 'px';
-            rtEyebrowEl.style.left = heroBrand.getBoundingClientRect().left + heroBrand.offsetWidth / 2 + 'px';
-            rtEyebrowEl.style.transform = 'translate(-50%, -50%)';
-            rtEyebrowEl.style.zIndex = '1001';
-          } else {
-            rtEyebrowEl.style.position = '';
-            rtEyebrowEl.style.top = '';
-            rtEyebrowEl.style.left = '';
-            rtEyebrowEl.style.transform = '';
-            rtEyebrowEl.style.zIndex = '';
-          }
-        }
 
         if (rtInView) {
           heroBrand.style.opacity = '1';
@@ -184,11 +165,6 @@ if (nav) {
           const fadeDownEnd = logoH - 60;
           const fadeDown = Math.min(1, Math.max(0, (fadeDownStart - gridTop) / (fadeDownStart - fadeDownEnd)));
           let opacity = 1 - fadeDown * 0.88;
-          const gridBottom = grid.getBoundingClientRect().bottom;
-          if (gridBottom < logoH) {
-            const restore = Math.min(1, Math.max(0, (logoH - gridBottom) / 180));
-            opacity = Math.max(opacity, restore);
-          }
           heroBrand.style.opacity = opacity;
           heroBrand.style.pointerEvents = opacity < 0.4 ? 'none' : '';
         }
@@ -359,6 +335,7 @@ if (floatBtn && floatOverlay) {
     }
   });
 }
+
 
 // Round Table interest form
 const rtForm = document.querySelector('.rt-form');
