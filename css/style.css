@@ -382,7 +382,7 @@ section { padding: 5rem 0; }
    GLOBAL DESIGN SERIES TEASER
    ============================================ */
 /* Brand Transition */
-.brand-transition { background: #dddcc8; padding: 0; overflow: hidden; }
+.brand-transition { background: var(--cream-dark); padding: 4rem 0; overflow: hidden; }
 .brand-cinematic { width: 100%; overflow: hidden; height: 560px; }
 .brand-cinematic-img { width: 100%; height: 100%; object-fit: cover; object-position: center 60%; display: block; }
 .brand-transition-inner { display: flex; justify-content: flex-start; align-items: center; will-change: transform; }
