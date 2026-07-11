@@ -417,13 +417,13 @@ section { padding: 5rem 0; }
    ============================================ */
 .subscribe-strip { background: var(--surface-dark); padding: 2.5rem 0; }
 .subscribe-strip .eyebrow { color: var(--terracotta) !important; }
-.subscribe-inner { display: flex; align-items: center; gap: 3rem; margin-left: clamp(120px, 12vw, 180px); }
+.subscribe-inner { display: flex; align-items: center; gap: 3rem; margin-left: auto; max-width: 700px; }
 .subscribe-label { color: rgba(255,255,255,0.45) !important; font-size: 0.65rem; letter-spacing: 0.16em; white-space: nowrap; margin: 0; flex-shrink: 0; }
 .page-gds-index .subscribe-inner { margin-left: 0; }
 .subscribe-text .eyebrow { color: var(--gold); margin-bottom: 0.75rem; }
 .subscribe-text h3 { font-size: clamp(1rem, 2vw, 1.4rem); color: var(--white); margin-bottom: 0.5rem; }
 .subscribe-text p { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.7; }
-.subscribe-form { display: flex; gap: 0; }
+.subscribe-form { display: flex; gap: 0; flex: 1; }
 .subscribe-form input {
   flex: 1; background: rgba(145,90,74,0.25); border: 1px solid rgba(145,90,74,0.4);
   border-right: none; color: rgba(255,255,255,0.75); padding: 0.9rem 1.25rem;
