@@ -146,46 +146,31 @@ if (nav) {
       });
     }
 
-    // Homepage: logo fades to watermark over testimonials, restores then locks when RT heading is level with logo
+    // Homepage: logo fades over testimonials, locks when RT section enters view
     if (heroSection && heroBrand) {
       const grid = document.querySelector('.testimonials-grid');
       const rtSection = document.querySelector('.round-table-section');
-      const rtHeading = document.querySelector('.round-table-section h2');
       if (grid) {
-        const gridTop = grid.getBoundingClientRect().top;
         const logoH = heroBrand.offsetHeight;
+        const rtInView = rtSection && rtSection.getBoundingClientRect().top <= logoH;
 
-        // Fade to watermark as testimonials grid scrolls past
-        const fadeDownStart = logoH + 200;
-        const fadeDownEnd = logoH - 60;
-        const fadeDown = Math.min(1, Math.max(0, (fadeDownStart - gridTop) / (fadeDownStart - fadeDownEnd)));
-        let opacity = 1 - fadeDown * 0.88;
-
-        // Restore gradually once testimonials grid bottom clears the logo
-        const gridBottom = grid.getBoundingClientRect().bottom;
-        if (gridBottom < logoH) {
-          const restore = Math.min(1, Math.max(0, (logoH - gridBottom) / 180));
-          opacity = Math.max(opacity, restore);
-        }
-
-        // Track scroll direction
-        const scrollingUp = window.scrollY < (window._lastScrollY || 0);
-        window._lastScrollY = window.scrollY;
-
-        // Lock when RT section top reaches the logo centre
-        if (rtSection) {
-          const rtTop = rtSection.getBoundingClientRect().top;
-          if (rtTop <= logoH) {
-            window._logoLocked = true;
+        if (rtInView) {
+          heroBrand.style.opacity = '1';
+          heroBrand.style.pointerEvents = '';
+        } else {
+          const gridTop = grid.getBoundingClientRect().top;
+          const fadeDownStart = logoH + 200;
+          const fadeDownEnd = logoH - 60;
+          const fadeDown = Math.min(1, Math.max(0, (fadeDownStart - gridTop) / (fadeDownStart - fadeDownEnd)));
+          let opacity = 1 - fadeDown * 0.88;
+          const gridBottom = grid.getBoundingClientRect().bottom;
+          if (gridBottom < logoH) {
+            const restore = Math.min(1, Math.max(0, (logoH - gridBottom) / 180));
+            opacity = Math.max(opacity, restore);
           }
-          if (window._logoLocked && scrollingUp && rtTop > logoH) {
-            window._logoLocked = false;
-          }
+          heroBrand.style.opacity = opacity;
+          heroBrand.style.pointerEvents = opacity < 0.4 ? 'none' : '';
         }
-        if (window._logoLocked) opacity = 1;
-
-        heroBrand.style.opacity = opacity;
-        heroBrand.style.pointerEvents = opacity < 0.4 ? 'none' : '';
       } else {
         heroBrand.style.opacity = '1';
         heroBrand.style.pointerEvents = '';
