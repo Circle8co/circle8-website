@@ -172,12 +172,14 @@ if (nav) {
         const scrollingUp = window.scrollY < (window._lastScrollY || 0);
         window._lastScrollY = window.scrollY;
 
-        // Lock when RT section reaches top of viewport
-        if (rtSection && rtSection.getBoundingClientRect().top <= 0) {
+        // Lock when the RT eyebrow centres in the logo circle (y ≈ logoH * 0.5)
+        const rtEyebrowEl = document.querySelector('.rt-eyebrow');
+        const lockY = logoH * 0.5;
+        if (rtEyebrowEl && rtEyebrowEl.getBoundingClientRect().top <= lockY) {
           window._logoLocked = true;
         }
-        // Unlock immediately when scrolling up past the RT section
-        if (window._logoLocked && scrollingUp && rtSection && rtSection.getBoundingClientRect().top > 0) {
+        // Unlock when scrolling up and eyebrow rises back above lock point
+        if (window._logoLocked && scrollingUp && rtEyebrowEl && rtEyebrowEl.getBoundingClientRect().top > lockY) {
           window._logoLocked = false;
         }
         if (window._logoLocked) opacity = 1;
