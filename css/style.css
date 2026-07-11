@@ -383,8 +383,6 @@ section { padding: 5rem 0; }
    ============================================ */
 /* Brand Transition */
 .brand-transition { background: var(--cream-dark); padding: 4rem 0; overflow: hidden; }
-.brand-cinematic { width: 100%; overflow: hidden; height: 400px; }
-.brand-cinematic-img { width: 100%; height: 100%; object-fit: cover; object-position: center 50%; display: block; }
 .brand-transition-inner { display: flex; justify-content: flex-start; align-items: center; will-change: transform; }
 .brand-transition-mark { width: clamp(700px, 88vw, 1300px); height: auto; opacity: 0.14; filter: sepia(1) saturate(0.8) hue-rotate(-10deg); display: block; margin-left: 5vw; transform: scaleX(-1); }
 
@@ -398,6 +396,9 @@ section { padding: 5rem 0; }
 .gds-eyebrow .letter { display: inline-block; color: transparent; transition: color 0.08s ease; }
 .gds-teaser h2 { font-size: clamp(2rem, 4vw, 3.2rem); color: var(--text-dark); margin-bottom: 1.25rem; }
 .gds-tagline { font-family: 'Lora', serif; font-style: italic; font-size: 0.95rem; color: var(--text-mid); line-height: 1.8; max-width: 480px; }
+.gds-map-wrap { padding: 3rem 0 6rem; }
+.gds-map-container { position: relative; width: 100%; max-width: 1100px; margin: 0 auto; }
+.gds-world-map { width: 100%; height: auto; display: block; }
 
 /* ============================================
    SUBSCRIBE STRIP
