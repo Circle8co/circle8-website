@@ -391,6 +391,9 @@ section { padding: 5rem 0; }
 .gds-teaser { background: #dddcc8; padding: 0; }
 .gds-sticky { position: sticky; top: 0; z-index: 5; background: #dddcc8; padding: 6rem 0 3rem; }
 .gds-sticky-content { margin-left: 150px; }
+.gds-title-row { display: flex; align-items: baseline; gap: 2rem; margin-bottom: 0; }
+.gds-view-all-link { font-family: 'Source Sans 3', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-light); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
+.gds-view-all-link:hover { color: var(--terracotta); border-color: var(--terracotta); }
 .gds-eyebrow { color: transparent; margin-bottom: 0; line-height: 2; }
 .gds-eyebrow .letter { display: inline-block; color: transparent; transition: color 0.08s ease; }
 .gds-teaser h2 { font-size: clamp(2rem, 4vw, 3.2rem); color: var(--text-dark); margin-bottom: 1.25rem; }
