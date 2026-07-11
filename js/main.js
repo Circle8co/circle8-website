@@ -155,6 +155,26 @@ if (nav) {
         const rtTop = rtSection ? rtSection.getBoundingClientRect().top : 9999;
         const rtInView = rtTop <= logoH;
 
+        // Pin the RT eyebrow inside the logo when it reaches logo centre
+        const rtEyebrowEl = document.querySelector('.rt-eyebrow');
+        if (rtEyebrowEl) {
+          const eyebrowTop = rtEyebrowEl.getBoundingClientRect().top;
+          const lockY = logoH * 0.5;
+          if (eyebrowTop <= lockY && rtInView) {
+            rtEyebrowEl.style.position = 'fixed';
+            rtEyebrowEl.style.top = lockY + 'px';
+            rtEyebrowEl.style.left = heroBrand.getBoundingClientRect().left + heroBrand.offsetWidth / 2 + 'px';
+            rtEyebrowEl.style.transform = 'translate(-50%, -50%)';
+            rtEyebrowEl.style.zIndex = '1001';
+          } else {
+            rtEyebrowEl.style.position = '';
+            rtEyebrowEl.style.top = '';
+            rtEyebrowEl.style.left = '';
+            rtEyebrowEl.style.transform = '';
+            rtEyebrowEl.style.zIndex = '';
+          }
+        }
+
         if (rtInView) {
           heroBrand.style.opacity = '1';
           heroBrand.style.pointerEvents = '';
