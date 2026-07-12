@@ -386,3 +386,108 @@ if (rtForm) {
       </div>`;
   });
 }
+
+// GDS map — editorial popup clusters on country pins (data-driven, add new countries below)
+(() => {
+  const GDS_EDITIONS = {
+    turkey: [
+      { title: 'Galataport', image: 'design-series/turkey/Galataport%20precinct%20images/IMG_0894.jpeg', href: 'design-series/turkey/galataport.html' },
+      { title: 'Hagia Sophia', image: 'design-series/turkey/Hagia%20Sophia%20images/IMG_1036.jpeg', href: 'design-series/turkey/hagia-sophia.html' },
+      { title: 'Blue Mosque', image: 'design-series/turkey/Blue%20mosque%20images/blue_mosque_08.jpg', href: 'design-series/turkey/blue-mosque.html' },
+      { title: 'Topkapi Palace', image: 'design-series/turkey/Topkapi%20Palace%20images/IMG_1094.jpeg', href: 'design-series/turkey/topkapi-palace.html' },
+    ],
+  };
+
+  const OFFSETS = [
+    { dx: -78, dy: -86, tilt: -6 },
+    { dx: -16, dy: -124, tilt: 4 },
+    { dx: 48, dy: -98, tilt: -3 },
+    { dx: 96, dy: -38, tilt: 5 },
+    { dx: 60, dy: 50, tilt: -4 },
+  ];
+
+  const pins = document.querySelectorAll('.gds-pin');
+  if (!pins.length) return;
+  const isTouch = window.matchMedia('(hover: none)').matches;
+  const svgNS = 'http://www.w3.org/2000/svg';
+  let closeTimer = null;
+
+  pins.forEach(pin => {
+    const editions = GDS_EDITIONS[pin.dataset.country];
+    if (!editions || !editions.length) return;
+    pin.dataset.hasEditions = 'true';
+
+    const leftPct = parseFloat(pin.style.left) || 50;
+    const topPct = parseFloat(pin.style.top) || 50;
+    const flipX = leftPct > 65 ? -1 : 1;
+    const flipY = topPct > 55 ? -1 : 1;
+
+    const cluster = document.createElement('div');
+    cluster.className = 'gds-pin-cluster';
+
+    const svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('class', 'gds-pin-lines');
+    svg.setAttribute('width', '400');
+    svg.setAttribute('height', '400');
+    svg.style.left = '-200px';
+    svg.style.top = '-200px';
+    cluster.appendChild(svg);
+
+    editions.slice(0, 5).forEach((ed, i) => {
+      const off = OFFSETS[i];
+      const dx = off.dx * flipX;
+      const dy = off.dy * flipY;
+
+      const line = document.createElementNS(svgNS, 'line');
+      line.setAttribute('x1', 200);
+      line.setAttribute('y1', 200);
+      line.setAttribute('x2', 200 + dx);
+      line.setAttribute('y2', 200 + dy);
+      svg.appendChild(line);
+
+      const item = document.createElement('a');
+      item.className = 'gds-pin-item';
+      item.href = ed.href;
+      item.style.left = `${dx}px`;
+      item.style.top = `${dy}px`;
+      item.style.setProperty('--tilt', `${off.tilt}deg`);
+      item.innerHTML = `
+        <span class="gds-pin-thumb"><img src="${ed.image}" alt="${ed.title}" loading="lazy"></span>
+        <span class="gds-pin-item-label">${ed.title}</span>`;
+      cluster.appendChild(item);
+    });
+
+    pin.appendChild(cluster);
+
+    const show = () => {
+      clearTimeout(closeTimer);
+      document.querySelectorAll('.gds-pin-cluster.is-visible').forEach(c => { if (c !== cluster) c.classList.remove('is-visible'); });
+      cluster.classList.add('is-visible');
+    };
+    const scheduleHide = () => {
+      clearTimeout(closeTimer);
+      closeTimer = setTimeout(() => cluster.classList.remove('is-visible'), 350);
+    };
+
+    if (isTouch) {
+      pin.addEventListener('click', (e) => {
+        if (e.target.closest('.gds-pin-item')) return;
+        e.preventDefault();
+        cluster.classList.toggle('is-visible');
+      });
+    } else {
+      pin.addEventListener('mouseenter', show);
+      pin.addEventListener('mouseleave', scheduleHide);
+      cluster.addEventListener('mouseenter', show);
+      cluster.addEventListener('mouseleave', scheduleHide);
+    }
+  });
+
+  if (isTouch) {
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.gds-pin')) {
+        document.querySelectorAll('.gds-pin-cluster.is-visible').forEach(c => c.classList.remove('is-visible'));
+      }
+    });
+  }
+})();

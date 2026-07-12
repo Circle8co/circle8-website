@@ -400,10 +400,46 @@ section { padding: 5rem 0; }
 .gds-map-container { position: relative; width: 100%; margin: 0 auto; }
 .gds-map-inner { position: relative; width: 62%; margin: 0 auto; }
 .gds-world-map { width: 100%; height: auto; display: block; opacity: 0.7; }
-.gds-map-caption-below {
+.gds-pin {
   position: absolute; transform: translateX(-50%);
+  padding: 0.5rem 0.75rem; margin: -0.5rem -0.75rem;
+}
+.gds-pin[data-has-editions="true"] { cursor: pointer; }
+.gds-map-caption-below {
   font-family: 'Caveat', cursive; font-size: clamp(0.55rem, 0.9vw, 0.75rem); line-height: 1.1;
-  color: #3a2a1a; text-align: center; white-space: nowrap; pointer-events: none;
+  color: #3a2a1a; text-align: center; white-space: nowrap; pointer-events: none; margin: 0;
+}
+
+/* Editorial popup cluster */
+.gds-pin-cluster {
+  position: absolute; left: 50%; top: 50%; width: 0; height: 0;
+  opacity: 0; visibility: hidden; transform: scale(0.92);
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0s linear 0.22s;
+  z-index: 20; pointer-events: none;
+}
+.gds-pin-cluster.is-visible {
+  opacity: 1; visibility: visible; transform: scale(1); pointer-events: auto;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+.gds-pin-lines { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+.gds-pin-lines line { stroke: rgba(58,42,26,0.45); stroke-width: 1; }
+.gds-pin-item {
+  position: absolute; display: flex; flex-direction: column; align-items: center; gap: 0.35rem;
+  transform: translate(-50%, -50%) rotate(var(--tilt, 0deg));
+  text-decoration: none;
+}
+.gds-pin-thumb {
+  width: clamp(44px, 5vw, 64px); height: clamp(44px, 5vw, 64px); border-radius: 50%;
+  overflow: hidden; border: 3px solid var(--cream); box-shadow: 0 4px 12px rgba(27,20,16,0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.gds-pin-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gds-pin-item:hover .gds-pin-thumb { transform: scale(1.1); box-shadow: 0 6px 16px rgba(27,20,16,0.45); }
+.gds-pin-item-label {
+  font-family: 'Source Sans 3', sans-serif; font-size: 0.55rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase; color: #3a2a1a;
+  background: rgba(245,245,243,0.88); padding: 2px 6px; border-radius: 3px;
+  white-space: nowrap; transform: rotate(calc(var(--tilt, 0deg) * -1));
 }
 
 /* ============================================
