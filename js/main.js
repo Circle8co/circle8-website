@@ -418,7 +418,7 @@ if (rtForm) {
 
   const pins = document.querySelectorAll('.gds-pin');
   if (!pins.length) return;
-  const isTouch = window.matchMedia('(hover: none)').matches;
+  const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
   const svgNS = 'http://www.w3.org/2000/svg';
   let closeTimer = null;
 
