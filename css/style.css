@@ -409,6 +409,11 @@ section { padding: 5rem 0; }
   font-family: 'Caveat', cursive; font-size: clamp(0.42rem, 0.7vw, 0.6rem); line-height: 1.05;
   color: #3a2a1a; text-align: center;
 }
+.gds-map-caption-below {
+  position: absolute; transform: translateX(-50%);
+  font-family: 'Caveat', cursive; font-size: clamp(0.55rem, 0.9vw, 0.75rem); line-height: 1.1;
+  color: #3a2a1a; text-align: center; white-space: nowrap; pointer-events: none;
+}
 
 /* ============================================
    SUBSCRIBE STRIP
