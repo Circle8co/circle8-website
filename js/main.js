@@ -55,10 +55,11 @@ if (nav) {
       nav.classList.toggle('past-hero', pastHero);
     }
 
-    // Editorial/inner pages: slide nav + logo up out of view when scrolled
+    // Inner pages (excluding editorial articles): slide nav + logo up out of view when scrolled
     const rtPageHero = document.querySelector('.rt-page-hero');
     const isRtPage = document.body.classList.contains('page-rt');
-    if (!heroSection && !rtPageHero && !isRtPage) {
+    const isEditorialPage = document.body.classList.contains('page-editorial');
+    if (!heroSection && !rtPageHero && !isRtPage && !isEditorialPage) {
       const hidden = window.scrollY > 80;
       nav.classList.toggle('nav-scrolled-away', hidden);
       if (heroBrand) heroBrand.classList.toggle('nav-scrolled-away', hidden);
