@@ -184,31 +184,41 @@ if (nav) {
       });
     }
 
-    // Homepage: logo fades over testimonials, locks when RT section enters view
+    // Homepage: logo watermarks over GDS map and over testimonials, locks solid when the section after each enters view
     if (heroSection && heroBrand) {
+      const logoH = heroBrand.offsetHeight;
+      const fadeDownStart = logoH + 200;
+      const fadeDownEnd = logoH - 60;
+      const fadeFactor = (el) => {
+        const top = el.getBoundingClientRect().top;
+        return Math.min(1, Math.max(0, (fadeDownStart - top) / (fadeDownStart - fadeDownEnd)));
+      };
+
+      const gdsMap = document.querySelector('.gds-map-wrap');
+      const subscribeSection = document.querySelector('.subscribe-strip');
       const grid = document.querySelector('.testimonials-grid');
       const rtSection = document.querySelector('.round-table-section');
-      if (grid) {
-        const logoH = heroBrand.offsetHeight;
-        const rtTop = rtSection ? rtSection.getBoundingClientRect().top : 9999;
-        const rtInView = rtTop <= 180; // logo goes solid as RT eyebrow approaches the logo from below
 
-        if (rtInView) {
-          heroBrand.style.opacity = '1';
-          heroBrand.style.pointerEvents = '';
-        } else {
-          const gridTop = grid.getBoundingClientRect().top;
-          const fadeDownStart = logoH + 200;
-          const fadeDownEnd = logoH - 60;
-          const fadeDown = Math.min(1, Math.max(0, (fadeDownStart - gridTop) / (fadeDownStart - fadeDownEnd)));
-          let opacity = 1 - fadeDown * 0.88;
-          heroBrand.style.opacity = opacity;
-          heroBrand.style.pointerEvents = opacity < 0.4 ? 'none' : '';
+      let opacity = 1;
+
+      if (gdsMap) {
+        const subscribeTop = subscribeSection ? subscribeSection.getBoundingClientRect().top : 9999;
+        const gdsTop = gdsMap.getBoundingClientRect().top;
+        if (subscribeTop <= 180 || gdsTop < fadeDownStart) {
+          opacity = subscribeTop <= 180 ? 1 : 1 - fadeFactor(gdsMap) * 0.88;
         }
-      } else {
-        heroBrand.style.opacity = '1';
-        heroBrand.style.pointerEvents = '';
       }
+
+      if (grid) {
+        const rtTop = rtSection ? rtSection.getBoundingClientRect().top : 9999;
+        const gridTop = grid.getBoundingClientRect().top;
+        if (rtTop <= 180 || gridTop < fadeDownStart) {
+          opacity = rtTop <= 180 ? 1 : 1 - fadeFactor(grid) * 0.88;
+        }
+      }
+
+      heroBrand.style.opacity = opacity;
+      heroBrand.style.pointerEvents = opacity < 0.4 ? 'none' : '';
     }
   }, { passive: true });
 }
