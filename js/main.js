@@ -65,11 +65,10 @@ if (nav) {
       if (heroBrand) heroBrand.classList.toggle('nav-scrolled-away', hidden);
     }
 
-    // RT page: lock logo and eyebrow in place
+    // RT page: eyebrow disappears and logo fades as soon as scrolling starts
     if (isRtPage && heroBrand) {
       heroBrand.classList.remove('nav-scrolled-away');
-      heroBrand.style.removeProperty('opacity');
-      heroBrand.style.removeProperty('transform');
+      document.body.classList.toggle('rt-scrolled', window.scrollY > 20);
     }
 
     // Reveal GDS eyebrow letters only while inside the logo circle
