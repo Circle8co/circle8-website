@@ -298,8 +298,8 @@ section { padding: 5rem 0; }
 /* ============================================
    STRATEGIC COLLABORATION
    ============================================ */
-.strategic { background: var(--mono-cream); padding: 0; }
-.strategic-sticky { position: sticky; top: 0; z-index: 5; background: var(--mono-cream); padding: 5rem 0 2.5rem; }
+.strategic { background: var(--mono-cream-dark); padding: 0; }
+.strategic-sticky { position: sticky; top: 0; z-index: 5; background: var(--mono-cream-dark); padding: 5rem 0 2.5rem; }
 .strategic-header { display: grid; grid-template-columns: 0.8fr 1.6fr; gap: 4rem; align-items: center; margin-left: 150px; }
 .strategic-eyebrow { margin-left: -175px; margin-top: 30px; }
 .strategic-header h2 { grid-column: 1; font-size: clamp(1.5rem, 2.6vw, 2.2rem); color: var(--text-dark); line-height: 1.15; letter-spacing: 0.01em; }
@@ -327,7 +327,7 @@ section { padding: 5rem 0; }
 /* ============================================
    ROUND TABLE
    ============================================ */
-.round-table-section { background: var(--mono-cream-dark); padding: 7rem 0 6rem; position: sticky; top: 0; z-index: 2; overflow: hidden; }
+.round-table-section { background: var(--mono-cream-dark); padding: 4.5rem 0 3rem; position: sticky; top: 0; z-index: 2; overflow: hidden; }
 .rt-watermark { position: absolute; right: 0%; top: 50%; transform: translateY(-50%); height: 140%; pointer-events: none; user-select: none; -webkit-mask-image: linear-gradient(to right, transparent 0%, black 35%); mask-image: linear-gradient(to right, transparent 0%, black 35%); }
 .rt-watermark-logo { height: 100%; width: auto; opacity: 0.07; display: block; }
 .rt-inner { margin-left: 220px; max-width: 640px; }
@@ -503,18 +503,22 @@ section { padding: 5rem 0; }
 /* ============================================
    CONTACT
    ============================================ */
-.contact { background: var(--text-dark); padding: 6rem 0; text-align: center; }
+.contact { background: var(--surface-dark); padding: 6rem 0; text-align: center; }
 .contact .eyebrow { color: var(--terracotta); margin-bottom: 1.25rem; }
 .contact h2 { font-size: clamp(1.3rem, 2.5vw, 2rem); color: var(--white); margin-bottom: 1.25rem; }
 .contact > .container > p { font-size: 0.88rem; color: rgba(255,255,255,0.58); max-width: 480px; margin: 0 auto 2.5rem; line-height: 1.85; }
-.contact-ctas { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
-.contact-details { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.08); margin-bottom: 3rem; }
-.contact-social { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 2rem; }
+.contact-ctas { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+.contact-social { display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 2.5rem; }
 .contact-social .social-strip-text { color: rgba(255,255,255,0.5); }
 .contact-social .social-strip-text strong { color: rgba(255,255,255,0.75); }
-.contact-item-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--terracotta); display: block; margin-bottom: 0.4rem; }
-.contact-item a, .contact-item span { font-size: 0.95rem; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
-.contact-item a:hover { color: var(--white); }
+.social-icon-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 42px; height: 42px; border-radius: 0;
+  border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.75);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.social-icon-btn:hover { border-color: var(--white); color: var(--white); }
+.social-icon-btn svg { width: 17px; height: 17px; }
 
 /* ============================================
    SOCIAL / AMPLIFICATION
@@ -870,7 +874,6 @@ body.rt-scrolled .hero-brand { opacity: 0.12 !important; pointer-events: none !i
   .metadata-bar-inner { gap: 2rem; }
   .footer-inner { flex-direction: column; text-align: center; }
   .footer-copy { text-align: center; }
-  .contact-details { gap: 2rem; }
   .article-pullquote-block::before { display: none; }
   .article-pullquote-block .pull-quote { padding-left: 0; }
   .hero-content { padding: 0 1.5rem; }
