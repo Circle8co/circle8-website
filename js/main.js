@@ -502,69 +502,18 @@ if (rtForm) {
   }
 })();
 
-// Testimonials carousel
+// Testimonials marquee
 (() => {
   const track = document.getElementById('testimonialsTrack');
-  const prevBtn = document.getElementById('testimonialsPrev');
-  const nextBtn = document.getElementById('testimonialsNext');
-  const dotsWrap = document.getElementById('testimonialsDots');
-  if (!track || !prevBtn || !nextBtn || !dotsWrap) return;
+  if (!track) return;
 
-  const cards = Array.from(track.children);
-  let cardsPerView = 3;
-  let page = 0;
-
-  const getCardsPerView = () => {
-    if (window.innerWidth <= 768) return 1;
-    if (window.innerWidth <= 1024) return 2;
-    return 3;
-  };
-
-  const totalPages = () => Math.ceil(cards.length / cardsPerView);
-
-  const buildDots = () => {
-    dotsWrap.innerHTML = '';
-    for (let i = 0; i < totalPages(); i++) {
-      const dot = document.createElement('button');
-      dot.className = 'testimonials-dot' + (i === page ? ' active' : '');
-      dot.setAttribute('aria-label', `Go to testimonials page ${i + 1}`);
-      dot.addEventListener('click', () => goToPage(i));
-      dotsWrap.appendChild(dot);
-    }
-  };
-
-  const update = () => {
-    const cardWidth = cards[0].getBoundingClientRect().width;
-    const gap = 24; // matches 1.5rem gap in CSS
-    const offset = page * cardsPerView * (cardWidth + gap);
-    track.style.transform = `translateX(-${offset}px)`;
-    Array.from(dotsWrap.children).forEach((dot, i) => dot.classList.toggle('active', i === page));
-  };
-
-  const goToPage = (i) => {
-    const max = totalPages() - 1;
-    page = Math.max(0, Math.min(i, max));
-    update();
-  };
-
-  prevBtn.addEventListener('click', () => goToPage(page - 1));
-  nextBtn.addEventListener('click', () => goToPage(page + 1));
-
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      const newCardsPerView = getCardsPerView();
-      if (newCardsPerView !== cardsPerView) {
-        cardsPerView = newCardsPerView;
-        page = 0;
-        buildDots();
-      }
-      update();
-    }, 150);
+  Array.from(track.children).forEach(card => {
+    const clone = card.cloneNode(true);
+    clone.classList.remove('fade-in', 'visible');
+    track.appendChild(clone);
   });
 
-  cardsPerView = getCardsPerView();
-  buildDots();
-  update();
+  const SPEED = 45; // pixels per second
+  const halfWidth = track.scrollWidth / 2;
+  track.style.animationDuration = `${halfWidth / SPEED}s`;
 })();
