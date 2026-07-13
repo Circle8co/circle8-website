@@ -12,7 +12,7 @@
   <meta property="og:url" content="https://www.circle8.co">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="css/style.css?v=6">
+  <link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body>
 
@@ -246,12 +246,13 @@
   <div class="container">
     <p class="eyebrow testimonials-eyebrow fade-in">Testimonials</p>
     <h2 class="fade-in testimonials-heading">Principals at the Heart of Every<br>Great Partnership</h2>
-    <p class="testimonials-subtitle fade-in">The people we work with, in their own words.</p>
-    <div class="testimonials-grid">
+    <p class="testimonials-subtitle fade-in">The people Paulette has worked with, in their own words.</p>
+    <div class="testimonials-carousel">
+      <div class="testimonials-grid" id="testimonialsTrack">
 
       <div class="testimonial-card fade-in">
         <img src="images/testimonials/Hassell%20crop.jpeg" alt="Angela Sampson" class="testimonial-photo" onerror="this.outerHTML='<div class=\'testimonial-photo-placeholder\'>AS</div>'">
-        <p class="testimonial-quote">What stands out most about Paulette is her ability to quickly build strong relationships by genuinely listening to understand the client's needs, then offering smart, tailored solutions that build trust and rapport. As an architect, I'm constantly presented with new products and services to trial and specify. I could always rely on Paulette to provide honest, accurate, and reliable information regarding product suitability, durability, delivery timeframes, and costs — ensuring that the options presented to clients were not only creative but also practical and well-informed. Similarly, her move from product representation to client services equally demonstrated a client-first mindset, going beyond transactional interactions to truly understand and support her client's long-term needs.</p>
+        <p class="testimonial-quote">What stands out most about Paulette is her ability to quickly build strong relationships by genuinely listening to understand the client's needs, then offering smart, tailored solutions that build trust and rapport, ensuring that the options presented to clients were not only creative but also practical and well-informed. Similarly, her move from product representation to client services equally demonstrated a client-first mindset, going beyond transactional interactions to truly understand and support her client's long-term needs.</p>
         <div class="testimonial-attribution">
           <span class="testimonial-name">Angela Sampson</span>
           <span class="testimonial-company">Hassell Architecture</span>
@@ -357,7 +358,11 @@
         </div>
       </div>
 
+      </div>
+      <button class="testimonials-nav prev" id="testimonialsPrev" aria-label="Previous testimonials">&larr;</button>
+      <button class="testimonials-nav next" id="testimonialsNext" aria-label="Next testimonials">&rarr;</button>
     </div>
+    <div class="testimonials-dots" id="testimonialsDots"></div>
   </div>
 </section>
 
@@ -458,6 +463,6 @@
   </nav>
 </div>
 
-<script src="js/main.js?v=31"></script>
+<script src="js/main.js?v=32"></script>
 </body>
 </html>
