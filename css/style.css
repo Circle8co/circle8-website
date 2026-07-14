@@ -511,7 +511,7 @@ section { padding: 5rem 0; }
 
 .strip-banner { width: 100%; height: clamp(70px, 8vw, 110px); padding: 0; overflow: hidden; }
 .strip-banner-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.strip-banner-tall { width: 100%; height: 560px; padding: 0; overflow: hidden; }
+.strip-banner-tall { width: 100%; height: 500px; padding: 0; overflow: hidden; }
 .strip-banner-tall-img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
 
 /* ============================================
