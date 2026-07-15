@@ -183,8 +183,11 @@ if (nav) {
       const rtFormatsStrip = document.querySelector('.rt-formats-strip');
       if (contactSection && rtFormatsStrip) {
         const contactTop = contactSection.getBoundingClientRect().top;
-        if (contactTop <= 180 || rtFormatsStrip.getBoundingClientRect().top < fadeDownStart) {
-          opacity = contactTop <= 180 ? 1 : 1 - fadeFactor(rtFormatsStrip) * 0.88;
+        const stripTop = rtFormatsStrip.getBoundingClientRect().top;
+        const zone3Start = 150, zone3End = 20;
+        const zone3Fade = Math.min(1, Math.max(0, (zone3Start - stripTop) / (zone3Start - zone3End)));
+        if (contactTop <= 180 || stripTop < zone3Start) {
+          opacity = contactTop <= 180 ? 1 : 1 - zone3Fade * 0.88;
         }
       }
 
