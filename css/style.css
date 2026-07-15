@@ -183,6 +183,8 @@ section { padding: 5rem 0; }
 .btn-ghost-dark:hover { background: var(--terracotta); color: var(--white); }
 .btn-gold { background: var(--terracotta); color: var(--white); }
 .btn-gold:hover { background: var(--terracotta-dark); }
+.btn-ghost-green { background: transparent; color: #8a9e85; border: 1px solid #8a9e85; }
+.btn-ghost-green:hover { background: #8a9e85; color: var(--white); }
 
 /* ============================================
    HERO
