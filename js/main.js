@@ -101,57 +101,19 @@ if (nav) {
       });
     }
 
-    // RT eyebrow: letter-reveal while scrolling in, clone pins at logo centre
+    // RT eyebrow: letter-reveal only while inside the logo circle (same as About/GDS/Testimonials)
     if (window._rtLetters && heroBrand) {
-      const rtEyebrowEl = document.querySelector('.rt-eyebrow');
-      const rtSection = document.querySelector('.round-table-section');
       const logoRect = heroBrand.getBoundingClientRect();
       const cx = logoRect.left + logoRect.width / 2;
       const cy = logoRect.top + logoRect.height / 2;
       const r = logoRect.width * 0.30;
-
-      // Create fixed body clone once (outside any CSS transform context)
-      if (!window._rtClone) {
-        const clone = document.createElement('p');
-        clone.style.cssText = 'position:fixed;opacity:0;pointer-events:none;margin:0;color:var(--terracotta);font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;font-family:"Source Sans 3",sans-serif;font-weight:600;white-space:nowrap;z-index:1002;transition:opacity 0.12s ease;';
-        clone.textContent = 'Circle8 Talks';
-        document.body.appendChild(clone);
-        window._rtClone = clone;
-      }
-
-      if (rtEyebrowEl && rtSection) {
-        const rtBottom = rtSection.getBoundingClientRect().bottom;
-        const rtTop = rtSection.getBoundingClientRect().top;
-
-        if (rtTop > cy && window._rtPinned) window._rtPinned = false;
-        if (rtBottom <= cy) window._rtPinned = false;
-
-        if (!window._rtPinned) {
-          const rect = rtEyebrowEl.getBoundingClientRect();
-          const eyebrowMid = rect.top + rect.height / 2;
-          if (eyebrowMid <= cy && rtBottom > cy) {
-            const cloneH = window._rtClone.offsetHeight || 14;
-            window._rtClone.style.top = (cy - cloneH / 2) + 'px';
-            window._rtClone.style.left = rect.left + 'px';
-            window._rtPinned = true;
-          }
-        }
-
-        if (window._rtPinned) {
-          heroBrand.style.opacity = '1';
-          window._rtClone.style.opacity = '1';
-          window._rtLetters.forEach(s => { s.style.color = 'transparent'; });
-        } else {
-          window._rtClone.style.opacity = '0';
-          window._rtLetters.forEach(span => {
-            const lr = span.getBoundingClientRect();
-            const x = lr.left + lr.width / 2;
-            const y = lr.top + lr.height / 2;
-            const inside = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2) <= r;
-            span.style.color = inside ? 'var(--terracotta)' : 'transparent';
-          });
-        }
-      }
+      window._rtLetters.forEach(span => {
+        const lr = span.getBoundingClientRect();
+        const x = lr.left + lr.width / 2;
+        const y = lr.top + lr.height / 2;
+        const inside = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2) <= r;
+        span.style.color = inside ? 'var(--terracotta)' : 'transparent';
+      });
     }
 
     // Reveal each letter only while it's inside the logo circle
