@@ -217,6 +217,15 @@ if (nav) {
         }
       }
 
+      const contactSection = document.querySelector('.contact');
+      if (rtSection && contactSection) {
+        const contactTop = contactSection.getBoundingClientRect().top;
+        const rtSectionTop = rtSection.getBoundingClientRect().top;
+        if (contactTop <= 180 || rtSectionTop < fadeDownStart) {
+          opacity = contactTop <= 180 ? 1 : 1 - fadeFactor(rtSection) * 0.88;
+        }
+      }
+
       heroBrand.style.opacity = opacity;
       heroBrand.style.pointerEvents = opacity < 0.4 ? 'none' : '';
     }
