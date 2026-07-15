@@ -689,15 +689,17 @@ figcaption { font-size: 0.76rem; color: var(--text-light); margin-top: 0.6rem; l
    ============================================ */
 .editions-header { display: flex; justify-content: space-between; align-items: center; padding: 3rem 0 2rem; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
 .editions-header span { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-light); }
-.editions-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; padding-bottom: 5rem; }
-.edition-card { text-decoration: none; display: block; border: 2px solid var(--terracotta); background: transparent; }
-.edition-card-image { position: relative; aspect-ratio: 3/4; overflow: hidden; margin-bottom: 1rem; background: var(--warm-taupe); }
-.edition-card-image img { width: 100%; height: 100%; object-fit: cover; object-position: top; transform: scale(var(--card-zoom, 1)); transition: transform 0.4s ease; }
-.edition-card:hover img { transform: scale(calc(var(--card-zoom, 1) * 1.04)); }
+.editions-list { display: flex; flex-direction: column; gap: 4rem; padding-bottom: 5rem; }
+.edition-row { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; text-decoration: none; }
+.edition-row.reverse .edition-row-image { order: 2; }
+.edition-row.reverse .edition-row-text { order: 1; }
+.edition-row-image { position: relative; aspect-ratio: 1/1; overflow: hidden; background: var(--warm-taupe); }
+.edition-row-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+.edition-row:hover .edition-row-image img { transform: scale(1.04); }
 .edition-badge { position: absolute; top: 1rem; left: 1rem; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; background: var(--terracotta); color: white; padding: 0.3rem 0.6rem; }
-.edition-card-location { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-light); margin-bottom: 0.4rem; display: block; padding: 0 1rem; }
-.edition-card h3 { font-size: 1.1rem; color: var(--text-dark); margin-bottom: 0.4rem; padding: 0 1rem; }
-.edition-card p { font-family: 'Lora', serif; font-style: italic; font-size: 0.82rem; color: var(--text-light); padding: 0 1rem 1rem; }
+.edition-row-location { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-light); margin-bottom: 0.6rem; display: block; }
+.edition-row-text h3 { font-size: 1.6rem; color: var(--text-dark); margin-bottom: 1.1rem; }
+.edition-row-text blockquote { font-family: 'Lora', serif; font-style: italic; font-size: 1.05rem; line-height: 1.7; color: var(--text-mid); margin: 0; padding-left: 1.25rem; border-left: 2px solid var(--terracotta); }
 
 /* ============================================
    ROUND TABLE PAGE
@@ -884,7 +886,9 @@ body.rt-scrolled .hero-brand { opacity: 0.12 !important; pointer-events: none !i
   .testimonial-card { flex: 0 0 280px; width: 280px; }
   .article-layout { grid-template-columns: 1fr; gap: 2.5rem; }
   .article-image-trio, .article-image-duo { grid-template-columns: 1fr; }
-  .editions-grid { grid-template-columns: 1fr; }
+  .edition-row, .edition-row.reverse { grid-template-columns: 1fr; gap: 1.5rem; }
+  .edition-row.reverse .edition-row-image { order: 1; }
+  .edition-row.reverse .edition-row-text { order: 2; }
   .ecosystem-grid { grid-template-columns: 1fr; }
   .rt-formats { grid-template-columns: 1fr; }
   .rt-rules { grid-template-columns: repeat(2,1fr); }
