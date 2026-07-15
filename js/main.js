@@ -182,15 +182,12 @@ if (nav) {
       const contactSection = document.querySelector('.contact');
       if (contactSection) {
         const contactTop = contactSection.getBoundingClientRect().top;
-        const downStart = 369, downEnd = 239, upEnd = 100;
-        if (contactTop <= upEnd) {
-          opacity = 1;
-        } else if (contactTop <= downEnd) {
-          const t = (downEnd - contactTop) / (downEnd - upEnd);
-          opacity = 0.12 + t * 0.88;
+        const downStart = 369, downEnd = 180;
+        if (contactTop <= downEnd) {
+          opacity = 0;
         } else if (contactTop < downStart) {
           const t = (downStart - contactTop) / (downStart - downEnd);
-          opacity = 1 - t * 0.88;
+          opacity = 1 - t;
         }
       }
 
