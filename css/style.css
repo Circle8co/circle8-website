@@ -778,7 +778,7 @@ body.rt-scrolled .hero-brand { opacity: 0.12 !important; pointer-events: none !i
   pointer-events: none;
   white-space: nowrap;
 }
-.page-gds-index .subscribe-strip { background: #8a9e85; }
+.page-gds-index .subscribe-strip { background: var(--surface-dark); }
 .page-gds-index .subscribe-strip h3,
 .page-gds-index .subscribe-strip p { color: var(--white); }
 .page-gds-index .subscribe-strip input { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.3); color: var(--white); }
