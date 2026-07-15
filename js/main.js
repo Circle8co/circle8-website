@@ -180,14 +180,17 @@ if (nav) {
       }
 
       const contactSection = document.querySelector('.contact');
-      const rtFormatsStrip = document.querySelector('.rt-formats-strip');
-      if (contactSection && rtFormatsStrip) {
+      if (contactSection) {
         const contactTop = contactSection.getBoundingClientRect().top;
-        const stripTop = rtFormatsStrip.getBoundingClientRect().top;
-        const zone3Start = 150, zone3End = 20;
-        const zone3Fade = Math.min(1, Math.max(0, (zone3Start - stripTop) / (zone3Start - zone3End)));
-        if (contactTop <= 180 || stripTop < zone3Start) {
-          opacity = contactTop <= 180 ? 1 : 1 - zone3Fade * 0.88;
+        const downStart = 369, downEnd = 239, upEnd = 100;
+        if (contactTop <= upEnd) {
+          opacity = 1;
+        } else if (contactTop <= downEnd) {
+          const t = (downEnd - contactTop) / (downEnd - upEnd);
+          opacity = 0.12 + t * 0.88;
+        } else if (contactTop < downStart) {
+          const t = (downStart - contactTop) / (downStart - downEnd);
+          opacity = 1 - t * 0.88;
         }
       }
 
