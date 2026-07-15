@@ -180,12 +180,10 @@ if (nav) {
       }
 
       const contactSection = document.querySelector('.contact');
-      if (rtSection && contactSection) {
+      if (contactSection) {
         const contactTop = contactSection.getBoundingClientRect().top;
-        const rtBottom = rtSection.getBoundingClientRect().bottom;
-        const rtBottomFade = Math.min(1, Math.max(0, (fadeDownStart - rtBottom) / (fadeDownStart - fadeDownEnd)));
-        if (contactTop <= 180 || rtBottom < fadeDownStart) {
-          opacity = contactTop <= 180 ? 1 : 1 - rtBottomFade * 0.88;
+        if (contactTop <= 180 || contactTop < fadeDownStart) {
+          opacity = contactTop <= 180 ? 1 : 1 - fadeFactor(contactSection) * 0.88;
         }
       }
 
