@@ -118,11 +118,9 @@ if (nav) {
       });
 
       if (!window._rtEyebrowLocked) {
-        const eyebrowRect = rtEyebrow.getBoundingClientRect();
-        const ex = eyebrowRect.left + eyebrowRect.width / 2;
-        const ey = eyebrowRect.top + eyebrowRect.height / 2;
-        const dist = Math.sqrt((ex - cx) ** 2 + (ey - cy) ** 2);
-        if (dist <= r) {
+        const rtSectionEl = document.querySelector('.round-table-section');
+        const rtSectionTop = rtSectionEl ? rtSectionEl.getBoundingClientRect().top : 9999;
+        if (rtSectionTop <= 180) {
           window._rtEyebrowLocked = true;
         }
       }
