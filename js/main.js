@@ -183,7 +183,7 @@ if (nav) {
       let contactTop = null;
       if (contactSection) {
         contactTop = contactSection.getBoundingClientRect().top;
-        const downStart = 369, downEnd = 239, upEnd = 100;
+        const downStart = 400, downEnd = 300, upEnd = 260;
         if (contactTop <= upEnd) {
           opacity = 1;
         } else if (contactTop <= downEnd) {
