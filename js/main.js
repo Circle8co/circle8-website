@@ -101,10 +101,8 @@ if (nav) {
       });
     }
 
-    // RT eyebrow: letter-reveal only while inside the logo circle (same as About/GDS/Testimonials).
-    // Once "Circle8 Talks" lines up with the logo, freeze it there permanently: hide the
-    // scrolling original and show a fixed copy locked to the logo's own position.
-    if (window._rtLetters && heroBrand && rtEyebrow) {
+    // RT eyebrow: letter-reveal only while inside the logo circle (same as About/GDS/Testimonials)
+    if (window._rtLetters && heroBrand) {
       const logoRect = heroBrand.getBoundingClientRect();
       const cx = logoRect.left + logoRect.width / 2;
       const cy = logoRect.top + logoRect.height / 2;
@@ -116,32 +114,10 @@ if (nav) {
         const inside = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2) <= r;
         span.style.color = inside ? 'var(--terracotta)' : 'transparent';
       });
-
-      if (!window._rtEyebrowLocked) {
-        const rtSectionEl = document.querySelector('.round-table-section');
-        const rtSectionTop = rtSectionEl ? rtSectionEl.getBoundingClientRect().top : 9999;
-        if (rtSectionTop <= 180) {
-          window._rtEyebrowLocked = true;
-        }
-      }
-
-      const rtLock = document.querySelector('.hero-brand-rt-lock:not(.hero-brand-strategic-lock)');
-      if (window._rtEyebrowLocked) {
-        rtEyebrow.style.opacity = '0';
-        if (rtLock) rtLock.classList.add('visible');
-        // RT is further down the page than Strategic Collaboration — once RT has
-        // locked, it always takes over from the Strategic lock so only one shows.
-        const stratLock = document.querySelector('.hero-brand-strategic-lock');
-        if (stratLock) stratLock.classList.remove('visible');
-      } else if (rtLock) {
-        rtLock.classList.remove('visible');
-        rtEyebrow.style.opacity = '';
-      }
     }
 
-    // Strategic Collaboration eyebrow ("What We Do"): letter-reveal, then lock to the
-    // logo permanently once past that section, same as the RT eyebrow above.
-    if (window._eyebrowLetters && heroBrand && strategicEyebrow) {
+    // Reveal each letter only while it's inside the logo circle
+    if (window._eyebrowLetters && heroBrand) {
       const logoRect = heroBrand.getBoundingClientRect();
       const cx = logoRect.left + logoRect.width / 2;
       const cy = logoRect.top + logoRect.height / 2;
@@ -153,23 +129,6 @@ if (nav) {
         const inside = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2) <= r;
         span.style.color = inside ? 'var(--terracotta)' : 'transparent';
       });
-
-      if (!window._strategicEyebrowLocked) {
-        const strategicSectionEl = document.querySelector('.strategic');
-        const strategicTop = strategicSectionEl ? strategicSectionEl.getBoundingClientRect().top : 9999;
-        if (strategicTop <= 180) {
-          window._strategicEyebrowLocked = true;
-        }
-      }
-
-      const strategicLock = document.querySelector('.hero-brand-strategic-lock');
-      if (window._strategicEyebrowLocked && !window._rtEyebrowLocked) {
-        strategicEyebrow.style.opacity = '0';
-        if (strategicLock) strategicLock.classList.add('visible');
-      } else {
-        if (strategicLock) strategicLock.classList.remove('visible');
-        if (!window._strategicEyebrowLocked) strategicEyebrow.style.opacity = '';
-      }
     }
 
     // Reveal Testimonials eyebrow letters only while inside the logo circle
