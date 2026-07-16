@@ -194,14 +194,23 @@ if (nav) {
         }
       }
 
-      // Logo lands full-colour just above the Contact "buttons / follow the journey" divider
-      const contactWatermark = document.querySelector('.contact-watermark');
-      if (contactWatermark) {
-        const wmTop = contactWatermark.getBoundingClientRect().top;
-        const landed = wmTop <= window.innerHeight * 0.82;
-        contactWatermark.classList.toggle('visible', landed);
-        if (landed) opacity = 0;
+      // Logo pins itself full-colour just above the Contact "buttons / follow the journey"
+      // divider and stays there (persists into the footer) instead of resetting to top-left.
+      const contactSocial = document.querySelector('.contact-social');
+      let landed = false;
+      if (contactSocial) {
+        const socialTop = contactSocial.getBoundingClientRect().top;
+        const fadeOutStart = 500, fadeOutEnd = 300;
+        if (socialTop <= fadeOutEnd) {
+          landed = true;
+          opacity = 1;
+        } else if (socialTop < fadeOutStart) {
+          // Fade the top-left logo out before it jumps to its new pinned spot
+          const t = (fadeOutStart - socialTop) / (fadeOutStart - fadeOutEnd);
+          opacity = opacity * (1 - t);
+        }
       }
+      heroBrand.classList.toggle('landed', landed);
 
       heroBrand.style.opacity = opacity;
       heroBrand.style.pointerEvents = opacity < 0.4 ? 'none' : '';
