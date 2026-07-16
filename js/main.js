@@ -135,8 +135,9 @@ if (nav) {
       }
     }
 
-    // Reveal each letter only while it's inside the logo circle
-    if (window._eyebrowLetters && heroBrand) {
+    // Strategic Collaboration eyebrow ("What We Do"): letter-reveal, then lock to the
+    // logo permanently once past that section, same as the RT eyebrow above.
+    if (window._eyebrowLetters && heroBrand && strategicEyebrow) {
       const logoRect = heroBrand.getBoundingClientRect();
       const cx = logoRect.left + logoRect.width / 2;
       const cy = logoRect.top + logoRect.height / 2;
@@ -148,6 +149,23 @@ if (nav) {
         const inside = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2) <= r;
         span.style.color = inside ? 'var(--terracotta)' : 'transparent';
       });
+
+      if (!window._strategicEyebrowLocked) {
+        const strategicSectionEl = document.querySelector('.strategic');
+        const strategicTop = strategicSectionEl ? strategicSectionEl.getBoundingClientRect().top : 9999;
+        if (strategicTop <= 180) {
+          window._strategicEyebrowLocked = true;
+        }
+      }
+
+      const strategicLock = document.querySelector('.hero-brand-strategic-lock');
+      if (window._strategicEyebrowLocked) {
+        strategicEyebrow.style.opacity = '0';
+        if (strategicLock) strategicLock.classList.add('visible');
+      } else if (strategicLock) {
+        strategicLock.classList.remove('visible');
+        strategicEyebrow.style.opacity = '';
+      }
     }
 
     // Reveal Testimonials eyebrow letters only while inside the logo circle
