@@ -225,13 +225,6 @@ section { padding: 5rem 0; }
   display: flex; flex-direction: column; align-items: flex-start;
 }
 .hero-brand-mark { width: 240px; height: 240px; object-fit: contain; opacity: 0.95; filter: drop-shadow(0 0 3px rgba(255,255,255,0.35)); }
-.hero-brand-rt-lock {
-  position: fixed; top: 120px; left: calc(clamp(2rem, 5vw, 5rem) + 120px); transform: translate(-50%, -50%);
-  font-family: 'Source Sans 3', sans-serif; font-size: 0.82rem; font-weight: 700;
-  letter-spacing: 0.22em; text-transform: uppercase; color: var(--terracotta);
-  white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-}
-.hero-brand-rt-lock.visible { opacity: 1; }
 .strategic-eyebrow {
   color: transparent;
 }

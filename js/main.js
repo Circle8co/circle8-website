@@ -101,11 +101,11 @@ if (nav) {
       });
     }
 
-    // RT eyebrow: single source of truth. The logo never moves (position: fixed,
-    // untouched). "Circle8 Talks" scrolls normally (plain visible text, no per-letter
-    // effect) until its vertical center reaches the logo's vertical center - at that
-    // exact moment, once, it hides and a fixed copy at the logo's position takes over
-    // permanently. One condition, one state change, never re-evaluated after it fires.
+    // RT eyebrow: single element, no duplicate. The logo never moves (position: fixed,
+    // untouched). "Circle8 Talks" scrolls normally with the page until its vertical
+    // center reaches the logo's vertical center - at that exact moment, once, this
+    // same element is switched from normal flow to position:fixed at its current
+    // on-screen coordinates, so it simply stops moving right where it is.
     if (heroBrand && rtEyebrow && !window._rtEyebrowLocked) {
       const logoRect = heroBrand.getBoundingClientRect();
       const cy = logoRect.top + logoRect.height / 2;
@@ -113,9 +113,10 @@ if (nav) {
       const ey = eyebrowRect.top + eyebrowRect.height / 2;
       if (ey <= cy) {
         window._rtEyebrowLocked = true;
-        rtEyebrow.style.opacity = '0';
-        const rtLock = document.querySelector('.hero-brand-rt-lock');
-        if (rtLock) rtLock.classList.add('visible');
+        rtEyebrow.style.position = 'fixed';
+        rtEyebrow.style.top = eyebrowRect.top + 'px';
+        rtEyebrow.style.left = eyebrowRect.left + 'px';
+        rtEyebrow.style.margin = '0';
       }
     }
 
