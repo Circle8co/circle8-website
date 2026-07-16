@@ -200,7 +200,7 @@ if (nav) {
       let landed = false;
       if (contactSocial) {
         const socialTop = contactSocial.getBoundingClientRect().top;
-        const fadeOutStart = 500, fadeOutEnd = 300;
+        const fadeOutStart = 280, fadeOutEnd = 120;
         if (socialTop <= fadeOutEnd) {
           landed = true;
           opacity = 1;
