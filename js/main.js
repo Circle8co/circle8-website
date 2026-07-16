@@ -194,6 +194,15 @@ if (nav) {
         }
       }
 
+      // Logo lands full-colour just above the Contact "buttons / follow the journey" divider
+      const contactWatermark = document.querySelector('.contact-watermark');
+      if (contactWatermark) {
+        const wmTop = contactWatermark.getBoundingClientRect().top;
+        const landed = wmTop <= window.innerHeight * 0.82;
+        contactWatermark.classList.toggle('visible', landed);
+        if (landed) opacity = 0;
+      }
+
       heroBrand.style.opacity = opacity;
       heroBrand.style.pointerEvents = opacity < 0.4 ? 'none' : '';
     }
