@@ -101,43 +101,21 @@ if (nav) {
       });
     }
 
-    // RT eyebrow: letter-reveal only while inside the logo circle (same as About/GDS/Testimonials).
-    // The logo itself never moves (position: fixed, unchanged). "Circle8 Talks" scrolls
-    // normally with the page until its center is perfectly aligned with the logo's
-    // center, then it is permanently locked there (a fixed copy takes over).
-    if (window._rtLetters && heroBrand && rtEyebrow) {
+    // RT eyebrow: single source of truth. The logo never moves (position: fixed,
+    // untouched). "Circle8 Talks" scrolls normally (plain visible text, no per-letter
+    // effect) until its vertical center reaches the logo's vertical center - at that
+    // exact moment, once, it hides and a fixed copy at the logo's position takes over
+    // permanently. One condition, one state change, never re-evaluated after it fires.
+    if (heroBrand && rtEyebrow && !window._rtEyebrowLocked) {
       const logoRect = heroBrand.getBoundingClientRect();
-      const cx = logoRect.left + logoRect.width / 2;
       const cy = logoRect.top + logoRect.height / 2;
-      const r = logoRect.width * 0.30;
-      window._rtLetters.forEach(span => {
-        const lr = span.getBoundingClientRect();
-        const x = lr.left + lr.width / 2;
-        const y = lr.top + lr.height / 2;
-        const inside = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2) <= r;
-        span.style.color = inside ? 'var(--terracotta)' : 'transparent';
-      });
-
-      if (!window._rtEyebrowLocked) {
-        const eyebrowRect = rtEyebrow.getBoundingClientRect();
-        const ey = eyebrowRect.top + eyebrowRect.height / 2;
-        // Trigger purely on vertical position reaching the logo's vertical center.
-        // The previous trigger also required horizontal proximity (2D distance <= r),
-        // which depends on viewport width (the eyebrow's container is centered and
-        // shifts right on wider screens while the logo's left offset is roughly fixed)
-        // and could fail to fire at all on wide viewports. This can't fail that way.
-        if (ey <= cy) {
-          window._rtEyebrowLocked = true;
-        }
-      }
-
-      const rtLock = document.querySelector('.hero-brand-rt-lock');
-      if (window._rtEyebrowLocked) {
+      const eyebrowRect = rtEyebrow.getBoundingClientRect();
+      const ey = eyebrowRect.top + eyebrowRect.height / 2;
+      if (ey <= cy) {
+        window._rtEyebrowLocked = true;
         rtEyebrow.style.opacity = '0';
+        const rtLock = document.querySelector('.hero-brand-rt-lock');
         if (rtLock) rtLock.classList.add('visible');
-      } else if (rtLock) {
-        rtLock.classList.remove('visible');
-        rtEyebrow.style.opacity = '';
       }
     }
 
@@ -237,16 +215,7 @@ if (aboutEyebrow) {
   window._aboutLetters = Array.from(aboutEyebrow.querySelectorAll('.letter'));
 }
 
-// Split round table eyebrow into per-letter spans for logo reveal effect
 const rtEyebrow = document.querySelector('.rt-eyebrow');
-if (rtEyebrow) {
-  rtEyebrow.innerHTML = rtEyebrow.textContent.split('').map(ch =>
-    ch === ' '
-      ? '<span class="letter" style="display:inline-block;min-width:0.3em;">&nbsp;</span>'
-      : `<span class="letter">${ch}</span>`
-  ).join('');
-  window._rtLetters = Array.from(rtEyebrow.querySelectorAll('.letter'));
-}
 
 // Split strategic eyebrow into per-letter spans for logo reveal effect
 const strategicEyebrow = document.querySelector('.strategic-eyebrow');
