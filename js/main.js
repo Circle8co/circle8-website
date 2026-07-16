@@ -179,20 +179,8 @@ if (nav) {
         }
       }
 
-      const contactSection = document.querySelector('.contact');
-      if (contactSection) {
-        const contactTop = contactSection.getBoundingClientRect().top;
-        const downStart = 400, downEnd = 300, upEnd = 260;
-        if (contactTop <= upEnd) {
-          opacity = 1;
-        } else if (contactTop <= downEnd) {
-          const t = (downEnd - contactTop) / (downEnd - upEnd);
-          opacity = 0.12 + t * 0.88;
-        } else if (contactTop < downStart) {
-          const t = (downStart - contactTop) / (downStart - downEnd);
-          opacity = 1 - t * 0.88;
-        }
-      }
+      // Once solid going into Round Table, the logo stays full-colour for the
+      // rest of the page — no further fade/dip approaching Contact.
 
       heroBrand.style.opacity = opacity;
       heroBrand.style.pointerEvents = opacity < 0.4 ? 'none' : '';
