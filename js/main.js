@@ -512,3 +512,17 @@ if (rtForm) {
   const halfWidth = track.scrollWidth / 2;
   track.style.animationDuration = `${halfWidth / SPEED}s`;
 })();
+
+// Temporary debug helper — run logoDebug() in the console at any scroll position
+window.logoDebug = function () {
+  const contact = document.querySelector('.contact');
+  const contactSocial = document.querySelector('.contact-social');
+  const heroBrand = document.querySelector('.hero-brand');
+  console.log({
+    viewportHeight: window.innerHeight,
+    contactTop: contact ? Math.round(contact.getBoundingClientRect().top) : 'n/a',
+    contactSocialTop: contactSocial ? Math.round(contactSocial.getBoundingClientRect().top) : 'n/a',
+    heroBrandOpacity: heroBrand ? getComputedStyle(heroBrand).opacity : 'n/a',
+    heroBrandLanded: heroBrand ? heroBrand.classList.contains('landed') : 'n/a'
+  });
+};
