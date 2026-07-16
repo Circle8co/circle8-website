@@ -101,8 +101,10 @@ if (nav) {
       });
     }
 
-    // RT eyebrow: letter-reveal only while inside the logo circle (same as About/GDS/Testimonials)
-    if (window._rtLetters && heroBrand) {
+    // RT eyebrow: letter-reveal only while inside the logo circle (same as About/GDS/Testimonials).
+    // Once "Circle8 Talks" lines up with the logo, freeze it there permanently: hide the
+    // scrolling original and show a fixed copy locked to the logo's own position.
+    if (window._rtLetters && heroBrand && rtEyebrow) {
       const logoRect = heroBrand.getBoundingClientRect();
       const cx = logoRect.left + logoRect.width / 2;
       const cy = logoRect.top + logoRect.height / 2;
@@ -114,6 +116,25 @@ if (nav) {
         const inside = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2) <= r;
         span.style.color = inside ? 'var(--terracotta)' : 'transparent';
       });
+
+      if (!window._rtEyebrowLocked) {
+        const eyebrowRect = rtEyebrow.getBoundingClientRect();
+        const ex = eyebrowRect.left + eyebrowRect.width / 2;
+        const ey = eyebrowRect.top + eyebrowRect.height / 2;
+        const dist = Math.sqrt((ex - cx) ** 2 + (ey - cy) ** 2);
+        if (dist <= r) {
+          window._rtEyebrowLocked = true;
+        }
+      }
+
+      const rtLock = document.querySelector('.hero-brand-rt-lock');
+      if (window._rtEyebrowLocked) {
+        rtEyebrow.style.opacity = '0';
+        if (rtLock) rtLock.classList.add('visible');
+      } else if (rtLock) {
+        rtLock.classList.remove('visible');
+        rtEyebrow.style.opacity = '';
+      }
     }
 
     // Reveal each letter only while it's inside the logo circle
