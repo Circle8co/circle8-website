@@ -120,10 +120,13 @@ if (nav) {
 
       if (!window._rtEyebrowLocked) {
         const eyebrowRect = rtEyebrow.getBoundingClientRect();
-        const ex = eyebrowRect.left + eyebrowRect.width / 2;
         const ey = eyebrowRect.top + eyebrowRect.height / 2;
-        const dist = Math.sqrt((ex - cx) ** 2 + (ey - cy) ** 2);
-        if (dist <= r) {
+        // Trigger purely on vertical position reaching the logo's vertical center.
+        // The previous trigger also required horizontal proximity (2D distance <= r),
+        // which depends on viewport width (the eyebrow's container is centered and
+        // shifts right on wider screens while the logo's left offset is roughly fixed)
+        // and could fail to fire at all on wide viewports. This can't fail that way.
+        if (ey <= cy) {
           window._rtEyebrowLocked = true;
         }
       }
