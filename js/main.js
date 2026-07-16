@@ -180,8 +180,9 @@ if (nav) {
       }
 
       const contactSection = document.querySelector('.contact');
+      let contactTop = null;
       if (contactSection) {
-        const contactTop = contactSection.getBoundingClientRect().top;
+        contactTop = contactSection.getBoundingClientRect().top;
         const downStart = 369, downEnd = 239, upEnd = 100;
         if (contactTop <= upEnd) {
           opacity = 1;
@@ -195,6 +196,12 @@ if (nav) {
       }
 
       heroBrand.style.opacity = opacity;
+
+      // Temporary on-screen readout — no DevTools needed
+      const debugEl = document.getElementById('scrollDebug');
+      if (debugEl) {
+        debugEl.textContent = `contactTop: ${contactTop !== null ? Math.round(contactTop) : 'n/a'}\nopacity: ${opacity.toFixed(2)}`;
+      }
       heroBrand.style.pointerEvents = opacity < 0.4 ? 'none' : '';
     }
   }, { passive: true });
