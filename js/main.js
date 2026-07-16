@@ -125,10 +125,14 @@ if (nav) {
         }
       }
 
-      const rtLock = document.querySelector('.hero-brand-rt-lock');
+      const rtLock = document.querySelector('.hero-brand-rt-lock:not(.hero-brand-strategic-lock)');
       if (window._rtEyebrowLocked) {
         rtEyebrow.style.opacity = '0';
         if (rtLock) rtLock.classList.add('visible');
+        // RT is further down the page than Strategic Collaboration — once RT has
+        // locked, it always takes over from the Strategic lock so only one shows.
+        const stratLock = document.querySelector('.hero-brand-strategic-lock');
+        if (stratLock) stratLock.classList.remove('visible');
       } else if (rtLock) {
         rtLock.classList.remove('visible');
         rtEyebrow.style.opacity = '';
@@ -159,12 +163,12 @@ if (nav) {
       }
 
       const strategicLock = document.querySelector('.hero-brand-strategic-lock');
-      if (window._strategicEyebrowLocked) {
+      if (window._strategicEyebrowLocked && !window._rtEyebrowLocked) {
         strategicEyebrow.style.opacity = '0';
         if (strategicLock) strategicLock.classList.add('visible');
-      } else if (strategicLock) {
-        strategicLock.classList.remove('visible');
-        strategicEyebrow.style.opacity = '';
+      } else {
+        if (strategicLock) strategicLock.classList.remove('visible');
+        if (!window._strategicEyebrowLocked) strategicEyebrow.style.opacity = '';
       }
     }
 
