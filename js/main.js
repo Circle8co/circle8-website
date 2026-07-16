@@ -194,24 +194,6 @@ if (nav) {
         }
       }
 
-      // Logo pins itself full-colour just above the Contact "buttons / follow the journey"
-      // divider and stays there (persists into the footer) instead of resetting to top-left.
-      const contactSocial = document.querySelector('.contact-social');
-      let landed = false;
-      if (contactSocial) {
-        const socialTop = contactSocial.getBoundingClientRect().top;
-        const fadeOutStart = 280, fadeOutEnd = 120;
-        if (socialTop <= fadeOutEnd) {
-          landed = true;
-          opacity = 1;
-        } else if (socialTop < fadeOutStart) {
-          // Fade the top-left logo out before it jumps to its new pinned spot
-          const t = (fadeOutStart - socialTop) / (fadeOutStart - fadeOutEnd);
-          opacity = opacity * (1 - t);
-        }
-      }
-      heroBrand.classList.toggle('landed', landed);
-
       heroBrand.style.opacity = opacity;
       heroBrand.style.pointerEvents = opacity < 0.4 ? 'none' : '';
     }
@@ -512,17 +494,3 @@ if (rtForm) {
   const halfWidth = track.scrollWidth / 2;
   track.style.animationDuration = `${halfWidth / SPEED}s`;
 })();
-
-// Temporary debug helper — run logoDebug() in the console at any scroll position
-window.logoDebug = function () {
-  const contact = document.querySelector('.contact');
-  const contactSocial = document.querySelector('.contact-social');
-  const heroBrand = document.querySelector('.hero-brand');
-  console.log({
-    viewportHeight: window.innerHeight,
-    contactTop: contact ? Math.round(contact.getBoundingClientRect().top) : 'n/a',
-    contactSocialTop: contactSocial ? Math.round(contactSocial.getBoundingClientRect().top) : 'n/a',
-    heroBrandOpacity: heroBrand ? getComputedStyle(heroBrand).opacity : 'n/a',
-    heroBrandLanded: heroBrand ? heroBrand.classList.contains('landed') : 'n/a'
-  });
-};
