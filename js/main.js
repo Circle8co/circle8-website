@@ -101,22 +101,47 @@ if (nav) {
       });
     }
 
-    // RT eyebrow: single element, no duplicate. The logo never moves (position: fixed,
-    // untouched). "Circle8 Talks" scrolls normally with the page until its vertical
-    // center reaches the logo's vertical center - at that exact moment, once, this
-    // same element is switched from normal flow to position:fixed at its current
-    // on-screen coordinates, so it simply stops moving right where it is.
-    if (heroBrand && rtEyebrow && !window._rtEyebrowLocked) {
+    // RT eyebrow: single element, fully reversible, no permanent state. The logo
+    // never moves (position: fixed, untouched). "Natural" position is derived fresh
+    // from .rt-inner (never transformed) plus a constant offset measured once at
+    // load, so pin/unpin and the fade are both driven purely by current scroll
+    // position each tick - nothing latched between ticks.
+    // - Far from the logo: hidden (opacity 0). [fade logic - unchanged]
+    // - Approaching: fades in as distance closes. [fade logic - unchanged]
+    // - Reaches the logo's vertical center: switches from normal flow to
+    //   position:fixed at that exact spot, so it and the logo hold together with
+    //   zero further movement no matter how much farther the page scrolls.
+    // - Scrolling back above that point releases it back into normal flow, where
+    //   the same fade logic takes over again automatically.
+    if (heroBrand && rtEyebrow && rtInner) {
       const logoRect = heroBrand.getBoundingClientRect();
       const cy = logoRect.top + logoRect.height / 2;
-      const eyebrowRect = rtEyebrow.getBoundingClientRect();
-      const ey = eyebrowRect.top + eyebrowRect.height / 2;
-      if (ey <= cy) {
-        window._rtEyebrowLocked = true;
-        rtEyebrow.style.position = 'fixed';
-        rtEyebrow.style.top = eyebrowRect.top + 'px';
-        rtEyebrow.style.left = eyebrowRect.left + 'px';
-        rtEyebrow.style.margin = '0';
+      const innerRect = rtInner.getBoundingClientRect();
+      const naturalEy = innerRect.top + rtEyebrowCenterOffset;
+      const diff = naturalEy - cy;
+      const fadeRange = 80;
+      const isPinned = rtEyebrow.style.position === 'fixed';
+      if (diff <= 0) {
+        if (!isPinned) {
+          const rect = rtEyebrow.getBoundingClientRect();
+          rtEyebrow.style.position = 'fixed';
+          rtEyebrow.style.top = rect.top + 'px';
+          rtEyebrow.style.left = rect.left + 'px';
+          rtEyebrow.style.margin = '0';
+        }
+        rtEyebrow.style.opacity = '1';
+      } else {
+        if (isPinned) {
+          rtEyebrow.style.position = '';
+          rtEyebrow.style.top = '';
+          rtEyebrow.style.left = '';
+          rtEyebrow.style.margin = '';
+        }
+        if (diff < fadeRange) {
+          rtEyebrow.style.opacity = String(1 - diff / fadeRange);
+        } else {
+          rtEyebrow.style.opacity = '0';
+        }
       }
     }
 
@@ -217,6 +242,17 @@ if (aboutEyebrow) {
 }
 
 const rtEyebrow = document.querySelector('.rt-eyebrow');
+const rtInner = document.querySelector('.rt-inner');
+let rtEyebrowCenterOffset = 0;
+if (rtEyebrow && rtInner) {
+  // Measured once, before any scroll-driven transform is ever applied: the
+  // eyebrow's vertical center relative to .rt-inner's top. .rt-inner is never
+  // transformed, so this constant lets the scroll handler always recover the
+  // eyebrow's true "natural" (untransformed) position from .rt-inner alone.
+  const eRect = rtEyebrow.getBoundingClientRect();
+  const iRect = rtInner.getBoundingClientRect();
+  rtEyebrowCenterOffset = (eRect.top + eRect.height / 2) - iRect.top;
+}
 
 // Split strategic eyebrow into per-letter spans for logo reveal effect
 const strategicEyebrow = document.querySelector('.strategic-eyebrow');
