@@ -101,47 +101,39 @@ if (nav) {
       });
     }
 
-    // RT eyebrow + logo, locked together as one group, driven by a single stable
-    // document-space threshold (rtLockScrollY, computed once at load - see above)
-    // compared directly to window.scrollY. No hardcoded or precomputed target
-    // position exists anywhere - the moment locking engages, both elements'
-    // CURRENT live getBoundingClientRect() values are captured and frozen there.
-    // - Far from the lock point: eyebrow hidden (opacity 0), logo at its normal
-    //   top:0 fixed position (untouched, no jump).
-    // - Approaching: eyebrow fades in as scrollY closes the distance to rtLockScrollY.
-    // - scrollY reaches rtLockScrollY: both elements' current on-screen positions
-    //   are captured once and frozen (position:fixed at those exact captured
-    //   coordinates) - not moved to any calculated or predefined position.
-    // - Scrolling back above rtLockScrollY releases both back to normal (logo to
-    //   top:0, eyebrow to normal flow), where the same fade logic resumes.
+    // RT logo+eyebrow: two-state reversible model, one document-space threshold
+    // (rtLockScrollY, computed once at load - see below). No stored/latched
+    // state - isPinned is recalculated fresh from window.scrollY every tick.
+    // - travelling (scrollY < rtLockScrollY): the logo moves DOWN from its
+    //   resting position in direct proportion to scroll, over the last
+    //   rtFadeRange px before the lock point. The eyebrow stays untouched in
+    //   normal flow, fading in over that same window (rtTravelProgress drives
+    //   both, so they stay in sync).
+    // - locked (scrollY >= rtLockScrollY): the logo's top holds at its fully
+    //   travelled value (rtTravelDistance) and the eyebrow switches to
+    //   position:fixed, centered exactly on the logo's now-frozen position -
+    //   both stay motionless regardless of further scroll.
+    // - Scrolling back above rtLockScrollY reverses both automatically: the
+    //   logo travels back up proportionally, the eyebrow returns to normal
+    //   flow and fades out.
     if (heroBrand && rtEyebrow) {
       const isPinned = window.scrollY >= rtLockScrollY;
       if (isPinned) {
         if (rtEyebrow.style.position !== 'fixed') {
-          // Capture both elements' actual current on-screen position at the
-          // exact moment of locking - no hardcoded or precomputed offset.
-          const currentLogoRect = heroBrand.getBoundingClientRect();
-          const frozenLogoTop = currentLogoRect.top;
-          const cyFrozen = frozenLogoTop + currentLogoRect.height / 2;
-          const currentEyebrowRect = rtEyebrow.getBoundingClientRect();
-
-          heroBrand.style.top = frozenLogoTop + 'px';
-
+          const logoRect = heroBrand.getBoundingClientRect();
+          const cx = logoRect.left + logoRect.width / 2;
+          const cy = logoRect.top + logoRect.height / 2;
+          const eyebrowRect = rtEyebrow.getBoundingClientRect();
           rtEyebrow.style.position = 'fixed';
-          // Eyebrow re-centered on the logo's frozen position, preserving the
-          // same internal alignment as the unlocked state.
-          rtEyebrow.style.top = (cyFrozen - currentEyebrowRect.height / 2) + 'px';
-          rtEyebrow.style.left = currentEyebrowRect.left + 'px';
+          rtEyebrow.style.top = (cy - eyebrowRect.height / 2 - 33) + 'px'; // optical centering nudge, locked state only
+          rtEyebrow.style.left = (cx - eyebrowRect.width / 2) + 'px';
           rtEyebrow.style.margin = '0';
           // Snap straight to fully visible, no transition lag, once locked.
           rtEyebrow.style.transition = 'none';
         }
+        heroBrand.style.top = rtTravelDistance + 'px';
         rtEyebrow.style.opacity = '1';
-        // TEMPORARY DEBUG - remove after confirming
-        heroBrand.style.outline = '4px solid red';
       } else {
-        // TEMPORARY DEBUG - remove after confirming
-        heroBrand.style.outline = '';
         if (rtEyebrow.style.position === 'fixed') {
           rtEyebrow.style.position = '';
           rtEyebrow.style.top = '';
@@ -150,10 +142,10 @@ if (nav) {
           // Restore the normal fade transition for the approach/retreat phase.
           rtEyebrow.style.transition = '';
         }
-        heroBrand.style.top = '';
-        const distanceToLock = rtLockScrollY - window.scrollY;
-        const fadeRange = 80;
-        rtEyebrow.style.opacity = distanceToLock < fadeRange ? String(1 - distanceToLock / fadeRange) : '0';
+        const travelStartScrollY = rtLockScrollY - rtFadeRange;
+        const travelProgress = Math.max(0, Math.min(1, (window.scrollY - travelStartScrollY) / rtFadeRange));
+        heroBrand.style.top = (travelProgress * rtTravelDistance) + 'px';
+        rtEyebrow.style.opacity = String(travelProgress);
       }
     }
 
@@ -254,21 +246,33 @@ if (aboutEyebrow) {
 }
 
 const rtEyebrow = document.querySelector('.rt-eyebrow');
+const rtSection = document.querySelector('.round-table-section');
 let rtLockScrollY = 0;
-if (rtEyebrow && heroBrand) {
-  // Measured once, before any scroll-driven change is ever applied: convert the
-  // eyebrow's current viewport position into an absolute document-space
-  // coordinate (top + current scrollY), and combine with the logo's vertical
-  // center (constant, since the logo never moves before locking) to derive the
-  // single scrollY value at which the eyebrow's natural position aligns with
-  // the logo. This is the ONLY thing precomputed at load - the actual pinned
-  // position is captured live, at the moment of locking, in the scroll handler
-  // below (no hardcoded or precomputed target coordinate of any kind).
+let rtTravelDistance = 0;
+const rtFadeRange = 80; // width of the travel/fade window, px of scroll - matches the constant already used for other proximity effects in this file
+if (rtEyebrow && heroBrand && rtSection) {
+  // rtLockScrollY: the scrollY at which .round-table-section's own top edge
+  // reaches 180px from the viewport top - the same proven pattern already
+  // used elsewhere in this file for the logo's opacity fade. This happens
+  // early in the section's visible lifetime (guaranteed section remaining
+  // afterward), unlike a threshold based on the eyebrow's own natural
+  // position, which was the actual bug: the eyebrow's scroll trajectory
+  // never reaches the logo before the section finishes scrolling past.
+  const initialSectionRect = rtSection.getBoundingClientRect();
+  const sectionDocTop = initialSectionRect.top + window.scrollY;
+  rtLockScrollY = sectionDocTop - 180;
+
+  // rtTravelDistance: how far down the logo must travel so that, at the
+  // exact moment of locking (scrollY === rtLockScrollY), its position
+  // coincides with wherever the eyebrow naturally is at that same scrollY
+  // (the eyebrow itself is never touched pre-lock, so its position at any
+  // given scrollY is fully determined by its own untouched document position).
   const initialEyebrowRect = rtEyebrow.getBoundingClientRect();
   const initialLogoRect = heroBrand.getBoundingClientRect();
-  const cy = initialLogoRect.top + initialLogoRect.height / 2;
-  const initialEyebrowDocTop = initialEyebrowRect.top + window.scrollY;
-  rtLockScrollY = initialEyebrowDocTop + initialEyebrowRect.height / 2 - cy;
+  const logoRestingCenter = initialLogoRect.top + initialLogoRect.height / 2;
+  const eyebrowDocTop = initialEyebrowRect.top + window.scrollY;
+  const eyebrowCenterAtLock = (eyebrowDocTop - rtLockScrollY) + initialEyebrowRect.height / 2;
+  rtTravelDistance = Math.max(0, eyebrowCenterAtLock - logoRestingCenter);
 }
 
 // Split strategic eyebrow into per-letter spans for logo reveal effect
