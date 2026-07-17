@@ -101,47 +101,38 @@ if (nav) {
       });
     }
 
-    // RT eyebrow: single element, fully reversible, no permanent state. The logo
-    // never moves (position: fixed, untouched). "Natural" position is derived fresh
-    // from .rt-inner (never transformed) plus a constant offset measured once at
-    // load, so pin/unpin and the fade are both driven purely by current scroll
-    // position each tick - nothing latched between ticks.
-    // - Far from the logo: hidden (opacity 0). [fade logic - unchanged]
-    // - Approaching: fades in as distance closes. [fade logic - unchanged]
-    // - Reaches the logo's vertical center: switches from normal flow to
-    //   position:fixed at that exact spot, so it and the logo hold together with
-    //   zero further movement no matter how much farther the page scrolls.
-    // - Scrolling back above that point releases it back into normal flow, where
+    // RT eyebrow: single element, fully reversible, driven by a single stable
+    // document-space threshold (rtLockScrollY, computed once at load - see below)
+    // compared directly to window.scrollY. The logo never moves (position: fixed,
+    // untouched, no transform transition). Nothing here re-measures either
+    // element's live position after pinning - only the scalar window.scrollY.
+    // - Far from the lock point: hidden (opacity 0).
+    // - Approaching: fades in as scrollY closes the distance to rtLockScrollY.
+    // - scrollY reaches rtLockScrollY: switches from normal flow to position:fixed
+    //   at the precomputed pinned coordinates, holding zero further movement no
+    //   matter how much farther the page scrolls.
+    // - Scrolling back above rtLockScrollY releases it into normal flow, where
     //   the same fade logic takes over again automatically.
-    if (heroBrand && rtEyebrow && rtInner) {
-      const logoRect = heroBrand.getBoundingClientRect();
-      const cy = logoRect.top + logoRect.height / 2;
-      const innerRect = rtInner.getBoundingClientRect();
-      const naturalEy = innerRect.top + rtEyebrowCenterOffset;
-      const diff = naturalEy - cy;
-      const fadeRange = 80;
-      const isPinned = rtEyebrow.style.position === 'fixed';
-      if (diff <= 0) {
-        if (!isPinned) {
-          const rect = rtEyebrow.getBoundingClientRect();
+    if (heroBrand && rtEyebrow) {
+      const isPinned = window.scrollY >= rtLockScrollY;
+      if (isPinned) {
+        if (rtEyebrow.style.position !== 'fixed') {
           rtEyebrow.style.position = 'fixed';
-          rtEyebrow.style.top = rect.top + 'px';
-          rtEyebrow.style.left = rect.left + 'px';
+          rtEyebrow.style.top = rtPinnedTop + 'px';
+          rtEyebrow.style.left = rtPinnedLeft + 'px';
           rtEyebrow.style.margin = '0';
         }
         rtEyebrow.style.opacity = '1';
       } else {
-        if (isPinned) {
+        if (rtEyebrow.style.position === 'fixed') {
           rtEyebrow.style.position = '';
           rtEyebrow.style.top = '';
           rtEyebrow.style.left = '';
           rtEyebrow.style.margin = '';
         }
-        if (diff < fadeRange) {
-          rtEyebrow.style.opacity = String(1 - diff / fadeRange);
-        } else {
-          rtEyebrow.style.opacity = '0';
-        }
+        const distanceToLock = rtLockScrollY - window.scrollY;
+        const fadeRange = 80;
+        rtEyebrow.style.opacity = distanceToLock < fadeRange ? String(1 - distanceToLock / fadeRange) : '0';
       }
     }
 
@@ -242,16 +233,24 @@ if (aboutEyebrow) {
 }
 
 const rtEyebrow = document.querySelector('.rt-eyebrow');
-const rtInner = document.querySelector('.rt-inner');
-let rtEyebrowCenterOffset = 0;
-if (rtEyebrow && rtInner) {
-  // Measured once, before any scroll-driven transform is ever applied: the
-  // eyebrow's vertical center relative to .rt-inner's top. .rt-inner is never
-  // transformed, so this constant lets the scroll handler always recover the
-  // eyebrow's true "natural" (untransformed) position from .rt-inner alone.
-  const eRect = rtEyebrow.getBoundingClientRect();
-  const iRect = rtInner.getBoundingClientRect();
-  rtEyebrowCenterOffset = (eRect.top + eRect.height / 2) - iRect.top;
+let rtLockScrollY = 0;
+let rtPinnedTop = 0;
+let rtPinnedLeft = 0;
+if (rtEyebrow && heroBrand) {
+  // Measured once, before any scroll-driven change is ever applied: convert the
+  // eyebrow's current viewport position into an absolute document-space
+  // coordinate (top + current scrollY), and combine with the logo's vertical
+  // center (constant, since the logo never moves) to derive the single scrollY
+  // value at which the eyebrow's natural position aligns with the logo. This is
+  // a stable threshold compared directly to window.scrollY on every scroll tick
+  // - never recalculated from live measurements of either element again.
+  const initialEyebrowRect = rtEyebrow.getBoundingClientRect();
+  const initialLogoRect = heroBrand.getBoundingClientRect();
+  const cy = initialLogoRect.top + initialLogoRect.height / 2;
+  const initialEyebrowDocTop = initialEyebrowRect.top + window.scrollY;
+  rtLockScrollY = initialEyebrowDocTop + initialEyebrowRect.height / 2 - cy;
+  rtPinnedTop = cy - initialEyebrowRect.height / 2;
+  rtPinnedLeft = initialEyebrowRect.left;
 }
 
 // Split strategic eyebrow into per-letter spans for logo reveal effect

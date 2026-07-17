@@ -105,8 +105,11 @@ section { padding: 5rem 0; }
   opacity: 0;
   pointer-events: none;
 }
-.nav, .hero-brand {
+.nav {
   transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.hero-brand {
+  transition: opacity 0.4s ease;
 }
 .nav.nav-scrolled-away {
   transform: translateY(-100%);
