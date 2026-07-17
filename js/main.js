@@ -102,43 +102,43 @@ if (nav) {
     }
 
     // RT eyebrow + logo, locked together as one group, driven by a single stable
-    // document-space threshold (rtLockScrollY, computed once at load - see below)
-    // compared directly to window.scrollY. Nothing here re-measures either
-    // element's live position after pinning - only the scalar window.scrollY.
+    // document-space threshold (rtLockScrollY, computed once at load - see above)
+    // compared directly to window.scrollY. No hardcoded or precomputed target
+    // position exists anywhere - the moment locking engages, both elements'
+    // CURRENT live getBoundingClientRect() values are captured and frozen there.
     // - Far from the lock point: eyebrow hidden (opacity 0), logo at its normal
-    //   top:0 fixed position.
+    //   top:0 fixed position (untouched, no jump).
     // - Approaching: eyebrow fades in as scrollY closes the distance to rtLockScrollY.
-    // - scrollY reaches rtLockScrollY: eyebrow switches from normal flow to
-    //   position:fixed at the precomputed pinned coordinates, and the logo's own
-    //   top shifts to heroBrandLockedTop - both hold with zero further movement
-    //   no matter how much farther the page scrolls.
-    // - Scrolling back above rtLockScrollY releases the eyebrow into normal flow
-    //   and the logo back to top:0, where the same fade logic takes over again.
+    // - scrollY reaches rtLockScrollY: both elements' current on-screen positions
+    //   are captured once and frozen (position:fixed at those exact captured
+    //   coordinates) - not moved to any calculated or predefined position.
+    // - Scrolling back above rtLockScrollY releases both back to normal (logo to
+    //   top:0, eyebrow to normal flow), where the same fade logic resumes.
     if (heroBrand && rtEyebrow) {
       const isPinned = window.scrollY >= rtLockScrollY;
       if (isPinned) {
         if (rtEyebrow.style.position !== 'fixed') {
+          // Capture both elements' actual current on-screen position at the
+          // exact moment of locking - no hardcoded or precomputed offset.
+          const currentLogoRect = heroBrand.getBoundingClientRect();
+          const frozenLogoTop = currentLogoRect.top;
+          const cyFrozen = frozenLogoTop + currentLogoRect.height / 2;
+          const currentEyebrowRect = rtEyebrow.getBoundingClientRect();
+
+          heroBrand.style.top = frozenLogoTop + 'px';
+
           rtEyebrow.style.position = 'fixed';
-          rtEyebrow.style.top = rtPinnedTop + 'px';
-          rtEyebrow.style.left = rtPinnedLeft + 'px';
+          // Eyebrow re-centered on the logo's frozen position, preserving the
+          // same internal alignment as the unlocked state.
+          rtEyebrow.style.top = (cyFrozen - currentEyebrowRect.height / 2) + 'px';
+          rtEyebrow.style.left = currentEyebrowRect.left + 'px';
           rtEyebrow.style.margin = '0';
           // Snap straight to fully visible, no transition lag, once locked.
           rtEyebrow.style.transition = 'none';
         }
-        // Logo moves down with the group as a unit; eyebrow stays centered on it
-        // (rtPinnedTop was computed against the logo's shifted position - see init).
-        heroBrand.style.top = heroBrandLockedTop + 'px';
         rtEyebrow.style.opacity = '1';
         // TEMPORARY DEBUG - remove after confirming
         heroBrand.style.outline = '4px solid red';
-        console.log('[RT LOCK DEBUG]', {
-          isPinned,
-          scrollY: window.scrollY,
-          heroBrand_styleTop: heroBrand.style.top,
-          heroBrand_computedTop: getComputedStyle(heroBrand).top,
-          heroBrand_boundingTop: heroBrand.getBoundingClientRect().top,
-          heroBrand_computedPosition: getComputedStyle(heroBrand).position
-        });
       } else {
         // TEMPORARY DEBUG - remove after confirming
         heroBrand.style.outline = '';
@@ -255,33 +255,20 @@ if (aboutEyebrow) {
 
 const rtEyebrow = document.querySelector('.rt-eyebrow');
 let rtLockScrollY = 0;
-let rtPinnedTop = 0;
-let rtPinnedLeft = 0;
-let heroBrandLockedTop = 0;
-let groupShift = 124; // how far down the whole locked logo+eyebrow group sits (temporarily module-scoped for debug logging)
 if (rtEyebrow && heroBrand) {
   // Measured once, before any scroll-driven change is ever applied: convert the
   // eyebrow's current viewport position into an absolute document-space
   // coordinate (top + current scrollY), and combine with the logo's vertical
-  // center (constant, since the logo never moves in its unlocked state) to
-  // derive the single scrollY value at which the eyebrow's natural position
-  // aligns with the logo. This threshold is intentionally based on the logo's
-  // NORMAL (unshifted) center and is not affected by groupShift below - the
-  // lock point itself is unchanged regardless of where the group ends up.
+  // center (constant, since the logo never moves before locking) to derive the
+  // single scrollY value at which the eyebrow's natural position aligns with
+  // the logo. This is the ONLY thing precomputed at load - the actual pinned
+  // position is captured live, at the moment of locking, in the scroll handler
+  // below (no hardcoded or precomputed target coordinate of any kind).
   const initialEyebrowRect = rtEyebrow.getBoundingClientRect();
   const initialLogoRect = heroBrand.getBoundingClientRect();
   const cy = initialLogoRect.top + initialLogoRect.height / 2;
   const initialEyebrowDocTop = initialEyebrowRect.top + window.scrollY;
   rtLockScrollY = initialEyebrowDocTop + initialEyebrowRect.height / 2 - cy;
-
-  // Locked position: the logo itself shifts down by groupShift, and the eyebrow
-  // is re-centered on the logo's shifted position - so their internal alignment
-  // (eyebrow exactly centered on the logo) is identical to the unlocked state,
-  // just both moved down together as one unit.
-  heroBrandLockedTop = initialLogoRect.top + groupShift;
-  const cyLocked = heroBrandLockedTop + initialLogoRect.height / 2;
-  rtPinnedTop = cyLocked - initialEyebrowRect.height / 2;
-  rtPinnedLeft = initialEyebrowRect.left;
 }
 
 // Split strategic eyebrow into per-letter spans for logo reveal effect
