@@ -249,7 +249,7 @@ if (rtEyebrow && heroBrand) {
   const cy = initialLogoRect.top + initialLogoRect.height / 2;
   const initialEyebrowDocTop = initialEyebrowRect.top + window.scrollY;
   rtLockScrollY = initialEyebrowDocTop + initialEyebrowRect.height / 2 - cy;
-  rtPinnedTop = cy - initialEyebrowRect.height / 2;
+  rtPinnedTop = cy - initialEyebrowRect.height / 2 + 12; // optical alignment: 12px lower
   rtPinnedLeft = initialEyebrowRect.left;
 }
 
