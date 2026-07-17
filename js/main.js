@@ -131,18 +131,15 @@ if (nav) {
         rtEyebrow.style.opacity = '1';
         // TEMPORARY DEBUG - remove after confirming
         heroBrand.style.outline = '4px solid red';
-        if (!window._rtLockDebugLogged) {
-          window._rtLockDebugLogged = true;
-          console.log('[RT LOCK DEBUG] locked branch fired', {
-            groupShift,
-            heroBrandLockedTop,
-            heroBrand_styleTop: heroBrand.style.top,
-            heroBrand_boundingTop: heroBrand.getBoundingClientRect().top,
-            rtEyebrow_boundingTop: rtEyebrow.getBoundingClientRect().top
-          });
-        }
+        console.log('[RT LOCK DEBUG]', {
+          isPinned,
+          scrollY: window.scrollY,
+          heroBrand_styleTop: heroBrand.style.top,
+          heroBrand_computedTop: getComputedStyle(heroBrand).top,
+          heroBrand_boundingTop: heroBrand.getBoundingClientRect().top,
+          heroBrand_computedPosition: getComputedStyle(heroBrand).position
+        });
       } else {
-        window._rtLockDebugLogged = false;
         // TEMPORARY DEBUG - remove after confirming
         heroBrand.style.outline = '';
         if (rtEyebrow.style.position === 'fixed') {
