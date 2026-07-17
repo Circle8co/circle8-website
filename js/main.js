@@ -101,52 +101,19 @@ if (nav) {
       });
     }
 
-    // RT logo+eyebrow: two-state reversible model, one document-space threshold
-    // (rtLockScrollY, computed once at load - see below). No stored/latched
-    // state - isPinned is recalculated fresh from window.scrollY every tick.
-    // - travelling (scrollY < rtLockScrollY): the logo moves DOWN from its
-    //   resting position in direct proportion to scroll, over the last
-    //   rtFadeRange px before the lock point. The eyebrow stays untouched in
-    //   normal flow, fading in over that same window (rtTravelProgress drives
-    //   both, so they stay in sync).
-    // - locked (scrollY >= rtLockScrollY): the logo's top holds at its fully
-    //   travelled value (rtTravelDistance) and the eyebrow switches to
-    //   position:fixed, centered exactly on the logo's now-frozen position -
-    //   both stay motionless regardless of further scroll.
-    // - Scrolling back above rtLockScrollY reverses both automatically: the
-    //   logo travels back up proportionally, the eyebrow returns to normal
-    //   flow and fades out.
-    if (heroBrand && rtEyebrow) {
-      const isPinned = window.scrollY >= rtLockScrollY;
-      if (isPinned) {
-        if (rtEyebrow.style.position !== 'fixed') {
-          const logoRect = heroBrand.getBoundingClientRect();
-          const cx = logoRect.left + logoRect.width / 2;
-          const cy = logoRect.top + logoRect.height / 2;
-          const eyebrowRect = rtEyebrow.getBoundingClientRect();
-          rtEyebrow.style.position = 'fixed';
-          rtEyebrow.style.top = (cy - eyebrowRect.height / 2 - 44) + 'px'; // optical centering nudge, locked state only
-          rtEyebrow.style.left = (cx - eyebrowRect.width / 2) + 'px';
-          rtEyebrow.style.margin = '0';
-          // Snap straight to fully visible, no transition lag, once locked.
-          rtEyebrow.style.transition = 'none';
-        }
-        heroBrand.style.top = rtTravelDistance + 'px';
-        rtEyebrow.style.opacity = '1';
-      } else {
-        if (rtEyebrow.style.position === 'fixed') {
-          rtEyebrow.style.position = '';
-          rtEyebrow.style.top = '';
-          rtEyebrow.style.left = '';
-          rtEyebrow.style.margin = '';
-          // Restore the normal fade transition for the approach/retreat phase.
-          rtEyebrow.style.transition = '';
-        }
-        const travelStartScrollY = rtLockScrollY - rtFadeRange;
-        const travelProgress = Math.max(0, Math.min(1, (window.scrollY - travelStartScrollY) / rtFadeRange));
-        heroBrand.style.top = (travelProgress * rtTravelDistance) + 'px';
-        rtEyebrow.style.opacity = String(travelProgress);
-      }
+    // RT eyebrow: letter-reveal only while inside the logo circle (same as About/GDS/Testimonials)
+    if (window._rtLetters && heroBrand) {
+      const logoRect = heroBrand.getBoundingClientRect();
+      const cx = logoRect.left + logoRect.width / 2;
+      const cy = logoRect.top + logoRect.height / 2;
+      const r = logoRect.width * 0.30;
+      window._rtLetters.forEach(span => {
+        const lr = span.getBoundingClientRect();
+        const x = lr.left + lr.width / 2;
+        const y = lr.top + lr.height / 2;
+        const inside = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2) <= r;
+        span.style.color = inside ? 'var(--terracotta)' : 'transparent';
+      });
     }
 
     // Reveal each letter only while it's inside the logo circle
@@ -245,34 +212,15 @@ if (aboutEyebrow) {
   window._aboutLetters = Array.from(aboutEyebrow.querySelectorAll('.letter'));
 }
 
+// Split round table eyebrow into per-letter spans for logo reveal effect
 const rtEyebrow = document.querySelector('.rt-eyebrow');
-const rtSection = document.querySelector('.round-table-section');
-let rtLockScrollY = 0;
-let rtTravelDistance = 0;
-const rtFadeRange = 80; // width of the travel/fade window, px of scroll - matches the constant already used for other proximity effects in this file
-if (rtEyebrow && heroBrand && rtSection) {
-  // rtLockScrollY: the scrollY at which .round-table-section's own top edge
-  // reaches 180px from the viewport top - the same proven pattern already
-  // used elsewhere in this file for the logo's opacity fade. This happens
-  // early in the section's visible lifetime (guaranteed section remaining
-  // afterward), unlike a threshold based on the eyebrow's own natural
-  // position, which was the actual bug: the eyebrow's scroll trajectory
-  // never reaches the logo before the section finishes scrolling past.
-  const initialSectionRect = rtSection.getBoundingClientRect();
-  const sectionDocTop = initialSectionRect.top + window.scrollY;
-  rtLockScrollY = sectionDocTop - 180;
-
-  // rtTravelDistance: how far down the logo must travel so that, at the
-  // exact moment of locking (scrollY === rtLockScrollY), its position
-  // coincides with wherever the eyebrow naturally is at that same scrollY
-  // (the eyebrow itself is never touched pre-lock, so its position at any
-  // given scrollY is fully determined by its own untouched document position).
-  const initialEyebrowRect = rtEyebrow.getBoundingClientRect();
-  const initialLogoRect = heroBrand.getBoundingClientRect();
-  const logoRestingCenter = initialLogoRect.top + initialLogoRect.height / 2;
-  const eyebrowDocTop = initialEyebrowRect.top + window.scrollY;
-  const eyebrowCenterAtLock = (eyebrowDocTop - rtLockScrollY) + initialEyebrowRect.height / 2;
-  rtTravelDistance = Math.max(0, eyebrowCenterAtLock - logoRestingCenter);
+if (rtEyebrow) {
+  rtEyebrow.innerHTML = rtEyebrow.textContent.split('').map(ch =>
+    ch === ' '
+      ? '<span class="letter" style="display:inline-block;min-width:0.3em;">&nbsp;</span>'
+      : `<span class="letter">${ch}</span>`
+  ).join('');
+  window._rtLetters = Array.from(rtEyebrow.querySelectorAll('.letter'));
 }
 
 // Split strategic eyebrow into per-letter spans for logo reveal effect
