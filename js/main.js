@@ -121,6 +121,8 @@ if (nav) {
           rtEyebrow.style.top = rtPinnedTop + 'px';
           rtEyebrow.style.left = rtPinnedLeft + 'px';
           rtEyebrow.style.margin = '0';
+          // Snap straight to fully visible, no transition lag, once locked.
+          rtEyebrow.style.transition = 'none';
         }
         rtEyebrow.style.opacity = '1';
       } else {
@@ -129,6 +131,8 @@ if (nav) {
           rtEyebrow.style.top = '';
           rtEyebrow.style.left = '';
           rtEyebrow.style.margin = '';
+          // Restore the normal fade transition for the approach/retreat phase.
+          rtEyebrow.style.transition = '';
         }
         const distanceToLock = rtLockScrollY - window.scrollY;
         const fadeRange = 80;
@@ -249,7 +253,7 @@ if (rtEyebrow && heroBrand) {
   const cy = initialLogoRect.top + initialLogoRect.height / 2;
   const initialEyebrowDocTop = initialEyebrowRect.top + window.scrollY;
   rtLockScrollY = initialEyebrowDocTop + initialEyebrowRect.height / 2 - cy;
-  rtPinnedTop = cy - initialEyebrowRect.height / 2 + 12; // optical alignment: 12px lower
+  rtPinnedTop = cy - initialEyebrowRect.height / 2 + 24; // optical alignment: 24px lower total
   rtPinnedLeft = initialEyebrowRect.left;
 }
 
