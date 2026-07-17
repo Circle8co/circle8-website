@@ -125,7 +125,7 @@ if (nav) {
           const cy = logoRect.top + logoRect.height / 2;
           const eyebrowRect = rtEyebrow.getBoundingClientRect();
           rtEyebrow.style.position = 'fixed';
-          rtEyebrow.style.top = (cy - eyebrowRect.height / 2 - 33) + 'px'; // optical centering nudge, locked state only
+          rtEyebrow.style.top = (cy - eyebrowRect.height / 2 - 44) + 'px'; // optical centering nudge, locked state only
           rtEyebrow.style.left = (cx - eyebrowRect.width / 2) + 'px';
           rtEyebrow.style.margin = '0';
           // Snap straight to fully visible, no transition lag, once locked.
