@@ -129,7 +129,22 @@ if (nav) {
         // (rtPinnedTop was computed against the logo's shifted position - see init).
         heroBrand.style.top = heroBrandLockedTop + 'px';
         rtEyebrow.style.opacity = '1';
+        // TEMPORARY DEBUG - remove after confirming
+        heroBrand.style.outline = '4px solid red';
+        if (!window._rtLockDebugLogged) {
+          window._rtLockDebugLogged = true;
+          console.log('[RT LOCK DEBUG] locked branch fired', {
+            groupShift,
+            heroBrandLockedTop,
+            heroBrand_styleTop: heroBrand.style.top,
+            heroBrand_boundingTop: heroBrand.getBoundingClientRect().top,
+            rtEyebrow_boundingTop: rtEyebrow.getBoundingClientRect().top
+          });
+        }
       } else {
+        window._rtLockDebugLogged = false;
+        // TEMPORARY DEBUG - remove after confirming
+        heroBrand.style.outline = '';
         if (rtEyebrow.style.position === 'fixed') {
           rtEyebrow.style.position = '';
           rtEyebrow.style.top = '';
@@ -246,6 +261,7 @@ let rtLockScrollY = 0;
 let rtPinnedTop = 0;
 let rtPinnedLeft = 0;
 let heroBrandLockedTop = 0;
+let groupShift = 124; // how far down the whole locked logo+eyebrow group sits (temporarily module-scoped for debug logging)
 if (rtEyebrow && heroBrand) {
   // Measured once, before any scroll-driven change is ever applied: convert the
   // eyebrow's current viewport position into an absolute document-space
@@ -255,7 +271,6 @@ if (rtEyebrow && heroBrand) {
   // aligns with the logo. This threshold is intentionally based on the logo's
   // NORMAL (unshifted) center and is not affected by groupShift below - the
   // lock point itself is unchanged regardless of where the group ends up.
-  const groupShift = 124; // how far down the whole locked logo+eyebrow group sits
   const initialEyebrowRect = rtEyebrow.getBoundingClientRect();
   const initialLogoRect = heroBrand.getBoundingClientRect();
   const cy = initialLogoRect.top + initialLogoRect.height / 2;
